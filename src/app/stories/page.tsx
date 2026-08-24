@@ -46,7 +46,7 @@ export default function StoriesPage() {
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-35">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1920&q=85"
+            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75"
             alt="Field dispatches hero"
             fill
             priority

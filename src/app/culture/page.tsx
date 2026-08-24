@@ -47,7 +47,7 @@ export default function CulturePage() {
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1920&q=85"
+            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75"
             alt="Borena Culture"
             fill
             priority
@@ -107,7 +107,7 @@ export default function CulturePage() {
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-card border border-sand-200 bg-forest-950">
               <OptimizedImage
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1200&q=80"
+                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=75"
                 alt="Gadaa Elders Assembly"
                 fill
                 sizes="50vw"

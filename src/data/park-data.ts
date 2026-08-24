@@ -95,10 +95,10 @@ The Ethiopian Wildlife Conservation Authority (EWCA), in collaboration with loca
     behavior: 'Non-harem territorial system. Stallions maintain territories up to 10 sq km near ephemeral watercourses.',
     viewingTip: 'Early morning game drives across the Dida Hara plains and the open savanna north of Yabelo.',
     populationEstimate: '~400 individuals in southern Ethiopian ecosystem',
-    imageUrl: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
     gallery: [
-      'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
-      'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
+      'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=75',
     ],
   },
   {
@@ -120,7 +120,7 @@ In Borana National Park, gerenuks thrive in dense commiphora and acacia scrub wh
     behavior: 'Solitary or small female-offspring groups. Highly alert with keen eyesight and acute hearing.',
     viewingTip: 'Watch carefully along the thicket margins of the central wildlife loop around mid-morning.',
     populationEstimate: 'Stable within protected park perimeter',
-    imageUrl: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-somali-ostrich',
@@ -139,7 +139,7 @@ Capable of sprinting at speeds exceeding 70 km/h, these giant flightless birds t
     behavior: 'Diurnal flocks of 4 to 15 individuals led by a dominant cock. Master sprinters.',
     viewingTip: 'Open vistas along the southern plateau road toward Mega and Finchawa.',
     populationEstimate: 'Vulnerable across regional Horn range; strong presence in Borana',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-beisa-oryx',
@@ -160,7 +160,7 @@ Intensified anti-poaching foot patrols by Borana rangers have allowed oryx herds
     behavior: 'Cohesive herds of 10 to 40 individuals. Highly nomadic in response to local rainfall patterns.',
     viewingTip: 'Early morning near seasonal pans and open salt licks.',
     populationEstimate: '~650 resident animals',
-    imageUrl: 'https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-ethiopian-wolf',
@@ -179,7 +179,7 @@ In the upper montane pockets and high-altitude plateaus adjoining the Borana hig
     behavior: 'Pack-living territorial canid. Packs hunt solitarily during daytime and reunite at dusk.',
     viewingTip: 'Highland ridges during misty dawn hours accompanied by an authorized EWCA wildlife guide.',
     populationEstimate: 'Critically endangered endemic predator',
-    imageUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef6?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef6?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-african-elephant',
@@ -200,7 +200,7 @@ EWCA ranger outposts operate 24/7 solar-powered satellite base stations to preve
     behavior: 'Matriarchal family units led by the oldest cow. Highly complex vocal and infrasonic communication.',
     viewingTip: 'Late afternoon near riverbed water points and dense commiphora woodlands.',
     populationEstimate: 'Seasonal herds numbering 120-200 animals',
-    imageUrl: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-african-lion',
@@ -219,7 +219,7 @@ Borana National Park's conservation strategy combines GPS telemetry tracking wit
     behavior: 'Highly social carnivore living in territorial prides of 3 to 12 adults and cubs.',
     viewingTip: 'Early morning game drives around the granite inselbergs and volcanic kopjes.',
     populationEstimate: '~45 resident individuals',
-    imageUrl: 'https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1534188753412-3e26d0d618d6?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-vulturine-guineafowl',
@@ -238,7 +238,7 @@ Flocks numbering up to 50 individuals trot together through the thorny scrub, ma
     behavior: 'Gregarious terrestrial flocks. Roosts high in acacia canopy branches at nightfall.',
     viewingTip: 'Ubiquitous along dusty park tracks in the early morning and late afternoon.',
     populationEstimate: 'Abundant throughout the park',
-    imageUrl: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-greater-kudu',
@@ -257,7 +257,7 @@ Equipped with enormous ears that rotate independently, kudu can detect approachi
     behavior: 'Bulls form bachelor groups; cows and calves form loose maternal bands.',
     viewingTip: 'Rocky ridges of the volcanic crater slopes during early morning hours.',
     populationEstimate: 'Common in rocky hills and crater rims',
-    imageUrl: 'https://images.unsplash.com/photo-1547970810-dc1eac8161a7?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1547970810-dc1eac8161a7?auto=format&fit=crop&w=800&q=75',
   },
   {
     id: 'w-caracal',
@@ -276,7 +276,7 @@ Masterfully secretive and predominantly nocturnal, the caracal roams solitary te
     behavior: 'Strictly solitary, agile nocturnal predator with supreme climbing skill.',
     viewingTip: 'Dusk spotlighting drives along rocky escarpments.',
     populationEstimate: 'Healthy wild population across rocky terrain',
-    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=75',
   },
 ]
 
@@ -303,7 +303,7 @@ The census also recorded substantial numbers of Beisa oryx, Somali ostrich flock
     },
     publishedAt: '2025-11-14',
     readTime: '5 min read',
-    imageUrl: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
     tags: ['Wildlife Census', 'Grevy\'s Zebra', 'EWCA Research', 'Endangered Species'],
   },
   {
@@ -323,7 +323,7 @@ Under the traditional *Gadaa* governance structure—inscribed by UNESCO as Inta
     },
     publishedAt: '2025-09-28',
     readTime: '6 min read',
-    imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=75',
     tags: ['Culture', 'Gadaa System', 'UNESCO Heritage', 'Singing Wells'],
   },
   {
@@ -343,7 +343,7 @@ Crucially, over 65% of active field scouts are recruited directly from neighbori
     },
     publishedAt: '2025-08-05',
     readTime: '4 min read',
-    imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=75',
     tags: ['Conservation', 'Anti-Poaching', 'Rangers', 'SMART Technology'],
   },
   {
@@ -363,7 +363,7 @@ Beyond its cultural and geological significance, the protected crater slopes pro
     },
     publishedAt: '2025-06-19',
     readTime: '5 min read',
-    imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=75',
     tags: ['Geology', 'El Sod Crater', 'Volcanoes', 'Cultural Tourism'],
   },
 ]

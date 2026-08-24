@@ -32,7 +32,7 @@ const EXPERIENCES = [
     duration: 'Half-Day or Full-Day',
     difficulty: 'Easy',
     desc: 'Expert-led 4WD tracking across the Dida Hara plains to observe Grevy’s zebras, Beisa oryx, lions, cheetahs, and Somali ostriches with a certified EWCA ranger.',
-    image: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
     highlight: 'Highest density of Grevy’s zebras in southern Ethiopia',
   },
   {
@@ -41,7 +41,7 @@ const EXPERIENCES = [
     duration: '3–4 Hours',
     difficulty: 'Moderate',
     desc: 'Descend 600 vertical meters into the ancient volcanic caldera of El Sod to witness traditional mineral salt harvesting from the subterranean black brine lake.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=75',
     highlight: '600m volcanic descent to black brine lake',
   },
   {
@@ -50,7 +50,7 @@ const EXPERIENCES = [
     duration: '2–3 Hours (Morning)',
     difficulty: 'Easy',
     desc: 'Witness the morning watering ritual at Dubuluk, where pastoralist teams chant in ancient rhythmic harmony as they draw water from 30-meter deep stone wells.',
-    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=75',
     highlight: 'UNESCO-inscribed living polyphonic chants',
   },
   {
@@ -59,7 +59,7 @@ const EXPERIENCES = [
     duration: '1–3 Nights',
     difficulty: 'Moderate',
     desc: 'Camp beneath some of East Africa’s darkest night skies in designated eco-campsites accompanied by an armed ranger, with nocturnal wildlife listening walks.',
-    image: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=75',
     highlight: 'Pristine Class-1 Bortle dark sky stargazing',
   },
   {
@@ -68,7 +68,7 @@ const EXPERIENCES = [
     duration: 'Full-Day',
     difficulty: 'Easy–Moderate',
     desc: 'Targeting over 320 recorded avian species including Vulturine Guineafowl, Somali Ostrich, Ruspoli’s Turaco, and cliff-dwelling Verreaux’s eagles.',
-    image: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
     highlight: '320+ species including Ethiopian endemics',
   },
   {
@@ -77,7 +77,7 @@ const EXPERIENCES = [
     duration: '4–5 Hours',
     difficulty: 'Challenging',
     desc: 'Trek through lush afro-montane forest slopes surrounding the emerald crater lake of Magado, home to colobus monkeys, bushbucks, and panoramic southern vistas.',
-    image: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=80',
+    image: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=75',
     highlight: 'Pristine cloud forest & crater lake panorama',
   },
 ]
@@ -131,7 +131,7 @@ export default function ExperiencesPage() {
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=85"
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75"
             alt="Experiences Hero"
             fill
             priority

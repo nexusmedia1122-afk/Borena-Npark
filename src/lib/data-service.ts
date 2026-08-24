@@ -64,7 +64,7 @@ export async function fetchAllGallery(): Promise<GalleryMedia[]> {
       title: m.title || m.filename || 'Borana National Park',
       caption: m.caption || m.alt_text || 'Scenic documentation from Borana National Park.',
       category: m.category || 'Landscapes',
-      imageUrl: m.url || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=85',
+      imageUrl: m.url || 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=75',
       thumbnailUrl: m.thumbnail_url || m.url,
       photographer: m.photographer || 'EWCA Media',
       location: m.location || 'Borana National Park',
@@ -170,7 +170,7 @@ export async function fetchAllWildlife(): Promise<WildlifeSpecies[]> {
       diet: 'Native vegetation and browse',
       behavior: d.wildlife_details?.behavior || 'Diurnal herd activity',
       viewingTip: d.wildlife_details?.viewing_tip || 'Early morning game drives',
-      imageUrl: d.featured_image_url || 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: d.featured_image_url || 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
       gallery: Array.isArray(d.gallery) ? d.gallery : [],
     }))
 
@@ -262,7 +262,7 @@ export async function fetchAllStories(): Promise<ParkStory[]> {
       },
       publishedAt: d.published_at ? d.published_at.slice(0, 10) : '2026-02-01',
       readTime: '5 min read',
-      imageUrl: d.featured_image_url || 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=80',
+      imageUrl: d.featured_image_url || 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
       tags: ['Borana NP', 'Conservation', 'Ethiopia'],
     }))
 

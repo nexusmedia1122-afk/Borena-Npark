@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -92,6 +95,7 @@ export function OptimizedImage({
   loading,
   unoptimized,
 }: ImageProps) {
+  const [loaded, setLoaded] = useState(false)
   const sizes = sizesProp || (fill ? '100vw' : '(max-width: 768px) 100vw, 50vw')
   const isCdn = src.includes('cloudinary.com') || src.includes('images.unsplash.com')
   const shouldBypass = unoptimized ?? isCdn
@@ -104,13 +108,15 @@ export function OptimizedImage({
         fill
         priority={priority}
         sizes={sizes}
-        className={className}
+        className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-90')}
         loading={priority ? 'eager' : loading || 'lazy'}
         unoptimized={shouldBypass}
         decoding={priority ? 'sync' : 'async'}
+        onLoad={() => setLoaded(true)}
       />
     )
   }
+
   return (
     <Image
       src={src}
@@ -119,10 +125,11 @@ export function OptimizedImage({
       height={height}
       priority={priority}
       sizes={sizesProp}
-      className={className}
+      className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-90')}
       loading={priority ? 'eager' : loading || 'lazy'}
       unoptimized={shouldBypass}
       decoding={priority ? 'sync' : 'async'}
+      onLoad={() => setLoaded(true)}
     />
   )
 }

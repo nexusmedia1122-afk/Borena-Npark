@@ -124,7 +124,7 @@ export default function GalleryPage() {
             src={
               featured?.cldId
                 ? cldImage(featured.cldId, 'w_1920,c_limit')
-                : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=85'
+                : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75'
             }
             alt="Gallery hero panorama"
             fill

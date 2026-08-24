@@ -4,6 +4,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import OptimizedImage from '@/components/OptimizedImage'
+import TulaWellsAcousticExplorer from '@/components/TulaWellsAcousticExplorer'
 import {
   Sparkles,
   Users,
@@ -18,6 +19,7 @@ import {
   CheckCircle2,
   HeartHandshake,
   BookOpen,
+  Moon,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -29,13 +31,6 @@ const GADAA_GRADES = [
   { grade: 'Raaba Doorii', age: '33–40 Years', role: 'Transition & Family Leadership', desc: 'Preparation for executive power, peacemaking, and sacred tree ceremonies.' },
   { grade: 'Gadaa (Executive)', age: '41–48 Years', role: 'Supreme Governance', desc: 'Active national leadership headed by the Abbaa Gadaa and council of ministers.' },
   { grade: 'Yuba & Jaarsa', age: '49+ Years', role: 'Senior Advisory Elders', desc: 'Judicial supreme arbitration, natural resource oversight, and cultural memory.' },
-]
-
-const TULA_WELL_SYSTEMS = [
-  { name: 'Dhaas Tula Complex', depth: '28 meters', chains: '18 people', location: 'Eastern Rangelands' },
-  { name: 'Dubuluq Limestone Well', depth: '32 meters', chains: '22 people', location: 'Central Plains' },
-  { name: 'Goofa Deep Aquifer', depth: '25 meters', chains: '16 people', location: 'Southern Corridor' },
-  { name: 'Web Hand-Hewn Well', depth: '30 meters', chains: '20 people', location: 'Northern Foothills' },
 ]
 
 export default function CulturePage() {
@@ -117,6 +112,29 @@ export default function CulturePage() {
           </div>
         </div>
 
+        {/* Feature Link to Astronomy */}
+        <div className="p-8 rounded-3xl bg-forest-950 text-white border border-gold-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
+          <div className="space-y-1.5 max-w-xl">
+            <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-400">
+              <Moon className="w-3.5 h-3.5" />
+              <span>Indigenous Astronomy & Timekeeping</span>
+            </div>
+            <h3 className="font-display font-bold text-xl sm:text-2xl text-white">
+              Explore the 2,300-Year-Old Borana Celestial Calendar
+            </h3>
+            <p className="text-xs text-ivory-200/80 font-light leading-relaxed">
+              Discover how the 7 sacred anchor constellations (*Camsa*, *Bufa*, *Waxabajjii*) and 27 *Ayyaana* days govern Borana grazing and Gadaa transitions.
+            </p>
+          </div>
+          <Link
+            href="/astronomy"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-xs font-bold uppercase tracking-wider transition-all shadow-sm shrink-0"
+          >
+            <span>Launch Star Observatory</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
         {/* The 8-Year Gadaa Lifecycle Timeline */}
         <section className="bg-white rounded-3xl border border-sand-200 p-8 sm:p-12 shadow-card space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -151,39 +169,9 @@ export default function CulturePage() {
           </div>
         </section>
 
-        {/* Tula Singing Wells Showcase */}
-        <section className="bg-forest-950 text-white rounded-3xl border border-forest-800 p-8 sm:p-12 shadow-card space-y-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-6 space-y-4">
-              <span className="text-xs uppercase font-bold tracking-widest-luxury text-gold-400 flex items-center gap-2">
-                <Music className="w-4 h-4 text-gold-400" />
-                Hydrological Marvel
-              </span>
-              <h3 className="font-display text-2xl sm:text-4xl font-bold leading-tight">
-                The Ancient Tula Singing Wells
-              </h3>
-              <p className="text-sm text-ivory-200 leading-relaxed">
-                Excavated by hand through solid limestone up to 30 meters deep, the nine historic Tula well complexes of Borana operate through human bucket-chains of 15 to 25 people.
-              </p>
-              <p className="text-sm text-ivory-200 leading-relaxed">
-                As they pass the traditional giraffe-hide water buckets (*Okolee*), the chanters sing rhythmic polyphonic working songs. The tempo sets the speed of the water flow. By customary law, water left in the ground-level troughs at dusk is dedicated exclusively for nocturnal wild animals—including lions, leopards, zebras, and antelopes.
-              </p>
-            </div>
-
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {TULA_WELL_SYSTEMS.map((well) => (
-                <div key={well.name} className="p-5 rounded-2xl bg-forest-900/80 border border-forest-800 space-y-2">
-                  <Droplets className="w-5 h-5 text-gold-400" />
-                  <h4 className="font-display font-bold text-base text-white">{well.name}</h4>
-                  <div className="text-xs text-ivory-300 space-y-1 pt-1">
-                    <p>Excavation Depth: <strong className="text-white">{well.depth}</strong></p>
-                    <p>Bucket Chain: <strong className="text-white">{well.chains}</strong></p>
-                    <p>Zone: <span className="text-gold-300">{well.location}</span></p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        {/* Interactive Tula Singing Wells Acoustic Simulator */}
+        <section>
+          <TulaWellsAcousticExplorer />
         </section>
 
         {/* Customary Environmental Laws (Seera Marraa fi Bishaan) */}

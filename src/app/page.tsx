@@ -547,13 +547,20 @@ export default function HomePage() {
               <p className="text-sm sm:text-base text-charcoal-700 leading-relaxed">
                 At the legendary <em>Tula</em> Singing Wells (such as Dubuluk and Web), human chains form inside 30-meter deep stone shafts, rhythmically passing leather buckets while singing ancient chants to water their livestock and nourish local wildlife.
               </p>
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap gap-4">
                 <Link
                   href="/culture"
-                  className="inline-flex items-center gap-2 font-bold text-sm text-forest-700 hover:text-forest-900 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-forest-900 text-white font-bold text-xs uppercase tracking-wider hover:bg-forest-800 transition-all shadow-sm"
                 >
-                  <span>Learn About Cultural Heritage & Etiquette</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Explore Singing Wells & Gadaa</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-gold-400" />
+                </Link>
+                <Link
+                  href="/astronomy"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white border border-sand-200 text-charcoal-800 font-bold text-xs uppercase tracking-wider hover:border-gold-500 transition-all shadow-sm"
+                >
+                  <span>Indigenous Astronomy (Dhaha)</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-gold-600" />
                 </Link>
               </div>
             </div>

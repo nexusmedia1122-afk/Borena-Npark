@@ -89,6 +89,11 @@ export default function SiteFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/astronomy" className="hover:text-gold-300 transition-colors">
+                  Indigenous Astronomy & Calendar
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="hover:text-gold-300 transition-colors">
                   About the Park
                 </Link>

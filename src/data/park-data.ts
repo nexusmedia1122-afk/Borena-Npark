@@ -278,6 +278,71 @@ Masterfully secretive and predominantly nocturnal, the caracal roams solitary te
     populationEstimate: 'Healthy wild population across rocky terrain',
     imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=75',
   },
+  {
+    id: 'w-ethiopian-bushcrow',
+    title: 'Ethiopian Bushcrow (Stresemann\'s Bushcrow)',
+    slug: 'ethiopian-bushcrow',
+    scientificName: 'Zavattariornis stresemanni',
+    category: 'Endemics',
+    conservationStatus: 'EN',
+    statusLabel: 'Endangered',
+    excerpt: "Borana's most famous avian enigma, globally restricted to a narrow 6,000 km² acacia savanna pocket around Yabelo and Mega.",
+    body: `The Ethiopian Bushcrow (*Zavattariornis stresemanni*), or *Qorii* in Afaan Oromo, is one of the world's most enigmatic and geographically restricted bird species. Found nowhere else on Earth outside the Borana acacia woodlands of southern Ethiopia, its global distribution is strictly bounded by a mysterious micro-climatic thermal envelope with an average annual temperature of 18.7°C to 20.6°C.
+
+Distinguished by its pearl-grey plumage, black wings, and startling bare cobalt-blue facial skin around the eye, the Bushcrow exhibits extraordinary cooperative social behavior. Family clans construct huge, communal globe nests of thorny acacia twigs up to 60 cm in diameter, insulated with cow dung and grass.
+
+Multiple adult helpers assist the breeding pair in incubating eggs and provisioning chicks. International ornithologists travel thousands of miles to Borana National Park to observe this legendary flagship species in its native rangeland.`,
+    habitat: 'Open Acacia-Commiphora savanna, thorny bush rangelands, and pastoral grassland glades between 1,300m and 1,800m.',
+    diet: 'Invertebrates, beetles, caterpillars, grasshoppers, and seasonal acacia seed pods.',
+    behavior: 'Highly gregarious clans of 4 to 12 birds foraging on the ground; communal nesting in giant thorny twig domes.',
+    viewingTip: 'Yabelo Wildlife Sanctuary sector, central acacia loop, and the open savanna between Yabelo and Dubuluk.',
+    populationEstimate: '~9,000–16,000 individuals globally (restricted to Borana)',
+    imageUrl: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
+    gallery: [
+      'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
+      'https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=800&q=75',
+    ],
+  },
+  {
+    id: 'w-white-tailed-swallow',
+    title: 'White-tailed Swallow',
+    slug: 'white-tailed-swallow',
+    scientificName: 'Hirundo megaensis',
+    category: 'Endemics',
+    conservationStatus: 'VU',
+    statusLabel: 'Vulnerable',
+    excerpt: "Dazzling endemic aerial acrobat with gleaming white outer tail feathers, skimming the Borana plateau savannas.",
+    body: `The White-tailed Swallow is a rare Ethiopian endemic restricted to the high-plateau savannas around Mega and Yabelo in southern Ethiopia. Named after the town of Mega (*megaensis*), this delicate swallow glides over open grasslands hawking winged insects.
+
+Its deep metallic steel-blue upperparts and snowy white throat and outer tail streamers create an unmistakable silhouette as it twists and dives across the open rangeland. It builds mud-pellet cup nests beneath the eaves of traditional Borana dwellings and culverts.
+
+Preservation of open grassland habitat and traditional pastoral grazing mosaics is critical to maintaining insect biodiversity for this range-restricted bird.`,
+    habitat: 'Highland thorn savanna, montane grassland glades, and pastoral grazing plains between 1,400m and 2,200m.',
+    diet: 'Aerial insects, flying termites, small beetles, and midges captured in flight.',
+    behavior: 'Pairs or loose flocks hunting low over grasses; graceful, rapid acrobatic flight with flashing white tail feathers.',
+    viewingTip: 'Plateau ridges between Yabelo and Mega, particularly around traditional Borana homesteads.',
+    populationEstimate: '~2,500–10,000 mature individuals',
+    imageUrl: 'https://images.unsplash.com/photo-1552728089-57bdde30beb3?auto=format&fit=crop&w=800&q=75',
+  },
+  {
+    id: 'w-prince-ruspolis-turaco',
+    title: 'Prince Ruspoli\'s Turaco',
+    slug: 'prince-ruspolis-turaco',
+    scientificName: 'Tauraco ruspolii',
+    category: 'Endemics',
+    conservationStatus: 'VU',
+    statusLabel: 'Vulnerable',
+    excerpt: "One of Africa's most breathtaking canopy birds, flashing brilliant ruby-red flight feathers through the highland juniper forests.",
+    body: `Prince Ruspoli's Turaco is an astonishing avian gem of southern Ethiopia's afro-montane cloud forests. First collected in 1892 by the Italian explorer Prince Eugenio Ruspoli, who was tragically killed by an elephant before recording the exact location, this bird remained an enigma to science for decades until rediscovery in the juniper forests adjoining the Borana highlands.
+
+With an iridescent bottle-green chest, a tall white crest, bright crimson eye-rings, and magnificent scarlet-crimson primary flight feathers, seeing a flock of Ruspoli's Turacos bounding through the canopy of *Juniperus procera* and *Podocarpus* trees is an unforgettable safari highlight.`,
+    habitat: 'Afro-montane juniper forest remnants, riverine fig galleries, and mixed podocarpus-acacia forest belts.',
+    diet: 'Wild figs (*Ficus*), juniper berries, mistletoe fruits, buds, and flowering blossoms.',
+    behavior: 'Arboreal fruit-eater living in bonded pairs or small noisy family groups; agile canopy runner.',
+    viewingTip: 'Arero forest canopy trails, Magado crater forest rim, and the highland juniper ravines.',
+    populationEstimate: '~3,000–6,000 mature individuals',
+    imageUrl: 'https://images.unsplash.com/photo-1535083783855-76ae62b2914e?auto=format&fit=crop&w=800&q=75',
+  },
 ]
 
 /* =========================================================================

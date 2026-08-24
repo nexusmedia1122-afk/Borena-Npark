@@ -29,13 +29,26 @@ export default function GalleryPage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (!isSupabaseConfigured()) { setLoading(false); return }
     loadItems()
   }, [])
 
   async function loadItems() {
-    const { data } = await supabase.from('media').select('*').order('created_at', { ascending: false })
-    setItems(data || [])
+    if (isSupabaseConfigured()) {
+      const { data } = await supabase.from('media').select('*').order('created_at', { ascending: false })
+      setItems(data || [])
+    } else {
+      const { fetchAllGallery } = await import('@/lib/data-service')
+      const local = await fetchAllGallery()
+      setItems(local.map(g => ({
+        id: g.id,
+        filename: g.title,
+        title: g.title,
+        mime_type: 'image/jpeg',
+        size_bytes: 204800,
+        url: g.imageUrl,
+        created_at: new Date().toISOString(),
+      })))
+    }
     setLoading(false)
   }
 

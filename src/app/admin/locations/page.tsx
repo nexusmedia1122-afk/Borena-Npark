@@ -28,13 +28,28 @@ export default function LocationsPage() {
   const [form, setForm] = useState(emptyForm)
 
   useEffect(() => {
-    if (!isSupabaseConfigured()) { setLoading(false); return }
     loadItems()
   }, [])
 
   async function loadItems() {
-    const { data } = await supabase.from('map_locations').select('*').order('order', { ascending: true })
-    setItems(data || [])
+    if (isSupabaseConfigured()) {
+      const { data } = await supabase.from('map_locations').select('*').order('order', { ascending: true })
+      setItems(data || [])
+    } else {
+      const { fetchAllMapPOIs } = await import('@/lib/data-service')
+      const local = await fetchAllMapPOIs()
+      setItems(local.map((l, i) => ({
+        id: l.id,
+        name: l.name,
+        description: l.description,
+        category: l.category,
+        latitude: l.latitude,
+        longitude: l.longitude,
+        image_url: l.imageUrl || null,
+        essential_offline: l.essential_offline,
+        order: i + 1,
+      })))
+    }
     setLoading(false)
   }
 

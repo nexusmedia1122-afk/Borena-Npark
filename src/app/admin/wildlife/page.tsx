@@ -25,29 +25,44 @@ export default function WildlifePage() {
   const itemsPerPage = 20
 
   useEffect(() => {
-    if (!isSupabaseConfigured()) { setLoading(false); return }
     loadItems()
   }, [search, statusFilter, currentPage])
 
   async function loadItems() {
     setLoading(true)
     try {
-      let query = supabase
-        .from('contents')
-        .select('*', { count: 'exact' })
-        .eq('type', 'wildlife')
-        .order('updated_at', { ascending: false })
+      if (isSupabaseConfigured()) {
+        let query = supabase
+          .from('contents')
+          .select('*', { count: 'exact' })
+          .eq('type', 'wildlife')
+          .order('updated_at', { ascending: false })
 
-      if (statusFilter !== 'all') query = query.eq('status', statusFilter)
-      if (search) query = query.ilike('title', `%${search}%`)
+        if (statusFilter !== 'all') query = query.eq('status', statusFilter)
+        if (search) query = query.ilike('title', `%${search}%`)
 
-      const from = (currentPage - 1) * itemsPerPage
-      const to = from + itemsPerPage - 1
-      const { data, error, count } = await query.range(from, to)
+        const from = (currentPage - 1) * itemsPerPage
+        const to = from + itemsPerPage - 1
+        const { data, error, count } = await query.range(from, to)
 
-      if (error) throw error
-      setItems(data || [])
-      setTotalCount(count || 0)
+        if (error) throw error
+        setItems(data || [])
+        setTotalCount(count || 0)
+      } else {
+        const { fetchAllWildlife } = await import('@/lib/data-service')
+        const local = await fetchAllWildlife()
+        const mapped = local.map(w => ({
+          id: w.id,
+          title: w.title,
+          type: 'wildlife',
+          status: 'published',
+          featured_image_url: w.imageUrl,
+          updated_at: new Date().toISOString(),
+        }))
+        const filtered = search ? mapped.filter(m => m.title.toLowerCase().includes(search.toLowerCase())) : mapped
+        setItems(filtered)
+        setTotalCount(filtered.length)
+      }
     } catch {
       console.error('Failed to load wildlife')
     } finally {

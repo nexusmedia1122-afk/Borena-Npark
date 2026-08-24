@@ -443,7 +443,7 @@ export default function ContactPage() {
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
             <FileCheck className="w-3.5 h-3.5" />
-            Official EWCA Permit & Visitor Desk
+            Visitor Coordination & Permit Desk
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
             Plan Your Visit & Permits

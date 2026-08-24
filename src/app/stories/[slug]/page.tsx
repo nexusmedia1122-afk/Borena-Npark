@@ -128,7 +128,7 @@ export default function StoryDetailPage({ params }: Props) {
 
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold text-forest-800 bg-forest-100 px-3 py-1 rounded-full">
-              Official EWCA Publication
+              Field Dispatch Report
             </span>
           </div>
         </div>

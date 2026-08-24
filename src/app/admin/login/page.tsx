@@ -53,11 +53,15 @@ export default function AdminLoginPage() {
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-forest-900 border border-gold-500/40 text-gold-400 font-display font-bold text-xl mb-3 shadow-sm">
-            B
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white border border-gold-500/40 p-1 mb-3 shadow-md overflow-hidden">
+            <img
+              src="/logo.png"
+              alt="Borana National Park Logo"
+              className="w-full h-full object-contain transform scale-110"
+            />
           </div>
           <h1 className="text-2xl sm:text-3xl font-display font-bold text-forest-950">
-            EWCA Staff Portal
+            Park Management Portal
           </h1>
           <p className="mt-1 text-xs text-charcoal-700">
             Borena National Park Content Management & Operations

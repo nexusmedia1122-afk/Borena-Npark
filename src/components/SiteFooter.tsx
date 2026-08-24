@@ -9,8 +9,12 @@ export default function SiteFooter() {
           {/* Col 1 & 2: Park Overview */}
           <div className="lg:col-span-2 space-y-5">
             <Link href="/" className="inline-flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gold-600 rounded-xl flex items-center justify-center font-display font-bold text-charcoal-900 text-xl shadow-sm group-hover:bg-gold-500 transition-colors">
-                B
+              <div className="w-12 h-12 bg-white rounded-full p-0.5 flex items-center justify-center shadow-md overflow-hidden border border-gold-400/60 shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Borana National Park Official Logo"
+                  className="w-full h-full object-contain transform scale-110"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-display text-2xl font-bold text-white tracking-tight leading-none">

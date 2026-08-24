@@ -55,8 +55,12 @@ export default function SiteHeader() {
           <div className="flex items-center justify-between h-20">
             {/* Brand Logo */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-gold-600 flex items-center justify-center font-display font-bold text-charcoal-950 text-xl shadow-md group-hover:bg-gold-500 transition-all transform group-hover:scale-105">
-                B
+              <div className="w-11 h-11 rounded-full bg-white p-0.5 flex items-center justify-center shadow-md group-hover:scale-105 transition-all overflow-hidden border border-gold-400/60 shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Borana National Park Official Logo"
+                  className="w-full h-full object-contain transform scale-110"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white group-hover:text-gold-300 transition-colors drop-shadow-md leading-none">

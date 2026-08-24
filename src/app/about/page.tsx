@@ -82,6 +82,31 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* Official Emblem & Identity */}
+        <div className="bg-white rounded-3xl border border-sand-200 p-8 sm:p-10 shadow-card grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          <div className="md:col-span-4 flex justify-center">
+            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-white p-2 border-2 border-gold-500/50 shadow-xl overflow-hidden flex items-center justify-center">
+              <img
+                src="/logo.png"
+                alt="Official Seal of Borana National Park"
+                className="w-full h-full object-contain transform scale-105"
+              />
+            </div>
+          </div>
+          <div className="md:col-span-8 space-y-3">
+            <span className="text-xs uppercase font-bold tracking-wider text-gold-600">Official Insignia</span>
+            <h3 className="font-display font-bold text-2xl text-charcoal-900">
+              The Official Seal of Borana National Park
+            </h3>
+            <p className="text-sm font-serif italic text-forest-800">
+              Paarkii Biyyooleessa Booranaa
+            </p>
+            <p className="text-sm text-charcoal-700 leading-relaxed">
+              The official emblem embodies the park&apos;s natural and cultural identity: featuring the distinctive volcanic ridgelines of the southern rift, customary Oromo Gadaa heritage colors, the endangered Grevy&apos;s zebra, and native savanna biodiversity protected under collaborative community stewardship.
+            </p>
+          </div>
+        </div>
+
         {/* Institutional Pillars */}
         <div>
           <div className="text-center max-w-2xl mx-auto mb-10">

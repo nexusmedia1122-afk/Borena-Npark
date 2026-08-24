@@ -33,7 +33,7 @@ export default function CulturePage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950">
+      <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-40">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1920&q=85"

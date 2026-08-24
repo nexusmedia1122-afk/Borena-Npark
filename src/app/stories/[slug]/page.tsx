@@ -74,8 +74,8 @@ export default function StoryDetailPage({ params }: Props) {
     <div className="min-h-screen bg-ivory-50 flex flex-col font-sans">
       <SiteHeader />
 
-      {/* Header Banner */}
-      <section className="relative h-[min(60vh,500px)] flex items-end overflow-hidden bg-forest-950">
+      {/* Hero Header */}
+      <section className="relative min-h-[380px] sm:min-h-[440px] flex items-end overflow-hidden bg-forest-950 pt-24">
         <div className="absolute inset-0">
           <OptimizedImage
             src={item.imageUrl}

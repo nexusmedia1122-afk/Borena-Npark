@@ -36,7 +36,7 @@ export default function ConservationPage() {
       <SiteHeader />
 
       {/* Hero Section */}
-      <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950">
+      <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-40">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1507034589631-9433cc6bc453?auto=format&fit=crop&w=1920&q=85"

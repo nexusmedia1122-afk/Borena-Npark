@@ -77,10 +77,25 @@ interface ImageProps {
   fill?: boolean
   sizes?: string
   loading?: 'lazy' | 'eager'
+  unoptimized?: boolean
 }
 
-export function OptimizedImage({ src, alt, width = 800, height = 600, className, priority = false, fill, sizes: sizesProp, loading }: ImageProps) {
-  const sizes = sizesProp || '100vw'
+export function OptimizedImage({
+  src,
+  alt,
+  width = 800,
+  height = 600,
+  className,
+  priority = false,
+  fill,
+  sizes: sizesProp,
+  loading,
+  unoptimized,
+}: ImageProps) {
+  const sizes = sizesProp || (fill ? '100vw' : '(max-width: 768px) 100vw, 50vw')
+  const isCdn = src.includes('cloudinary.com') || src.includes('images.unsplash.com')
+  const shouldBypass = unoptimized ?? isCdn
+
   if (fill) {
     return (
       <Image
@@ -90,7 +105,9 @@ export function OptimizedImage({ src, alt, width = 800, height = 600, className,
         priority={priority}
         sizes={sizes}
         className={className}
-        loading={loading}
+        loading={priority ? 'eager' : loading || 'lazy'}
+        unoptimized={shouldBypass}
+        decoding={priority ? 'sync' : 'async'}
       />
     )
   }
@@ -103,7 +120,9 @@ export function OptimizedImage({ src, alt, width = 800, height = 600, className,
       priority={priority}
       sizes={sizesProp}
       className={className}
-      loading={loading}
+      loading={priority ? 'eager' : loading || 'lazy'}
+      unoptimized={shouldBypass}
+      decoding={priority ? 'sync' : 'async'}
     />
   )
 }

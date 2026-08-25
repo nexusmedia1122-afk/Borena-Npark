@@ -24,6 +24,7 @@ import { fetchAllMapPOIs, getInitialMapPOIs } from '@/lib/data-service'
 import { MapPOI } from '@/data/park-data'
 import { cn } from '@/lib/utils'
 import { cldImage } from '@/lib/cloudinary'
+import ParkBlocksWildlifeExplorer from '@/components/ParkBlocksWildlifeExplorer'
 
 // Dynamic import with SSR disabled for Leaflet map component
 const MapView = dynamic(() => import('@/components/MapView'), {
@@ -380,6 +381,11 @@ export default function MapPage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* 5 Conservation Blocks & Wildlife Spatial Habitat Explorer */}
+        <div className="mt-14">
+          <ParkBlocksWildlifeExplorer />
         </div>
       </main>
 

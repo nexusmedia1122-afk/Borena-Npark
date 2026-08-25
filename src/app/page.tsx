@@ -5,6 +5,7 @@ import NewsletterForm from '@/components/NewsletterForm'
 import SeasonalWildlifeMatrix from '@/components/SeasonalWildlifeMatrix'
 import TrailCircuitExplorer from '@/components/TrailCircuitExplorer'
 import HomeMapSection from '@/components/HomeMapSection'
+import ParkBlocksWildlifeExplorer from '@/components/ParkBlocksWildlifeExplorer'
 import { Button, OptimizedImage, SectionHeading } from '@/components/ui/components'
 import { CountUp } from '@/components/ui/CountUp'
 import { cldImage, cldVideo } from '@/lib/cloudinary'
@@ -37,7 +38,7 @@ import {
 
 /* ---- Cloudinary verified media assets ---- */
 const MEDIA = {
-  heroVideo: 'tiktok-v-7644618832073542932_0_53fe155d0d540963',
+  heroVideo: 'https://res.cloudinary.com/d39v3q6s/video/upload/v1787492152/tiktok-v-7644618832073542932_0_53fe155d0d540963.mp4',
   heroPoster: '668110576_1374606031380241_6681634558621259739_n',
   welcome: '667817973_1374606124713565_3197675928973472449_n',
   wildlife: [
@@ -488,6 +489,13 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ===== 7b. Interactive 5 Conservation Blocks & Wildlife Spatial Habitat Explorer ===== */}
+      <section className="py-20 bg-ivory-50 border-b border-sand-200">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ParkBlocksWildlifeExplorer />
         </div>
       </section>
 

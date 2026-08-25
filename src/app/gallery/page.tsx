@@ -123,8 +123,8 @@ export default function GalleryPage() {
           <OptimizedImage
             src={
               featured?.cldId
-                ? cldImage(featured.cldId, 'w_1920,c_limit')
-                : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75'
+                ? cldImage(featured.cldId, 'w_1920,c_limit,q_auto')
+                : cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_1920,c_limit,q_auto')
             }
             alt="Gallery hero panorama"
             fill

@@ -3,6 +3,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import BoranaAstronomyExplorer from '@/components/BoranaAstronomyExplorer'
 import { Button, OptimizedImage } from '@/components/ui/components'
+import { cldImage } from '@/lib/cloudinary'
 import {
   Sparkles,
   Camera,
@@ -44,7 +45,7 @@ export default function AstronomyPage() {
       <section className="relative pt-32 pb-24 overflow-hidden border-b border-forest-800/80">
         <div className="absolute inset-0 opacity-25">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('666892056_1374606258046885_5010924787227253853_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Starlit African night sky over acacia savanna"
             fill
             priority

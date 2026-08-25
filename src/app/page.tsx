@@ -118,7 +118,7 @@ const WILDLIFE_HIGHLIGHTS = [
     statusLabel: 'Endangered',
     statusColor: 'bg-rose-50 text-rose-800 border-rose-200',
     habitat: 'Restricted 6,000 km² Borana Thermal Zone',
-    img: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
+    img: MEDIA.wildlife[1],
   },
   {
     name: 'Beisa Oryx',

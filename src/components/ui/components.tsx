@@ -131,20 +131,23 @@ export function OptimizedImage({
   const [loaded, setLoaded] = useState(false)
 
   const sizes = sizesProp || (fill ? '100vw' : '(max-width: 768px) 100vw, 50vw')
-  const isCdn = (imgSrc || '').includes('cloudinary.com') || (imgSrc || '').includes('images.unsplash.com')
+  const isCdn = (imgSrc || '').includes('cloudinary.com')
   const shouldBypass = unoptimized ?? isCdn
 
+  const CLOUDINARY_FALLBACK =
+    'https://res.cloudinary.com/d39v3q6s/image/upload/f_auto,q_auto:good,w_1200,c_fill/668110576_1374606031380241_6681634558621259739_n.jpg'
+
   const handleError = () => {
-    // If Cloudinary or other external image fails, gracefully fallback
-    if (imgSrc !== 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75') {
-      setImgSrc('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75')
+    // If remote image fails, gracefully fallback to Cloudinary master asset
+    if (imgSrc !== CLOUDINARY_FALLBACK) {
+      setImgSrc(CLOUDINARY_FALLBACK)
     }
   }
 
   if (fill) {
     return (
       <Image
-        src={imgSrc || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75'}
+        src={imgSrc || CLOUDINARY_FALLBACK}
         alt={alt}
         fill
         priority={priority}
@@ -161,7 +164,7 @@ export function OptimizedImage({
 
   return (
     <Image
-      src={imgSrc || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75'}
+      src={imgSrc || CLOUDINARY_FALLBACK}
       alt={alt}
       width={width}
       height={height}

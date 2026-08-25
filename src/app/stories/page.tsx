@@ -8,6 +8,7 @@ import OptimizedImage from '@/components/OptimizedImage'
 import { Search, BookOpen, Calendar, Clock, ArrowRight, User } from 'lucide-react'
 import { fetchAllStories } from '@/lib/data-service'
 import { ParkStory } from '@/data/park-data'
+import { cldImage } from '@/lib/cloudinary'
 
 const CATEGORIES = ['All', 'Conservation', 'Research', 'Community', 'Field Report']
 
@@ -44,9 +45,9 @@ export default function StoriesPage() {
 
       {/* Hero Header */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Field dispatches hero"
             fill
             priority
@@ -54,7 +55,7 @@ export default function StoriesPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5" />
@@ -133,7 +134,7 @@ export default function StoriesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {filtered.map(story => (
+            {filtered.map((story, idx) => (
               <Link
                 key={story.id}
                 href={`/stories/${story.slug}`}
@@ -145,6 +146,7 @@ export default function StoriesPage() {
                       src={story.imageUrl}
                       alt={story.title}
                       fill
+                      priority={idx < 3}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />

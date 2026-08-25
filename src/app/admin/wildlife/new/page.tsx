@@ -246,7 +246,7 @@ export default function NewWildlifePage() {
                 required
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
-                placeholder="https://images.unsplash.com/... or https://res.cloudinary.com/..."
+                placeholder="https://res.cloudinary.com/d39v3q6s/... or Cloudinary Public ID"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-sand-200 text-xs outline-none focus:border-forest-700 font-mono"
               />
             </div>

@@ -8,6 +8,7 @@ import OptimizedImage from '@/components/OptimizedImage'
 import { Button } from '@/components/ui/components'
 import { Shield, Award, MapPin, Users, TreePine, FileText, CheckCircle2, ArrowRight } from 'lucide-react'
 import { PARK_INSTITUTIONAL_DATA } from '@/data/park-data'
+import { cldImage } from '@/lib/cloudinary'
 
 export default function AboutPage() {
   return (
@@ -16,9 +17,9 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="About Borena National Park"
             fill
             priority
@@ -26,7 +27,7 @@ export default function AboutPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Award className="w-3.5 h-3.5" />
@@ -75,7 +76,7 @@ export default function AboutPage() {
           <div className="lg:col-span-6">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card border border-sand-200 bg-forest-950">
               <OptimizedImage
-                src="https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75"
+                src={cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_800,h_600,c_fill,q_auto')}
                 alt="Protected Savanna Landscape"
                 fill
                 sizes="50vw"
@@ -98,45 +99,58 @@ export default function AboutPage() {
           </div>
           <div className="md:col-span-8 space-y-3">
             <span className="text-xs uppercase font-bold tracking-wider text-earth-700">Official Insignia</span>
-            <h3 className="font-display font-bold text-2xl text-charcoal-950">
-              The Official Seal of Borana National Park
-            </h3>
-            <p className="text-xs sm:text-sm text-charcoal-700 leading-relaxed font-light">
-              The circular emblem embodies the park&apos;s dual mission: institutional statutory conservation and ancestral Oromo pastoralist heritage. The typography honors Afaan Oromo (*Paarkii Biyyooleessa Booranaa*), framing the southern acacia rift silhouette and Oromo tricolor palette.
+            <h3 className="font-display text-2xl font-bold text-charcoal-950">The Institutional Seal</h3>
+            <p className="text-xs sm:text-sm text-charcoal-700 font-light leading-relaxed">
+              The national park insignia features the sacred Odaa sycamore tree of Gadaa assembly, the iconic horns of the Beisa oryx, and the golden sunrise over the southern Ethiopian rift escarpment, symbolizing democratic governance, wildlife protection, and ecological renewal.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <span className="text-[11px] font-semibold bg-ivory-100 text-charcoal-700 px-3 py-1 rounded-md border border-sand-200">
+                EWCA Regulated
+              </span>
+              <span className="text-[11px] font-semibold bg-ivory-100 text-charcoal-700 px-3 py-1 rounded-md border border-sand-200">
+                Oromia Regional State
+              </span>
+              <span className="text-[11px] font-semibold bg-ivory-100 text-charcoal-700 px-3 py-1 rounded-md border border-sand-200">
+                IUCN Category II
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Strategic Pillars */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white p-7 rounded-2xl border border-sand-200/80 shadow-subtle space-y-3">
+            <div className="w-10 h-10 rounded-lg bg-forest-50 text-forest-800 flex items-center justify-center border border-forest-100">
+              <Shield className="w-5 h-5" />
+            </div>
+            <h4 className="font-display font-bold text-lg text-charcoal-950">Biodiversity Preservation</h4>
+            <p className="text-xs text-charcoal-700 leading-relaxed font-light">
+              Active protection of endangered Grevy&apos;s zebra breeding corridors, endemic bird habitats, and predator monitoring through SMART telemetry.
+            </p>
+          </div>
+
+          <div className="bg-white p-7 rounded-2xl border border-sand-200/80 shadow-subtle space-y-3">
+            <div className="w-10 h-10 rounded-lg bg-gold-50 text-gold-800 flex items-center justify-center border border-gold-100">
+              <Users className="w-5 h-5" />
+            </div>
+            <h4 className="font-display font-bold text-lg text-charcoal-950">Community Co-Management</h4>
+            <p className="text-xs text-charcoal-700 leading-relaxed font-light">
+              Direct partnership with Gadaa councils, employing local pastoralists as certified wildlife scouts and sharing tourism revenue with villages.
+            </p>
+          </div>
+
+          <div className="bg-white p-7 rounded-2xl border border-sand-200/80 shadow-subtle space-y-3">
+            <div className="w-10 h-10 rounded-lg bg-earth-50 text-earth-800 flex items-center justify-center border border-earth-100">
+              <TreePine className="w-5 h-5" />
+            </div>
+            <h4 className="font-display font-bold text-lg text-charcoal-950">Sustainable Ecotourism</h4>
+            <p className="text-xs text-charcoal-700 leading-relaxed font-light">
+              High-value, low-impact safari experiences, volcanic trekking, and cultural tours that provide sustainable economic alternatives.
             </p>
           </div>
         </div>
 
-        {/* Institutional Governance Specs */}
-        <div className="space-y-6">
-          <div className="max-w-2xl space-y-1">
-            <span className="text-xs uppercase font-bold tracking-wider text-earth-700">Governance & Demographics</span>
-            <h3 className="font-display font-bold text-2xl text-charcoal-950">
-              Key Institutional Facts
-            </h3>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
-              <span className="text-xs text-charcoal-600 block">Managing Authority</span>
-              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.authority}</p>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
-              <span className="text-xs text-charcoal-600 block">Regional State</span>
-              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.regionalState}</p>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
-              <span className="text-xs text-charcoal-600 block">Park Headquarters</span>
-              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.headquarters}</p>
-            </div>
-            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
-              <span className="text-xs text-charcoal-600 block">Elevation Range</span>
-              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.elevationRange}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Official Downloads Section */}
+        {/* Downloads / Management Documents */}
         <OfficialDownloads />
       </main>
 

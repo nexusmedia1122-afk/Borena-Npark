@@ -23,6 +23,7 @@ import {
 import { fetchAllMapPOIs } from '@/lib/data-service'
 import { MapPOI } from '@/data/park-data'
 import { cn } from '@/lib/utils'
+import { cldImage } from '@/lib/cloudinary'
 
 // Dynamic import with SSR disabled for Leaflet map component
 const MapView = dynamic(() => import('@/components/MapView'), {
@@ -119,9 +120,9 @@ export default function MapPage() {
 
       {/* Map Hero Header */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Topographic landscape of Borana"
             fill
             priority

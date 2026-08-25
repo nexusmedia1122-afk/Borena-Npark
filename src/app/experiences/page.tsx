@@ -13,6 +13,7 @@ import {
   Calculator,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { cldImage } from '@/lib/cloudinary'
 
 const EXPERIENCES = [
   {
@@ -21,7 +22,7 @@ const EXPERIENCES = [
     duration: 'Half-Day or Full-Day',
     difficulty: 'Easy',
     desc: 'Expert-led 4WD tracking across the Dida Hara plains to observe Grevy’s zebras, Beisa oryx, lions, cheetahs, and Somali ostriches with a certified EWCA ranger.',
-    image: 'https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: 'Highest density of Grevy’s zebras in southern Ethiopia',
   },
   {
@@ -30,7 +31,7 @@ const EXPERIENCES = [
     duration: '3–4 Hours',
     difficulty: 'Moderate',
     desc: 'Descend 600 vertical meters into the ancient volcanic caldera of El Sod to witness traditional mineral salt harvesting from the subterranean black brine lake.',
-    image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: '600m volcanic descent to black brine lake',
   },
   {
@@ -39,7 +40,7 @@ const EXPERIENCES = [
     duration: '2–3 Hours (Morning)',
     difficulty: 'Easy',
     desc: 'Witness the morning watering ritual at Dubuluk, where pastoralist teams chant in ancient rhythmic harmony as they draw water from 30-meter deep stone wells.',
-    image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: 'UNESCO-inscribed living polyphonic chants',
   },
   {
@@ -48,7 +49,7 @@ const EXPERIENCES = [
     duration: '1–3 Nights',
     difficulty: 'Moderate',
     desc: 'Camp beneath some of East Africa’s darkest night skies in designated eco-campsites accompanied by an armed ranger, with nocturnal wildlife listening walks.',
-    image: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: 'Pristine Class-1 Bortle dark sky stargazing',
   },
   {
@@ -57,7 +58,7 @@ const EXPERIENCES = [
     duration: 'Full-Day',
     difficulty: 'Easy–Moderate',
     desc: 'Targeting over 320 recorded avian species including Vulturine Guineafowl, Somali Ostrich, Ruspoli’s Turaco, and cliff-dwelling Verreaux’s eagles.',
-    image: 'https://images.unsplash.com/photo-1549608276-5786777e6587?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('667812556_1374606328046878_2299729915640711788_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: '320+ species including Ethiopian endemics',
   },
   {
@@ -66,7 +67,7 @@ const EXPERIENCES = [
     duration: '4–5 Hours',
     difficulty: 'Challenging',
     desc: 'Trek through lush afro-montane forest slopes surrounding the emerald crater lake of Magado, home to colobus monkeys, bushbucks, and panoramic southern vistas.',
-    image: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=75',
+    image: cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_800,h_500,c_fill,q_auto'),
     highlight: 'Pristine cloud forest & crater lake panorama',
   },
 ]
@@ -116,9 +117,9 @@ export default function ExperiencesPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Experiences Hero"
             fill
             priority
@@ -126,7 +127,7 @@ export default function ExperiencesPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Compass className="w-3.5 h-3.5" />
@@ -159,7 +160,7 @@ export default function ExperiencesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {EXPERIENCES.map((exp) => (
+            {EXPERIENCES.map((exp, idx) => (
               <div
                 key={exp.title}
                 className="group bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle hover:shadow-card hover:border-gold-500/50 transition-all flex flex-col justify-between"
@@ -170,6 +171,7 @@ export default function ExperiencesPage() {
                       src={exp.image}
                       alt={exp.title}
                       fill
+                      priority={idx < 3}
                       sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />

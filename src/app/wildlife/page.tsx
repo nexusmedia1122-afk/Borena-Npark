@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import { Button } from '@/components/ui/components'
 import OptimizedImage from '@/components/OptimizedImage'
 import { Search, Shield, ArrowRight, Sparkles } from 'lucide-react'
 import { fetchAllWildlife } from '@/lib/data-service'
 import { WildlifeSpecies } from '@/data/park-data'
+import { cldImage } from '@/lib/cloudinary'
 
 const CATEGORIES = ['All', 'Mammals', 'Birds', 'Endemics', 'Reptiles']
 
@@ -47,9 +47,9 @@ export default function WildlifePage() {
 
       {/* Hero Banner */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Borena wildlife savanna"
             fill
             priority
@@ -57,7 +57,7 @@ export default function WildlifePage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-4xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
@@ -155,7 +155,7 @@ export default function WildlifePage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map(spec => (
+            {filtered.map((spec, idx) => (
               <Link
                 key={spec.id}
                 href={`/wildlife/${spec.slug}`}
@@ -167,6 +167,7 @@ export default function WildlifePage() {
                       src={spec.imageUrl}
                       alt={spec.title}
                       fill
+                      priority={idx < 6}
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />

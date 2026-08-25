@@ -14,6 +14,7 @@ import {
   Sparkles,
   FileText,
 } from 'lucide-react'
+import { cldImage } from '@/lib/cloudinary'
 
 const CONSERVATION_METRICS = [
   { value: '1.2M+ ha', label: 'Monitored under SMART Patrols' },
@@ -56,9 +57,9 @@ export default function ConservationPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1507034589631-9433cc6bc453?auto=format&fit=crop&w=1200&q=75"
+            src={cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_1600,h_900,c_fill,q_auto')}
             alt="Conservation in Borana"
             fill
             priority
@@ -66,7 +67,7 @@ export default function ConservationPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Shield className="w-3.5 h-3.5" />

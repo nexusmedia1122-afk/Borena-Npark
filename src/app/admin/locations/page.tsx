@@ -264,7 +264,7 @@ export default function LocationsPage() {
                   type="url"
                   value={form.imageUrl}
                   onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
+                  placeholder="https://res.cloudinary.com/d39v3q6s/... or Public ID"
                   className="w-full px-3.5 py-2 rounded-xl border border-sand-200 font-mono text-xs outline-none focus:border-forest-700"
                 />
               </div>

@@ -5,6 +5,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import OptimizedImage from '@/components/OptimizedImage'
 import TulaWellsAcousticExplorer from '@/components/TulaWellsAcousticExplorer'
+import { cldImage } from '@/lib/cloudinary'
 import {
   Users,
   ArrowRight,
@@ -13,6 +14,8 @@ import {
   Scale,
   CheckCircle2,
   Moon,
+  Sparkles,
+  Camera,
 } from 'lucide-react'
 
 const GADAA_GRADES = [
@@ -25,6 +28,37 @@ const GADAA_GRADES = [
   { grade: 'Yuba & Jaarsa', age: '49+ Years', role: 'Senior Advisory Elders', desc: 'Judicial supreme arbitration, natural resource oversight, and cultural memory.' },
 ]
 
+const CULTURAL_GALLERY = [
+  {
+    title: 'Gadaa Council Assembly Under the Odaa Tree',
+    desc: 'Senior elders convening under the sacred sycamore tree for legal proclamation and peaceful arbitration.',
+    cldId: '782618326_122141256453053365_1096858521163718193_n',
+    fallback: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=75',
+    tag: 'Gadaa Democracy',
+  },
+  {
+    title: 'Singing Wells Morning Watering Cadence',
+    desc: 'Human bucket chains passing leather buckets rhythmically in 30-meter stone shafts.',
+    cldId: '782451195_122141256279053365_7936837558989253988_n',
+    fallback: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=75',
+    tag: 'Hydrological Heritage',
+  },
+  {
+    title: 'Buna Qalaa Coffee Berry Blessing',
+    desc: 'Sacred ritual roasting of whole coffee berries in fresh butter symbolizing peace and prosperity.',
+    cldId: '784080423_122141256609053365_7618537852163299997_n',
+    fallback: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=75',
+    tag: 'Sacred Ritual',
+  },
+  {
+    title: 'Pastoralist Savannah & Sacred Rangelands',
+    desc: 'Ancestral grazing pastures protected under Seera Marraa fi Bishaan customary covenants.',
+    cldId: '667817973_1374606124713565_3197675928973472449_n',
+    fallback: 'https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=800&q=75',
+    tag: 'Biocultural Sanctuary',
+  },
+]
+
 export default function CulturePage() {
   return (
     <div className="min-h-screen bg-ivory-50 flex flex-col font-sans">
@@ -32,17 +66,17 @@ export default function CulturePage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-35">
+        <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75"
-            alt="Borena Culture"
+            src={cldImage('782618326_122141256453053365_1096858521163718193_n', 'c_fill,w_1600,h_900')}
+            alt="Borena Living Cultural Heritage"
             fill
             priority
             sizes="100vw"
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
         <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Users className="w-3.5 h-3.5" />
@@ -95,12 +129,17 @@ export default function CulturePage() {
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card border border-sand-200 bg-forest-950">
               <OptimizedImage
-                src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=75"
-                alt="Gadaa Elders Assembly"
+                src={cldImage('782618326_122141256453053365_1096858521163718193_n', 'c_fill,w_1000,h_750')}
+                alt="Gadaa Elders Assembly Under Sacred Odaa Tree"
                 fill
                 sizes="50vw"
                 className="object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-forest-950/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 bg-forest-950/90 text-white p-3 rounded-xl border border-gold-500/30 backdrop-blur-sm">
+                <span className="text-gold-400 font-bold uppercase tracking-wider text-[9px] block">UNESCO Living Assembly</span>
+                <p className="font-display text-xs text-ivory-100">Gumii Gaayyo Customary Legislative Assembly</p>
+              </div>
             </div>
           </div>
         </div>
@@ -127,6 +166,61 @@ export default function CulturePage() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
+
+        {/* Visual Cultural Archive Showcase */}
+        <section className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div className="space-y-1">
+              <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+                <span className="inline-block h-px w-4 bg-gold-600" />
+                <Camera className="w-3.5 h-3.5 text-gold-600" />
+                <span>Visual Field Documentation</span>
+              </p>
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-charcoal-950">
+                Living Traditions & Cultural Archives
+              </h3>
+            </div>
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-forest-800 hover:text-gold-700 transition-colors"
+            >
+              <span>View Full Photo Archive</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {CULTURAL_GALLERY.map((item) => (
+              <div
+                key={item.title}
+                className="group bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle hover:shadow-card hover:border-gold-500/50 transition-all flex flex-col justify-between"
+              >
+                <div>
+                  <div className="relative aspect-[4/3] bg-forest-950 overflow-hidden">
+                    <OptimizedImage
+                      src={cldImage(item.cldId, 'c_fill,w_700,h_525')}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <span className="absolute top-3 left-3 bg-forest-950/90 backdrop-blur-sm text-gold-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full border border-gold-500/30">
+                      {item.tag}
+                    </span>
+                  </div>
+                  <div className="p-4 space-y-1.5">
+                    <h4 className="font-display font-bold text-base text-charcoal-950 leading-snug group-hover:text-forest-800 transition-colors">
+                      {item.title}
+                    </h4>
+                    <p className="text-xs text-charcoal-600 line-clamp-2 font-light leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
         {/* The 8-Year Gadaa Lifecycle Timeline */}
         <section className="bg-white rounded-2xl border border-sand-200/80 p-8 sm:p-12 shadow-subtle space-y-8">

@@ -127,15 +127,24 @@ export function OptimizedImage({
   loading,
   unoptimized,
 }: ImageProps) {
+  const [imgSrc, setImgSrc] = useState(src)
   const [loaded, setLoaded] = useState(false)
+
   const sizes = sizesProp || (fill ? '100vw' : '(max-width: 768px) 100vw, 50vw')
-  const isCdn = src.includes('cloudinary.com') || src.includes('images.unsplash.com')
+  const isCdn = (imgSrc || '').includes('cloudinary.com') || (imgSrc || '').includes('images.unsplash.com')
   const shouldBypass = unoptimized ?? isCdn
+
+  const handleError = () => {
+    // If Cloudinary or other external image fails, gracefully fallback
+    if (imgSrc !== 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75') {
+      setImgSrc('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75')
+    }
+  }
 
   if (fill) {
     return (
       <Image
-        src={src}
+        src={imgSrc || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75'}
         alt={alt}
         fill
         priority={priority}
@@ -145,13 +154,14 @@ export function OptimizedImage({
         unoptimized={shouldBypass}
         decoding={priority ? 'sync' : 'async'}
         onLoad={() => setLoaded(true)}
+        onError={handleError}
       />
     )
   }
 
   return (
     <Image
-      src={src}
+      src={imgSrc || 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=75'}
       alt={alt}
       width={width}
       height={height}
@@ -162,6 +172,7 @@ export function OptimizedImage({
       unoptimized={shouldBypass}
       decoding={priority ? 'sync' : 'async'}
       onLoad={() => setLoaded(true)}
+      onError={handleError}
     />
   )
 }

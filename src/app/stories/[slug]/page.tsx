@@ -1,40 +1,38 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { use, useState, useEffect } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import OptimizedImage from '@/components/OptimizedImage'
 import { ArrowLeft, Calendar, Clock, User, ArrowRight, Loader2 } from 'lucide-react'
 import { fetchStoryBySlug, fetchAllStories } from '@/lib/data-service'
-import { ParkStory } from '@/data/park-data'
+import { ParkStory, OFFICIAL_STORIES } from '@/data/park-data'
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
 export default function StoryDetailPage({ params }: Props) {
-  const [item, setItem] = useState<ParkStory | null>(null)
-  const [related, setRelated] = useState<ParkStory[]>([])
-  const [loading, setLoading] = useState(true)
-  const [slug, setSlug] = useState('')
+  const resolvedParams = use(params)
+  const slug = resolvedParams.slug
+  const initialStory = OFFICIAL_STORIES.find(s => s.slug === slug || s.id === slug) || null
+
+  const [item, setItem] = useState<ParkStory | null>(initialStory)
+  const [related, setRelated] = useState<ParkStory[]>(() =>
+    OFFICIAL_STORIES.filter(s => s.slug !== slug).slice(0, 3)
+  )
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    params.then(p => setSlug(p.slug))
-  }, [params])
-
-  useEffect(() => {
-    if (!slug) return
-    async function load() {
-      const story = await fetchStoryBySlug(slug)
-      setItem(story)
+    fetchStoryBySlug(slug).then(story => {
       if (story) {
-        const all = await fetchAllStories()
-        setRelated(all.filter(s => s.slug !== slug).slice(0, 3))
+        setItem(story)
+        fetchAllStories().then(all => {
+          setRelated(all.filter(s => s.slug !== slug).slice(0, 3))
+        })
       }
-      setLoading(false)
-    }
-    load()
+    })
   }, [slug])
 
   if (loading) {

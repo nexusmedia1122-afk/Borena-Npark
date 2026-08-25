@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { use, useState, useEffect } from 'react'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
@@ -21,7 +21,7 @@ import {
   Sparkles,
 } from 'lucide-react'
 import { fetchWildlifeBySlug, fetchAllWildlife } from '@/lib/data-service'
-import { WildlifeSpecies } from '@/data/park-data'
+import { WildlifeSpecies, OFFICIAL_WILDLIFE } from '@/data/park-data'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -37,28 +37,26 @@ const IUCN_LEVELS = [
 ]
 
 export default function WildlifeDetailPage({ params }: Props) {
-  const [item, setItem] = useState<WildlifeSpecies | null>(null)
-  const [related, setRelated] = useState<WildlifeSpecies[]>([])
-  const [loading, setLoading] = useState(true)
-  const [slug, setSlug] = useState('')
+  const resolvedParams = use(params)
+  const slug = resolvedParams.slug
+  const initialItem = OFFICIAL_WILDLIFE.find((w) => w.slug === slug || w.id === slug) || null
+
+  const [item, setItem] = useState<WildlifeSpecies | null>(initialItem)
+  const [related, setRelated] = useState<WildlifeSpecies[]>(() =>
+    OFFICIAL_WILDLIFE.filter((w) => w.slug !== slug).slice(0, 3)
+  )
+  const [loading, setLoading] = useState(false)
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
 
   useEffect(() => {
-    params.then((p) => setSlug(p.slug))
-  }, [params])
-
-  useEffect(() => {
-    if (!slug) return
-    async function load() {
-      const spec = await fetchWildlifeBySlug(slug)
-      setItem(spec)
+    fetchWildlifeBySlug(slug).then((spec) => {
       if (spec) {
-        const all = await fetchAllWildlife()
-        setRelated(all.filter((w) => w.slug !== slug).slice(0, 3))
+        setItem(spec)
+        fetchAllWildlife().then((all) => {
+          setRelated(all.filter((w) => w.slug !== slug).slice(0, 3))
+        })
       }
-      setLoading(false)
-    }
-    load()
+    })
   }, [slug])
 
   if (loading) {

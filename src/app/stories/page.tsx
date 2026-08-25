@@ -5,26 +5,25 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import OptimizedImage from '@/components/OptimizedImage'
-import { Search, BookOpen, Calendar, Clock, ArrowRight, User } from 'lucide-react'
-import { fetchAllStories } from '@/lib/data-service'
+import { Search, BookOpen, Calendar, Clock, User, ArrowRight } from 'lucide-react'
+import { fetchAllStories, getInitialStories } from '@/lib/data-service'
 import { ParkStory } from '@/data/park-data'
 import { cldImage } from '@/lib/cloudinary'
 
 const CATEGORIES = ['All', 'Conservation', 'Research', 'Community', 'Field Report']
 
 export default function StoriesPage() {
-  const [items, setItems] = useState<ParkStory[]>([])
-  const [loading, setLoading] = useState(true)
+  const [items, setItems] = useState<ParkStory[]>(getInitialStories)
+  const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
 
   useEffect(() => {
-    async function load() {
-      const data = await fetchAllStories()
-      setItems(data)
-      setLoading(false)
-    }
-    load()
+    fetchAllStories().then((data) => {
+      if (data && data.length > 0) {
+        setItems(data)
+      }
+    })
   }, [])
 
   const filtered = items.filter(item => {

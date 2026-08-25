@@ -20,7 +20,7 @@ import {
   Mountain,
   Loader2,
 } from 'lucide-react'
-import { fetchAllMapPOIs } from '@/lib/data-service'
+import { fetchAllMapPOIs, getInitialMapPOIs } from '@/lib/data-service'
 import { MapPOI } from '@/data/park-data'
 import { cn } from '@/lib/utils'
 import { cldImage } from '@/lib/cloudinary'
@@ -50,24 +50,20 @@ const CATEGORIES = [
 ]
 
 export default function MapPage() {
-  const [locations, setLocations] = useState<MapPOI[]>([])
-  const [loading, setLoading] = useState(true)
+  const initialPOIs = getInitialMapPOIs()
+  const [locations, setLocations] = useState<MapPOI[]>(initialPOIs)
+  const [loading, setLoading] = useState(false)
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedLocation, setSelectedLocation] = useState<MapPOI | null>(null)
+  const [selectedLocation, setSelectedLocation] = useState<MapPOI | null>(initialPOIs[0] || null)
   const [copiedGps, setCopiedGps] = useState(false)
 
   useEffect(() => {
-    async function load() {
-      const data = await fetchAllMapPOIs()
-      setLocations(data)
-      setLoading(false)
-      // Default select the Park HQ
-      if (data.length > 0) {
-        setSelectedLocation(data[0])
+    fetchAllMapPOIs().then((data) => {
+      if (data && data.length > 0) {
+        setLocations(data)
       }
-    }
-    load()
+    })
   }, [])
 
   const filtered = useMemo(() => {

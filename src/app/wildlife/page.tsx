@@ -6,26 +6,25 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import OptimizedImage from '@/components/OptimizedImage'
 import { Search, Shield, ArrowRight, Sparkles } from 'lucide-react'
-import { fetchAllWildlife } from '@/lib/data-service'
+import { fetchAllWildlife, getInitialWildlife } from '@/lib/data-service'
 import { WildlifeSpecies } from '@/data/park-data'
 import { cldImage } from '@/lib/cloudinary'
 
 const CATEGORIES = ['All', 'Mammals', 'Birds', 'Endemics', 'Reptiles']
 
 export default function WildlifePage() {
-  const [items, setItems] = useState<WildlifeSpecies[]>([])
-  const [loading, setLoading] = useState(true)
+  const [items, setItems] = useState<WildlifeSpecies[]>(getInitialWildlife)
+  const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [statusFilter, setStatusFilter] = useState('All')
 
   useEffect(() => {
-    async function load() {
-      const data = await fetchAllWildlife()
-      setItems(data)
-      setLoading(false)
-    }
-    load()
+    fetchAllWildlife().then((data) => {
+      if (data && data.length > 0) {
+        setItems(data)
+      }
+    })
   }, [])
 
   const filtered = items.filter(item => {

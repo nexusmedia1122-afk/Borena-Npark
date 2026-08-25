@@ -26,7 +26,7 @@ import {
   ArrowRight,
   Check,
 } from 'lucide-react'
-import { fetchAllGallery } from '@/lib/data-service'
+import { fetchAllGallery, getInitialGallery } from '@/lib/data-service'
 import { GalleryMedia } from '@/data/park-data'
 import { cn } from '@/lib/utils'
 
@@ -39,8 +39,8 @@ const CATEGORIES = [
 ]
 
 export default function GalleryPage() {
-  const [items, setItems] = useState<GalleryMedia[]>([])
-  const [loading, setLoading] = useState(true)
+  const [items, setItems] = useState<GalleryMedia[]>(getInitialGallery)
+  const [loading, setLoading] = useState(false)
   const [activeCategory, setActiveCategory] = useState('All')
   const [viewMode, setViewMode] = useState<'masonry' | 'grid'>('grid')
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
@@ -48,12 +48,11 @@ export default function GalleryPage() {
   const [copiedLink, setCopiedLink] = useState(false)
 
   useEffect(() => {
-    async function load() {
-      const data = await fetchAllGallery()
-      setItems(data)
-      setLoading(false)
-    }
-    load()
+    fetchAllGallery().then((data) => {
+      if (data && data.length > 0) {
+        setItems(data)
+      }
+    })
   }, [])
 
   const filtered =

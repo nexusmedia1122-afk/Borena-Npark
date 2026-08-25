@@ -37,23 +37,40 @@ function setLocalStore<T>(key: string, items: T[]) {
   }
 }
 
+/** Timeout wrapper to guarantee remote queries never hang the UI */
+async function withTimeout<T>(promise: PromiseLike<T>, ms = 1500): Promise<T> {
+  return Promise.race([
+    Promise.resolve(promise),
+    new Promise<never>((_, reject) => setTimeout(() => reject(new Error('Network query timed out')), ms)),
+  ])
+}
+
 // ==========================================
-// 1. GALLERY MEDIA
+// 1. GALLERY MEDIA (Instant Baseline + Revalidation)
 // ==========================================
+
+export function getInitialGallery(): GalleryMedia[] {
+  const localCustom = getLocalStore<GalleryMedia>(STORAGE_KEYS.GALLERY)
+  return [...localCustom, ...OFFICIAL_GALLERY]
+}
 
 export async function fetchAllGallery(): Promise<GalleryMedia[]> {
   const localCustom = getLocalStore<GalleryMedia>(STORAGE_KEYS.GALLERY)
 
   if (!isSupabaseConfigured()) {
-    // Return custom uploads first, then official baseline
     return [...localCustom, ...OFFICIAL_GALLERY]
   }
 
   try {
-    const { data, error } = await supabase
-      .from('media')
-      .select('*')
-      .order('created_at', { ascending: false })
+    const res = await withTimeout(
+      supabase
+        .from('media')
+        .select('*')
+        .order('created_at', { ascending: false }),
+      1500
+    )
+
+    const { data, error } = res as any
 
     if (error || !data || data.length === 0) {
       return [...localCustom, ...OFFICIAL_GALLERY]
@@ -80,30 +97,31 @@ export async function fetchAllGallery(): Promise<GalleryMedia[]> {
 }
 
 export async function saveGalleryItem(item: GalleryMedia): Promise<GalleryMedia> {
-  // 1. Prepend to local storage for immediate public view
   const current = getLocalStore<GalleryMedia>(STORAGE_KEYS.GALLERY)
   const updated = [item, ...current.filter((i) => i.id !== item.id)]
   setLocalStore(STORAGE_KEYS.GALLERY, updated)
 
-  // 2. Persist to Supabase if configured
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('media').insert({
-        id: item.id,
-        title: item.title,
-        filename: item.title,
-        url: item.imageUrl,
-        thumbnail_url: item.thumbnailUrl,
-        alt_text: item.caption,
-        category: item.category,
-        photographer: item.photographer,
-        location: item.location,
-        camera_specs: item.cameraSpecs,
-        mime_type: 'image/jpeg',
-        created_at: new Date().toISOString(),
-      } as any)
+      await withTimeout(
+        supabase.from('media').insert({
+          id: item.id,
+          title: item.title,
+          filename: item.title,
+          url: item.imageUrl,
+          thumbnail_url: item.thumbnailUrl,
+          alt_text: item.caption,
+          category: item.category,
+          photographer: item.photographer,
+          location: item.location,
+          camera_specs: item.cameraSpecs,
+          mime_type: 'image/jpeg',
+          created_at: new Date().toISOString(),
+        } as any),
+        2000
+      )
     } catch (err) {
-      console.warn('Supabase insert skipped or failed:', err)
+      console.warn('Supabase insert skipped or timed out:', err)
     }
   }
 
@@ -119,7 +137,7 @@ export async function deleteGalleryItem(id: string): Promise<boolean> {
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('media').delete().eq('id', id)
+      await withTimeout(supabase.from('media').delete().eq('id', id), 2000)
     } catch {}
   }
 
@@ -127,8 +145,13 @@ export async function deleteGalleryItem(id: string): Promise<boolean> {
 }
 
 // ==========================================
-// 2. WILDLIFE SPECIES
+// 2. WILDLIFE SPECIES (Instant Baseline + Revalidation)
 // ==========================================
+
+export function getInitialWildlife(): WildlifeSpecies[] {
+  const localCustom = getLocalStore<WildlifeSpecies>(STORAGE_KEYS.WILDLIFE)
+  return [...localCustom, ...OFFICIAL_WILDLIFE]
+}
 
 export async function fetchAllWildlife(): Promise<WildlifeSpecies[]> {
   const localCustom = getLocalStore<WildlifeSpecies>(STORAGE_KEYS.WILDLIFE)
@@ -138,12 +161,17 @@ export async function fetchAllWildlife(): Promise<WildlifeSpecies[]> {
   }
 
   try {
-    const { data, error } = await supabase
-      .from('contents')
-      .select('*, wildlife_details(*)')
-      .eq('type', 'wildlife')
-      .eq('status', 'published')
-      .order('title')
+    const res = await withTimeout(
+      supabase
+        .from('contents')
+        .select('*, wildlife_details(*)')
+        .eq('type', 'wildlife')
+        .eq('status', 'published')
+        .order('title'),
+      1500
+    )
+
+    const { data, error } = res as any
 
     if (error || !data || data.length === 0) {
       return [...localCustom, ...OFFICIAL_WILDLIFE]
@@ -192,18 +220,21 @@ export async function saveWildlifeItem(item: WildlifeSpecies): Promise<WildlifeS
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('contents').upsert({
-        id: item.id,
-        title: item.title,
-        slug: item.slug,
-        type: 'wildlife',
-        status: 'published',
-        excerpt: item.excerpt,
-        body: item.body,
-        featured_image_url: item.imageUrl,
-        gallery: item.gallery,
-        updated_at: new Date().toISOString(),
-      } as any)
+      await withTimeout(
+        supabase.from('contents').upsert({
+          id: item.id,
+          title: item.title,
+          slug: item.slug,
+          type: 'wildlife',
+          status: 'published',
+          excerpt: item.excerpt,
+          body: item.body,
+          featured_image_url: item.imageUrl,
+          gallery: item.gallery,
+          updated_at: new Date().toISOString(),
+        } as any),
+        2000
+      )
     } catch {}
   }
 
@@ -219,7 +250,7 @@ export async function deleteWildlifeItem(id: string): Promise<boolean> {
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('contents').delete().eq('id', id)
+      await withTimeout(supabase.from('contents').delete().eq('id', id), 2000)
     } catch {}
   }
 
@@ -227,8 +258,13 @@ export async function deleteWildlifeItem(id: string): Promise<boolean> {
 }
 
 // ==========================================
-// 3. FIELD STORIES & DISPATCHES
+// 3. FIELD STORIES & DISPATCHES (Instant Baseline + Revalidation)
 // ==========================================
+
+export function getInitialStories(): ParkStory[] {
+  const localCustom = getLocalStore<ParkStory>(STORAGE_KEYS.STORIES)
+  return [...localCustom, ...OFFICIAL_STORIES]
+}
 
 export async function fetchAllStories(): Promise<ParkStory[]> {
   const localCustom = getLocalStore<ParkStory>(STORAGE_KEYS.STORIES)
@@ -238,12 +274,17 @@ export async function fetchAllStories(): Promise<ParkStory[]> {
   }
 
   try {
-    const { data, error } = await supabase
-      .from('contents')
-      .select('*')
-      .eq('type', 'story')
-      .eq('status', 'published')
-      .order('published_at', { ascending: false })
+    const res = await withTimeout(
+      supabase
+        .from('contents')
+        .select('*')
+        .eq('type', 'story')
+        .eq('status', 'published')
+        .order('published_at', { ascending: false }),
+      1500
+    )
+
+    const { data, error } = res as any
 
     if (error || !data || data.length === 0) {
       return [...localCustom, ...OFFICIAL_STORIES]
@@ -284,18 +325,21 @@ export async function saveStory(story: ParkStory): Promise<ParkStory> {
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('contents').upsert({
-        id: story.id,
-        title: story.title,
-        slug: story.slug,
-        type: 'story',
-        status: 'published',
-        excerpt: story.excerpt,
-        body: story.body,
-        featured_image_url: story.imageUrl,
-        published_at: story.publishedAt,
-        updated_at: new Date().toISOString(),
-      } as any)
+      await withTimeout(
+        supabase.from('contents').upsert({
+          id: story.id,
+          title: story.title,
+          slug: story.slug,
+          type: 'story',
+          status: 'published',
+          excerpt: story.excerpt,
+          body: story.body,
+          featured_image_url: story.imageUrl,
+          published_at: story.publishedAt,
+          updated_at: new Date().toISOString(),
+        } as any),
+        2000
+      )
     } catch {}
   }
 
@@ -311,7 +355,7 @@ export async function deleteStory(id: string): Promise<boolean> {
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('contents').delete().eq('id', id)
+      await withTimeout(supabase.from('contents').delete().eq('id', id), 2000)
     } catch {}
   }
 
@@ -319,8 +363,13 @@ export async function deleteStory(id: string): Promise<boolean> {
 }
 
 // ==========================================
-// 4. MAP LANDMARKS & POIS
+// 4. MAP POINTS OF INTEREST (Instant Baseline + Revalidation)
 // ==========================================
+
+export function getInitialMapPOIs(): MapPOI[] {
+  const localCustom = getLocalStore<MapPOI>(STORAGE_KEYS.LOCATIONS)
+  return [...localCustom, ...OFFICIAL_MAP_POIS]
+}
 
 export async function fetchAllMapPOIs(): Promise<MapPOI[]> {
   const localCustom = getLocalStore<MapPOI>(STORAGE_KEYS.LOCATIONS)
@@ -330,10 +379,8 @@ export async function fetchAllMapPOIs(): Promise<MapPOI[]> {
   }
 
   try {
-    const { data, error } = await supabase
-      .from('map_locations')
-      .select('*')
-      .order('order', { ascending: true })
+    const res = await withTimeout(supabase.from('locations').select('*').order('name'), 1500)
+    const { data, error } = res as any
 
     if (error || !data || data.length === 0) {
       return [...localCustom, ...OFFICIAL_MAP_POIS]
@@ -342,12 +389,14 @@ export async function fetchAllMapPOIs(): Promise<MapPOI[]> {
     const mapped: MapPOI[] = data.map((l: any) => ({
       id: l.id,
       name: l.name,
+      category: l.category || 'viewpoint',
+      latitude: Number(l.latitude || l.lat) || 4.85,
+      longitude: Number(l.longitude || l.lng) || 38.25,
       description: l.description || '',
-      category: l.category || 'visitor-center',
-      latitude: l.latitude,
-      longitude: l.longitude,
+      elevation: l.elevation || undefined,
+      accessTip: l.access_tip || undefined,
       imageUrl: l.image_url || undefined,
-      essential_offline: !!l.essential_offline,
+      essential_offline: Boolean(l.essential_offline),
     }))
 
     return [...localCustom, ...mapped]
@@ -358,21 +407,27 @@ export async function fetchAllMapPOIs(): Promise<MapPOI[]> {
 
 export async function saveMapPOI(poi: MapPOI): Promise<MapPOI> {
   const current = getLocalStore<MapPOI>(STORAGE_KEYS.LOCATIONS)
-  const updated = [poi, ...current.filter((p) => p.id !== poi.id)]
+  const updated = [poi, ...current.filter((l) => l.id !== poi.id)]
   setLocalStore(STORAGE_KEYS.LOCATIONS, updated)
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('map_locations').upsert({
-        id: poi.id,
-        name: poi.name,
-        description: poi.description,
-        category: poi.category,
-        latitude: poi.latitude,
-        longitude: poi.longitude,
-        image_url: poi.imageUrl,
-        essential_offline: poi.essential_offline,
-      } as any)
+      await withTimeout(
+        supabase.from('locations').upsert({
+          id: poi.id,
+          name: poi.name,
+          category: poi.category,
+          latitude: poi.latitude,
+          longitude: poi.longitude,
+          description: poi.description,
+          elevation: poi.elevation,
+          access_tip: poi.accessTip,
+          image_url: poi.imageUrl,
+          essential_offline: poi.essential_offline,
+          updated_at: new Date().toISOString(),
+        } as any),
+        2000
+      )
     } catch {}
   }
 
@@ -383,12 +438,12 @@ export async function deleteMapPOI(id: string): Promise<boolean> {
   const current = getLocalStore<MapPOI>(STORAGE_KEYS.LOCATIONS)
   setLocalStore(
     STORAGE_KEYS.LOCATIONS,
-    current.filter((p) => p.id !== id)
+    current.filter((l) => l.id !== id)
   )
 
   if (isSupabaseConfigured()) {
     try {
-      await supabase.from('map_locations').delete().eq('id', id)
+      await withTimeout(supabase.from('locations').delete().eq('id', id), 2000)
     } catch {}
   }
 

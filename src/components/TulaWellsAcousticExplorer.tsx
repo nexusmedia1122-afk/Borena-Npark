@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import {
   Music,
   Volume2,
@@ -171,17 +171,207 @@ export default function TulaWellsAcousticExplorer() {
   const [selectedWell, setSelectedWell] = useState<TulaWell>(TULA_WELLS[0])
   const [selectedTier, setSelectedTier] = useState(DEPTH_TIERS[0])
   const [isPlayingAudio, setIsPlayingAudio] = useState(false)
-  const [waveCadence, setWaveCadence] = useState(1)
+  const [currentBeat, setCurrentBeat] = useState(0)
+  const [volume, setVolume] = useState(0.8)
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout
-    if (isPlayingAudio) {
-      interval = setInterval(() => {
-        setWaveCadence((prev) => (prev >= 4 ? 1 : prev + 1))
-      }, 400)
+  const audioCtxRef = useRef<AudioContext | null>(null)
+  const isPlayingRef = useRef(false)
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
+  const masterGainRef = useRef<GainNode | null>(null)
+
+  // 76 BPM = 60 / 76 = 0.789s per beat
+  const BEAT_DURATION = 60 / 76
+
+  const CHANT_BEATS = [
+    {
+      scout: 'Abbaa Eelaa (Deep Aquifer -30m)',
+      lyric: '“Hoo-ye... Eelaa Tulaa!”',
+      action: 'Subterranean Scoop & Water Dip',
+      rootFreq: 110, // A2 deep chant
+      waterAction: 'dip',
+    },
+    {
+      scout: 'Kalloo 2 (Lower Relay -20m)',
+      lyric: '“Wallaaluu... Sa’aa obaasaa!”',
+      action: 'Vertical Hand-off & Shaft Echo',
+      rootFreq: 164.8, // E3 harmonic
+      waterAction: 'echo',
+    },
+    {
+      scout: 'Kalloo 1 (Mid Relay -12m)',
+      lyric: '“Dadhabaa hinqabnuu!”',
+      action: 'Mid-Shaft Momentum Rhythm',
+      rootFreq: 220, // A3 vocal
+      waterAction: 'handoff',
+    },
+    {
+      scout: 'Abbaa Okolee (Surface Trough 0m)',
+      lyric: '“Bishaan dhugaa yaa loonii!”',
+      action: 'Pour into Naanniga Stone Trough',
+      rootFreq: 277.18, // C#4 resolution
+      waterAction: 'pour',
+    },
+  ]
+
+  // Play a single procedural beat with realistic chant harmonics and water acoustics
+  const playProceduralBeat = (beatIndex: number) => {
+    try {
+      const ctx = audioCtxRef.current
+      if (!ctx || ctx.state !== 'running') return
+
+      const now = ctx.currentTime
+      const beatInfo = CHANT_BEATS[beatIndex]
+
+      // Master output node
+      const beatGain = ctx.createGain()
+      beatGain.gain.setValueAtTime(volume * 0.7, now)
+      beatGain.connect(ctx.destination)
+
+      // 1. Polyphonic Vocal Chant Layer (Dual Formant Oscillator)
+      const osc1 = ctx.createOscillator()
+      const osc2 = ctx.createOscillator()
+      const vocalGain = ctx.createGain()
+      const formantFilter = ctx.createBiquadFilter()
+
+      osc1.type = 'triangle'
+      osc1.frequency.setValueAtTime(beatInfo.rootFreq, now)
+      // Slight pitch glide typical of pastoral chanting
+      osc1.frequency.exponentialRampToValueAtTime(beatInfo.rootFreq * 1.02, now + 0.15)
+      osc1.frequency.exponentialRampToValueAtTime(beatInfo.rootFreq, now + 0.6)
+
+      osc2.type = 'sine'
+      osc2.frequency.setValueAtTime(beatInfo.rootFreq * 1.5, now) // Perfect fifth overtone
+
+      // Formant vowel filter (Acoustic cavity of limestone shaft)
+      formantFilter.type = 'bandpass'
+      formantFilter.frequency.setValueAtTime(beatInfo.rootFreq * 3.2, now)
+      formantFilter.Q.setValueAtTime(3.5, now)
+
+      vocalGain.gain.setValueAtTime(0.001, now)
+      vocalGain.gain.linearRampToValueAtTime(0.35, now + 0.12)
+      vocalGain.gain.exponentialRampToValueAtTime(0.001, now + BEAT_DURATION * 0.9)
+
+      osc1.connect(formantFilter)
+      osc2.connect(formantFilter)
+      formantFilter.connect(vocalGain)
+      vocalGain.connect(beatGain)
+
+      osc1.start(now)
+      osc2.start(now)
+      osc1.stop(now + BEAT_DURATION)
+      osc2.stop(now + BEAT_DURATION)
+
+      // 2. Leather Bucket & Water Splash Layer (Noise Synthesizer)
+      const bufferSize = ctx.sampleRate * 0.4
+      const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
+      const output = noiseBuffer.getChannelData(0)
+      for (let i = 0; i < bufferSize; i++) {
+        output[i] = Math.random() * 2 - 1
+      }
+
+      const whiteNoise = ctx.createBufferSource()
+      whiteNoise.buffer = noiseBuffer
+
+      const noiseFilter = ctx.createBiquadFilter()
+      const noiseGain = ctx.createGain()
+
+      if (beatInfo.waterAction === 'dip' || beatInfo.waterAction === 'pour') {
+        // Deep aquifer splash or surface trough pour
+        noiseFilter.type = beatInfo.waterAction === 'pour' ? 'bandpass' : 'lowpass'
+        noiseFilter.frequency.setValueAtTime(beatInfo.waterAction === 'pour' ? 1800 : 650, now)
+        noiseFilter.Q.setValueAtTime(2.0, now)
+
+        noiseGain.gain.setValueAtTime(0.001, now + 0.05)
+        noiseGain.gain.linearRampToValueAtTime(beatInfo.waterAction === 'pour' ? 0.4 : 0.28, now + 0.1)
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.45)
+      } else {
+        // Wooden scaffolding & leather bucket handoff click
+        noiseFilter.type = 'highpass'
+        noiseFilter.frequency.setValueAtTime(2200, now)
+        noiseGain.gain.setValueAtTime(0.001, now + 0.02)
+        noiseGain.gain.linearRampToValueAtTime(0.15, now + 0.05)
+        noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.18)
+      }
+
+      whiteNoise.connect(noiseFilter)
+      noiseFilter.connect(noiseGain)
+      noiseGain.connect(beatGain)
+
+      whiteNoise.start(now)
+      whiteNoise.stop(now + 0.5)
+
+      // 3. Subterranean Shaft Reverb Echo (Simulating 30m limestone shaft)
+      const delay = ctx.createDelay()
+      delay.delayTime.setValueAtTime(0.24, now)
+      const delayFeedback = ctx.createGain()
+      delayFeedback.gain.setValueAtTime(0.35, now)
+
+      vocalGain.connect(delay)
+      delay.connect(delayFeedback)
+      delayFeedback.connect(delay)
+      delay.connect(beatGain)
+    } catch (err) {
+      console.warn('Audio synthesis error:', err)
     }
-    return () => clearInterval(interval)
-  }, [isPlayingAudio])
+  }
+
+  const startAudioEngine = async () => {
+    try {
+      if (!audioCtxRef.current) {
+        const AudioContextClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+        audioCtxRef.current = new AudioContextClass()
+      }
+
+      if (audioCtxRef.current.state === 'suspended') {
+        await audioCtxRef.current.resume()
+      }
+
+      isPlayingRef.current = true
+      setIsPlayingAudio(true)
+
+      let step = 0
+      playProceduralBeat(step)
+      setCurrentBeat(step)
+
+      timerRef.current = setInterval(() => {
+        if (!isPlayingRef.current) return
+        step = (step + 1) % 4
+        setCurrentBeat(step)
+        playProceduralBeat(step)
+      }, BEAT_DURATION * 1000)
+    } catch (err) {
+      console.error('Failed to start Web Audio engine:', err)
+      setIsPlayingAudio(false)
+    }
+  }
+
+  const stopAudioEngine = () => {
+    isPlayingRef.current = false
+    setIsPlayingAudio(false)
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+  }
+
+  const toggleAudio = () => {
+    if (isPlayingAudio) {
+      stopAudioEngine()
+    } else {
+      startAudioEngine()
+    }
+  }
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      isPlayingRef.current = false
+      if (timerRef.current) clearInterval(timerRef.current)
+      if (audioCtxRef.current && audioCtxRef.current.state !== 'closed') {
+        audioCtxRef.current.close().catch(() => {})
+      }
+    }
+  }, [])
 
   return (
     <div className="bg-white rounded-2xl border border-sand-200/80 p-6 sm:p-10 shadow-subtle space-y-8">
@@ -266,41 +456,101 @@ export default function TulaWellsAcousticExplorer() {
             <p>{selectedWell.historicalSignificance}</p>
           </div>
 
-          {/* Polyphonic Song Acoustic Player Card */}
-          <div className="p-5 rounded-xl bg-forest-950 text-white space-y-3.5 shadow-card border border-forest-800">
-            <div className="flex items-center justify-between">
+          {/* Polyphonic Song Acoustic Player Card with Real Web Audio Synthesis */}
+          <div className="p-5 rounded-2xl bg-forest-950 text-white space-y-4 shadow-card border border-forest-800">
+            <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-300">
-                <Music className="w-4 h-4 text-gold-400" />
+                <Music className="w-4 h-4 text-gold-400 animate-pulse" />
                 <span>Weellu Acoustic Cadence Simulator</span>
               </div>
               <button
-                onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500 text-charcoal-950 text-xs font-bold uppercase tracking-wider hover:bg-gold-400 transition-all shadow-subtle"
+                onClick={toggleAudio}
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-xs font-bold uppercase tracking-wider transition-all shadow-subtle shrink-0"
               >
                 {isPlayingAudio ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
-                <span>{isPlayingAudio ? 'Mute Song' : 'Listen Cadence'}</span>
+                <span>{isPlayingAudio ? 'Stop Cadence' : 'Listen Cadence'}</span>
               </button>
             </div>
 
             <p className="text-xs text-ivory-200/80 leading-relaxed font-light">
-              The polyphonic call-and-response chant sets a rhythmic 76 BPM tempo. Each syllable matches the exact micro-second of a leather bucket handoff between scouts.
+              Procedural Web Audio synthesis of the polyphonic call-and-response chant at a rhythmic <strong>76 BPM tempo</strong>, matching each bucket handoff and water splash down the 30m shaft.
             </p>
 
-            {/* Simulated Acoustic Wave Bars */}
-            <div className="h-9 rounded-lg bg-forest-900/90 border border-forest-800 flex items-center justify-center gap-1.5 px-4 overflow-hidden">
-              {[4, 8, 14, 22, 30, 24, 18, 28, 32, 26, 16, 20, 28, 12, 6, 18, 24, 10, 4].map((h, i) => (
-                <div
-                  key={i}
-                  style={{
-                    height: isPlayingAudio ? `${Math.min(28, h * (0.8 + (waveCadence % 3) * 0.3))}px` : '5px',
-                  }}
-                  className={cn(
-                    'w-1.5 rounded-full transition-all duration-200',
-                    isPlayingAudio ? 'bg-gold-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-forest-700'
-                  )}
-                />
-              ))}
+            {/* Live Lyric & Action Banner */}
+            <div className="p-3 rounded-xl bg-forest-900/90 border border-forest-800 space-y-1.5">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-gold-400 font-bold uppercase tracking-wider">
+                  {isPlayingAudio ? CHANT_BEATS[currentBeat].scout : 'Scout Chain Inactive'}
+                </span>
+                <span className="font-mono text-ivory-400 text-[10px]">
+                  {isPlayingAudio ? `Step ${currentBeat + 1} of 4 (76 BPM)` : 'Press Listen Cadence to Start'}
+                </span>
+              </div>
+              <p className="text-sm font-display font-bold text-white italic">
+                {isPlayingAudio ? CHANT_BEATS[currentBeat].lyric : '“Hoo-ye... Eelaa Tulaa! Sa’aa obaasaa!”'}
+              </p>
+              <p className="text-[11px] text-ivory-300 font-light">
+                {isPlayingAudio ? `Action: ${CHANT_BEATS[currentBeat].action}` : 'Click button above to hear authentic multi-voice chanting & water splash cadence.'}
+              </p>
             </div>
+
+            {/* 4-Beat Step Indicator */}
+            <div className="grid grid-cols-4 gap-1.5">
+              {CHANT_BEATS.map((beat, idx) => {
+                const isActive = isPlayingAudio && currentBeat === idx
+                return (
+                  <div
+                    key={idx}
+                    className={cn(
+                      'py-1.5 px-2 rounded-lg text-center border transition-all text-[10px] font-bold',
+                      isActive
+                        ? 'bg-gold-500 text-charcoal-950 border-gold-400 shadow-[0_0_12px_rgba(251,191,36,0.5)] scale-[1.02]'
+                        : 'bg-forest-900/60 text-ivory-400 border-forest-800'
+                    )}
+                  >
+                    <span>{idx === 0 ? '1. Scoop' : idx === 1 ? '2. Low' : idx === 2 ? '3. Mid' : '4. Pour'}</span>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Animated Acoustic Waveform */}
+            <div className="h-9 rounded-lg bg-forest-900/90 border border-forest-800 flex items-center justify-center gap-1.5 px-4 overflow-hidden">
+              {[4, 8, 14, 22, 30, 24, 18, 28, 32, 26, 16, 20, 28, 12, 6, 18, 24, 10, 4].map((h, i) => {
+                const barHeight = isPlayingAudio
+                  ? Math.min(28, h * (0.6 + ((currentBeat + i) % 4) * 0.25))
+                  : 5
+                return (
+                  <div
+                    key={i}
+                    style={{ height: `${barHeight}px` }}
+                    className={cn(
+                      'w-1.5 rounded-full transition-all duration-150',
+                      isPlayingAudio ? 'bg-gold-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]' : 'bg-forest-700'
+                    )}
+                  />
+                )
+              })}
+            </div>
+
+            {/* Volume Control */}
+            {isPlayingAudio && (
+              <div className="flex items-center justify-between gap-3 pt-1 text-[11px] text-ivory-300">
+                <span className="flex items-center gap-1 font-medium">
+                  <Volume2 className="w-3.5 h-3.5 text-gold-400" /> Volume:
+                </span>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={volume}
+                  onChange={(e) => setVolume(parseFloat(e.target.value))}
+                  className="w-32 h-1.5 bg-forest-800 rounded-lg appearance-none cursor-pointer accent-gold-400"
+                />
+                <span className="font-mono text-[10px] text-ivory-400">{Math.round(volume * 100)}%</span>
+              </div>
+            )}
           </div>
         </div>
 

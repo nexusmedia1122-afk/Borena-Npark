@@ -66,7 +66,7 @@ export default function WildlifePage() {
             Wildlife of Borena
           </h1>
           <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
-            Explore 450+ recorded species across the southern Ethiopian savanna, including critically endangered endemics and majestic Horn of Africa fauna.
+            Home to 280+ bird species (including 4 globally endangered range endemics) and 40+ mammal species featuring the world&apos;s rarest sympatric coexistence of Grevy&apos;s and Plains zebras.
           </p>
         </div>
       </section>

@@ -62,38 +62,38 @@ const MEDIA = {
 }
 
 const HERO_STATS = [
-  { value: '1.2M+', label: 'Hectares Protected' },
-  { value: '450+', label: 'Recorded Species' },
-  { value: '320+', label: 'Avian Species' },
-  { value: '500+ Yrs', label: 'Gadaa Stewardship' },
+  { value: '45,366 km²', label: "Ethiopia's Largest Park" },
+  { value: '5 Blocks', label: 'Conservation Sectors' },
+  { value: '280+ Birds', label: '4 Range-Restricted Endemics' },
+  { value: '2 Equids', label: "Sympatric Zebra Coexistence" },
 ]
 
 const PILLARS = [
   {
     icon: Leaf,
     title: 'Rare Biodiversity',
-    desc: 'Endangered Grevy’s zebras, endemic bushcrows, Somali ostriches, and Beisa oryx in intact acacia savannas.',
+    desc: 'Endangered Grevy’s and Plains zebras, endemic Stresemann’s bushcrows, Somali ostriches, and Beisa oryx.',
     href: '/wildlife',
-    badge: '450+ Species',
+    badge: '40+ Mammals',
   },
   {
     icon: Users,
     title: 'Living Culture & Gadaa',
-    desc: 'UNESCO-inscribed egalitarian democracy, the 9 ancient Tula Singing Wells, and customary water covenants.',
+    desc: 'UNESCO-inscribed egalitarian democracy, the 9 ancient Tula Singing Wells (12–30m deep), and customary water laws.',
     href: '/culture',
     badge: 'UNESCO Heritage',
   },
   {
     icon: Shield,
     title: 'Active Conservation',
-    desc: 'SMART telemetry tracking, community scout networks, and scientific habitat restoration across southern corridors.',
+    desc: 'SMART telemetry tracking, community scout networks, and defending Booqee Sadeen against industrial mining.',
     href: '/conservation',
-    badge: '120+ Scouts',
+    badge: 'Community Co-Managed',
   },
   {
     icon: Compass,
     title: 'Guided Safaris',
-    desc: 'Bespoke 4WD wildlife circuits, volcanic caldera rim hiking, endemic birding, and wilderness eco-camping.',
+    desc: 'Bespoke 4WD wildlife circuits, El Sod caldera descent, endemic birding expeditions, and Sarite wilderness camping.',
     href: '/experiences',
     badge: 'Expeditions',
   },
@@ -117,7 +117,7 @@ const WILDLIFE_HIGHLIGHTS = [
     status: 'EN',
     statusLabel: 'Endangered',
     statusColor: 'bg-rose-50 text-rose-800 border-rose-200',
-    habitat: 'Restricted 6,000 km² Borana Thermal Zone',
+    habitat: 'Restricted 17.5°–20°C Thermal Envelope',
     img: MEDIA.wildlife[1],
   },
   {
@@ -144,24 +144,24 @@ const WILDLIFE_HIGHLIGHTS = [
 
 const REGIONS = [
   {
-    name: 'Dida Hara Central Savanna',
-    desc: 'Vast golden plains teeming with plains game — the classic African safari heartland.',
+    name: 'Dida-Hara Conservation Block',
+    desc: 'Drought-resistant woodland and open savanna — premier ecotourism site with sympatric zebras and oryx.',
     img: MEDIA.heroPoster,
   },
   {
-    name: 'El Sod Volcanic Caldera',
-    desc: 'A 600m deep ancient crater featuring a subterranean mineral salt lake and rim trails.',
+    name: 'El Sod "House of Salt" Caldera',
+    desc: 'A 600m deep volcanic explosion caldera featuring a subterranean mineral salt lake and 600-year mining heritage.',
     img: MEDIA.landscape,
   },
   {
-    name: 'Magado Highland Crater Lake',
-    desc: 'Lush afro-montane cloud forests harboring endemic turacos and pristine mountain waters.',
-    img: MEDIA.welcome,
+    name: 'Sarite Grassland Block',
+    desc: 'Endless tussock grassland plains where Grevy’s zebras and gazelles roam beneath dark starry skies.',
+    img: MEDIA.culture,
   },
   {
-    name: 'Sarite Pastoral Conservancy',
-    desc: 'Traditional rangelands where ancestral pastoral grazing harmony meets wildlife corridors.',
-    img: MEDIA.culture,
+    name: 'Magado & Arero Highlands',
+    desc: 'Dry Afromontane juniper forests harboring Prince Ruspoli’s turaco, emerald crater lakes, and mountain vistas.',
+    img: MEDIA.welcome,
   },
 ]
 

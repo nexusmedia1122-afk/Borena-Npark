@@ -74,10 +74,96 @@ export interface TariffRate {
   unit: string
 }
 
+export interface ConservationBlock {
+  id: string
+  name: string
+  oromoName: string
+  character: string
+  dominantFlora: string
+  keyFauna: string
+  ecotourismPotential: string
+}
+
 /* =========================================================================
-   OFFICIAL WILDLIFE SPECIES OF BORANA NATIONAL PARK
+   THE FIVE CONSERVATION BLOCKS OF BORANA NATIONAL PARK
+   ========================================================================= */
+export const PARK_BLOCKS: ConservationBlock[] = [
+  {
+    id: 'block-dida-hara',
+    name: 'Dida-Hara Block',
+    oromoName: 'Dida Haaraa',
+    character: 'Drought-resistant woodland and open savanna. Premier ecotourism research site with high mammal density.',
+    dominantFlora: 'Boscia mossambicensis, Acacia tortilis, and Commiphora bushland',
+    keyFauna: "Grevy's zebra, Common plains zebra, Beisa oryx, Somali ostrich, Gerenuk",
+    ecotourismPotential: 'Highest ecotourism readiness (Nigatu 2016 academic study); prime game drive loops and bird watching.',
+  },
+  {
+    id: 'block-sarite',
+    name: 'Sarite Block',
+    oromoName: 'Sariitee',
+    character: 'Vast open tussock grasslands and dry savanna plains extending toward the southern Kenya frontier.',
+    dominantFlora: 'Chrysopogon plumulosus, Cenchrus ciliaris, and scattered whistling thorn',
+    keyFauna: "Coexisting Grevy's and Plains zebras, Grant's gazelle, Cheetah, Kori bustard",
+    ecotourismPotential: 'Endless horizon photography, savanna wilderness camping, and predator tracking.',
+  },
+  {
+    id: 'block-yabello',
+    name: 'Yabello Block',
+    oromoName: 'Yaballoo',
+    character: 'Highland transition zone and park gateway; mixed Acacia woodland and rocky granitic inselbergs.',
+    dominantFlora: 'Acacia drepanolobium, Acacia brevispica, and Aloe species',
+    keyFauna: "Ethiopian Bushcrow (Stresemann's bushcrow), White-tailed swallow, Olive baboon, Leopard",
+    ecotourismPotential: 'Headquarters, permit issuance desk, natural history exhibits, and endemic birding trails.',
+  },
+  {
+    id: 'block-gammedo',
+    name: 'Gammedo Block',
+    oromoName: 'Gammoojjii Gammeedo',
+    character: 'Semi-arid backcountry bushland acting as a vital dry-season wildlife corridor and buffer zone.',
+    dominantFlora: 'Commiphora africana, Acacia reficiens, and aromatic resin-bearing shrubs',
+    keyFauna: 'Greater kudu, Lesser kudu, Striped hyena, Spotted hyena, Secretarybird',
+    ecotourismPotential: 'Wilderness 4WD overland expeditions and traditional pastoral biocultural encounters.',
+  },
+  {
+    id: 'block-danbala-dhibayu',
+    name: 'Danbala-Dhibayu Block',
+    oromoName: 'Danbala Dhibayyuu',
+    character: 'Rugged volcanic hills, rocky kopjes, seasonal drainage valleys, and limestone karst features.',
+    dominantFlora: 'Euphorbia candelabrum, Ficus cordata, and mountain juniper remnants',
+    keyFauna: "Verreaux's eagle, Klipspringer, Caracal, Prince Ruspoli's turaco (in northern pockets)",
+    ecotourismPotential: 'Volcanic caldera trekking, scenic ridge viewpoints, and raptor observation.',
+  },
+]
+
+/* =========================================================================
+   OFFICIAL WILDLIFE SPECIES OF BORANA NATIONAL PARK (Sourced)
    ========================================================================= */
 export const OFFICIAL_WILDLIFE: WildlifeSpecies[] = [
+  {
+    id: 'w-ethiopian-bushcrow',
+    title: "Ethiopian Bushcrow (Stresemann's Bushcrow)",
+    slug: 'ethiopian-bushcrow',
+    scientificName: 'Zavattariornis stresemanni',
+    category: 'Endemics',
+    conservationStatus: 'EN',
+    statusLabel: 'Endangered',
+    excerpt: "Borana's iconic avian enigma, globally restricted to a micro-climatic thermal bubble (17.5–20°C) across short-grass acacia savanna.",
+    body: `The Ethiopian Bushcrow (*Zavattariornis stresemanni*), or *Qorii* in Afaan Oromo, is one of the world's most famous ornithological flagships. Found nowhere else on Earth outside a narrow ~2,400–6,000 km² range centered on Yabelo, Mega, and Arero in southern Ethiopia, its entire global distribution is governed by a remarkable climatic thermal boundary with a mean annual temperature of 17.5°C to 20°C.
+
+Distinguished by its soft pearl-grey body, glossy black wings, and startling bare cobalt-blue facial skin around the eye, the Bushcrow relies on heavily grazed, short-grass acacia savanna maintained by traditional Borana cattle herds. Family clans construct huge communal dome nests from thorny twigs (up to 60 cm wide) insulated with cattle dung and grass lining.
+
+Roadside census data indicated an ~80% decline between the 1990s and 2003, with current populations estimated at under 9,000 pairs. Climate modeling (Donald et al. 2012) projects up to a 90% range contraction by 2070 under warming scenarios, making habitat protection in Borana National Park urgent for planetary biodiversity.`,
+    habitat: 'Heavily grazed short-grass Acacia-Commiphora savanna and pastoral glades between 1,300m and 1,800m elevation.',
+    diet: 'Invertebrates, beetles, insect larvae, grasshoppers, and seasonal seeds extracted from dung and soil.',
+    behavior: 'Cooperative breeding clans of 4 to 12 individuals. Communal nesting in massive thorny twig structures.',
+    viewingTip: 'Yabello and Dida-Hara blocks, along the open savanna road toward Mega and Finchawa.',
+    populationEstimate: '<9,000 breeding pairs globally (Strict Borana Endemic)',
+    imageUrl: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_800,h_600,c_fill,q_auto'),
+    gallery: [
+      cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_1200,h_800,c_fill,q_auto'),
+      cldImage('715234713_1425095352997975_7244808407264930827_n', 'w_1200,h_800,c_fill,q_auto'),
+    ],
+  },
   {
     id: 'w-grevys-zebra',
     title: "Grevy's Zebra",
@@ -86,17 +172,17 @@ export const OFFICIAL_WILDLIFE: WildlifeSpecies[] = [
     category: 'Endemics',
     conservationStatus: 'EN',
     statusLabel: 'Endangered',
-    excerpt: "The largest and most threatened of all wild equids, distinguished by narrow, close-set stripes and large rounded ears.",
-    body: `Grevy's zebra is the largest living wild equid and one of Africa's most iconic savanna species. In southern Ethiopia's Borana zone and Sarite Sanctuary, small but vital populations find refuge in semi-arid thornbrush and savanna grasslands.
+    excerpt: "The largest and rarest wild equid on Earth, coexisting sympatrically with common plains zebras across the Sarite and Dida-Hara grasslands.",
+    body: `Grevy's zebra is the largest living wild equid and one of Africa's most endangered large mammals, with a global population of fewer than 2,500 individuals. Borana National Park and the adjacent Sarite Sanctuary harbor one of Ethiopia's last viable breeding populations.
 
-Unlike the common plains zebra, Grevy's zebra stallions establish large breeding territories rather than maintaining harems. Their bold, narrow pinstripe pattern provides exceptional camouflage in the shimmering heat haze of the acacia savanna.
+One of the park's most distinctive ecological marvels is the rare **sympatric coexistence of two zebra species**: both the endangered Grevy's zebra (*Equus grevyi*) and the Common Plains zebra (*Equus quagga*) graze side-by-side in the same savanna and woodland mosaic.
 
-The Ethiopian Wildlife Conservation Authority (EWCA), in collaboration with local community scout networks and pastoralist associations, conducts biannual ground censuses to monitor foaling rates and water-point accessibility.`,
-    habitat: 'Arid and semi-arid grasslands, acacia-commiphora bushlands, and open thorn savanna.',
-    diet: 'Herbivorous grazer feeding predominantly on tough tussock grasses, supplemented by herbs and browse.',
-    behavior: 'Non-harem territorial system. Stallions maintain territories up to 10 sq km near ephemeral watercourses.',
-    viewingTip: 'Early morning game drives across the Dida Hara plains and the open savanna north of Yabelo.',
-    populationEstimate: '~400 individuals in southern Ethiopian ecosystem',
+Grevy's zebras are distinguished by their tall stature, large rounded mule-like ears, white unstriped belly, and dense, narrow pinstripe pattern. Unlike plains zebras which live in harems, Grevy's stallions establish large solitary breeding territories near seasonal water points.`,
+    habitat: 'Arid and semi-arid grasslands, open Acacia tortilis woodlands, and dry savanna plains.',
+    diet: 'Tough fibrous grasses, sedges, herbs, and drought-resistant browse.',
+    behavior: 'Non-harem territorial system. Stallions maintain territories up to 10 km² near watercourses.',
+    viewingTip: 'Early morning game drives across Dida-Hara and Sarite conservation blocks.',
+    populationEstimate: '~350–450 individuals in southern Ethiopian ecosystem',
     imageUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_600,c_fill,q_auto'),
     gallery: [
       cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_1200,h_800,c_fill,q_auto'),
@@ -104,24 +190,98 @@ The Ethiopian Wildlife Conservation Authority (EWCA), in collaboration with loca
     ],
   },
   {
+    id: 'w-plains-zebra',
+    title: 'Plains Zebra (Common Zebra)',
+    slug: 'plains-zebra',
+    scientificName: 'Equus quagga',
+    category: 'Mammals',
+    conservationStatus: 'LC',
+    statusLabel: 'Least Concern',
+    excerpt: "Social savanna grazer forming charismatic family harems, grazing alongside Grevy's zebras in a rare dual-species ecosystem.",
+    body: `The Plains Zebra forms the dynamic social heartbeat of Borana's open grasslands. Featuring broad, bold vertical stripes that wrap under the belly and shadow stripes across the flank, plains zebras live in tight, cooperative family harems led by a dominant stallion.
+
+In Borana National Park, plains zebras partition savanna resources with Grevy's zebras by grazing shorter, newer grass shoots, demonstrating exceptional ecological niche differentiation. Their loud barking calls ('kwa-ha-ha') resonate across the Dida-Hara savanna at sunrise.`,
+    habitat: 'Open grasslands, woodland savannas, and shrub steppes.',
+    diet: 'Grass leaves, tender shoots, and seasonal herbs.',
+    behavior: 'Cohesive family harems with strong social bonds and mutual grooming.',
+    viewingTip: 'Dida-Hara plains and waterholes near Sarite.',
+    populationEstimate: 'Common and stable across park grasslands',
+    imageUrl: cldImage('715234713_1425095352997975_7244808407264930827_n', 'w_800,h_600,c_fill,q_auto'),
+  },
+  {
+    id: 'w-white-tailed-swallow',
+    title: 'White-tailed Swallow',
+    slug: 'white-tailed-swallow',
+    scientificName: 'Hirundo megaensis',
+    category: 'Endemics',
+    conservationStatus: 'VU',
+    statusLabel: 'Vulnerable',
+    excerpt: "Delicate endemic aerial insectivore with flashing pure-white outer tail streamers, restricted to the high-plateau acacia savannas.",
+    body: `The White-tailed Swallow is a rare Ethiopian endemic restricted to the high-altitude savannas around Mega and Yabelo. Named after the town of Mega (*megaensis*), this bird shares the restricted micro-climatic range of the Ethiopian Bushcrow.
+
+Possessing a lustrous deep steel-blue mantle, snowy white underparts, and flashing pure-white outer tail feathers, it performs breathtaking low-altitude aerobatics over open grasslands to catch flying insects. It often builds mud cup nests under the eaves of traditional Borana houses and rocky culverts.`,
+    habitat: 'Highland thorn savanna, montane grassland glades, and pastoral grazing plains (1,400m–2,200m).',
+    diet: 'Aerial insects, termites, and small flying beetles caught in flight.',
+    behavior: 'Agile acrobatic flyer in pairs or small foraging flocks skimming the grass canopy.',
+    viewingTip: 'Plateau ridges and open meadows between Yabelo and Mega.',
+    populationEstimate: '~2,500–10,000 mature individuals',
+    imageUrl: cldImage('715234713_1425095352997975_7244808407264930827_n', 'w_800,h_600,c_fill,q_auto'),
+  },
+  {
+    id: 'w-prince-ruspolis-turaco',
+    title: "Prince Ruspoli's Turaco",
+    slug: 'prince-ruspolis-turaco',
+    scientificName: 'Tauraco ruspolii',
+    category: 'Endemics',
+    conservationStatus: 'VU',
+    statusLabel: 'Vulnerable',
+    excerpt: "Splendid high-canopy frugivore with an emerald crest and crimson wings, inhabiting northern juniper and podocarpus forests.",
+    body: `Prince Ruspoli's Turaco is one of Africa's most breathtaking canopy birds. First collected in 1892 by Italian explorer Prince Eugenio Ruspoli (who was tragically killed by an elephant before recording the specimen's location), the bird remained an enigma for decades before being relocated in the dry Afromontane juniper forests near Arero and the northern Borana border.
+
+With its bottle-green body, tall white crest, bright crimson eye-wattles, and brilliant scarlet primary wing feathers that flash dramatically in flight, seeing Ruspoli's Turaco bounding across *Juniperus procera* branches is an unforgettable experience.`,
+    habitat: 'Dry Afromontane forests, juniper-podocarpus woodlands, and riverine fig galleries (1,500m–2,000m).',
+    diet: 'Wild figs (*Ficus*), juniper berries, mistletoe fruits, and tender buds.',
+    behavior: 'Arboreal fruit specialist in pairs or family parties bounding through high forest canopy.',
+    viewingTip: 'Arero forest priority area and northern highland ravines of Danbala-Dhibayu.',
+    populationEstimate: '~3,000–6,000 mature individuals',
+    imageUrl: cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_800,h_600,c_fill,q_auto'),
+  },
+  {
+    id: 'w-black-fronted-spurfowl',
+    title: 'Black-fronted Spurfowl (Francolin)',
+    slug: 'black-fronted-spurfowl',
+    scientificName: 'Pternistis atrifrons',
+    category: 'Endemics',
+    conservationStatus: 'VU',
+    statusLabel: 'Vulnerable',
+    excerpt: "Range-restricted southern Ethiopian game bird inhabiting dense acacia-commiphora thickets and rocky hillslopes.",
+    body: `The Black-fronted Spurfowl (*Pternistis atrifrons*) is a localized endemic galliform species closely tied to the dry thorn scrub and rocky foothill slopes of the Borana region.
+
+Featuring a distinctive black forehead, finely vermiculated grey-brown plumage, and bright orange-red facial skin, this terrestrial bird is heard at dawn delivering loud, raspy territorial calls from atop termite mounds and rocky kopjes.`,
+    habitat: 'Dense Acacia-Commiphora thickets, rocky slopes, and dry seasonal river margins.',
+    diet: 'Seeds, grass shoots, tubers, and ground invertebrates.',
+    behavior: 'Secretive terrestrial pairs; roosts in low acacia branches at dusk.',
+    viewingTip: 'Rocky thickets around Yabello and Gammedo blocks at sunrise.',
+    populationEstimate: 'Restricted range within southern Ethiopia',
+    imageUrl: cldImage('667812556_1374606328046878_2299729915640711788_n', 'w_800,h_600,c_fill,q_auto'),
+  },
+  {
     id: 'w-gerenuk',
-    title: 'Gerenuk (Waller\'s Gazelle)',
+    title: "Gerenuk (Waller's Gazelle)",
     slug: 'gerenuk',
     scientificName: 'Litocranius walleri',
     category: 'Mammals',
     conservationStatus: 'NT',
     statusLabel: 'Near Threatened',
-    excerpt: "Known as the 'giraffe gazelle', this long-necked antelope stands upright on its hind legs to browse high acacia shoots.",
-    body: `The gerenuk is an astonishing evolutionary marvel of the Horn of Africa. With an exceptionally elongated neck, slender limbs, and strong lumbar spine, it can stand completely erect on its two hind legs to reach tender foliage up to 2.5 meters high—well out of reach of other gazelles.
+    excerpt: "The 'giraffe gazelle' of the Horn of Africa, standing fully erect on hind legs to browse high thorny acacia shoots.",
+    body: `The gerenuk is an astonishing evolutionary marvel of the Horn of Africa drylands. With an elongated neck, slender legs, and strong lumbar spine, it can stand completely vertical on its hind legs to reach tender foliage up to 2.5 meters high.
 
-Their name originates from the Somali language, translating to 'giraffe-necked'. Gerenuks never need to drink free-standing water; their entire moisture requirement is absorbed from the morning dew and succulent foliage they consume.
-
-In Borana National Park, gerenuks thrive in dense commiphora and acacia scrub where their russet coat blends invisibly with red volcanic soils.`,
-    habitat: 'Dense woody savanna, thorny thickets, and arid shrublands.',
-    diet: 'Specialist browser eating tender acacia leaves, buds, flowers, and succulent climbers.',
-    behavior: 'Solitary or small female-offspring groups. Highly alert with keen eyesight and acute hearing.',
-    viewingTip: 'Watch carefully along the thicket margins of the central wildlife loop around mid-morning.',
-    populationEstimate: 'Stable within protected park perimeter',
+Their name originates from the Somali language ('giraffe-necked'). Gerenuks never require free-standing water, extracting all necessary hydration from succulent browse and morning dew. In Borana National Park, they blend seamlessly with red volcanic laterite soils.`,
+    habitat: 'Dense woody savanna, thorny Commiphora thickets, and arid shrublands.',
+    diet: 'Specialist browser eating tender acacia leaflets, buds, flowers, and climbers.',
+    behavior: 'Solitary or small maternal bands; exceptionally alert with acute hearing.',
+    viewingTip: 'Thicket margins of Dida-Hara and Gammedo blocks in mid-morning.',
+    populationEstimate: 'Healthy resident population across thornveld',
     imageUrl: cldImage('707545377_122258731046333664_8066991454525016717_n', 'w_800,h_600,c_fill,q_auto'),
   },
   {
@@ -132,14 +292,14 @@ In Borana National Park, gerenuks thrive in dense commiphora and acacia scrub wh
     category: 'Birds',
     conservationStatus: 'VU',
     statusLabel: 'Vulnerable',
-    excerpt: "Distinct from common ostriches by its spectacular slate-blue neck and legs, roaming the wide open arid southern plains.",
-    body: `Recognized as a distinct full species in 2014, the Somali Ostrich (or Blue-necked Ostrich) is adapted to the semi-desert plains of the Horn of Africa. The male possesses striking grey-blue skin across the neck and thighs which flushes bright cobalt during the breeding season.
+    excerpt: "Giant flightless desert bird distinguished by its stunning cobalt-blue neck and thighs, sprinting across the Sarite plains.",
+    body: `Recognized as a distinct full species in 2014, the Somali Ostrich (or Blue-necked Ostrich) is adapted to the arid plains of the Horn of Africa. The male possesses vibrant slate-blue neck and leg skin that intensifies to bright cobalt during the breeding season.
 
-Capable of sprinting at speeds exceeding 70 km/h, these giant flightless birds traverse enormous expanses of Borana's open plains in small flocks. Their towering height and acute visual acuity make them natural sentinels for grazing herds of zebras and oryx.`,
-    habitat: 'Open semi-arid savanna, flat plains, and sparse bushland.',
-    diet: 'Seeds, shrubs, succulent roots, grasses, and occasionally small reptiles or locusts.',
-    behavior: 'Diurnal flocks of 4 to 15 individuals led by a dominant cock. Master sprinters.',
-    viewingTip: 'Open vistas along the southern plateau road toward Mega and Finchawa.',
+Capable of sprinting at over 70 km/h, these birds roam wide open grasslands in small flocks, acting as natural sentinels for grazing herds of zebras and oryx.`,
+    habitat: 'Open semi-arid savanna, flat gravel plains, and sparse bushland.',
+    diet: 'Seeds, foliage, succulent roots, fruits, and small invertebrates.',
+    behavior: 'Flocks of 4 to 15 birds led by a dominant male; master sprinters.',
+    viewingTip: 'Open vistas of the Sarite and Dida-Hara blocks.',
     populationEstimate: 'Vulnerable across regional Horn range; strong presence in Borana',
     imageUrl: cldImage('782170688_122141256729053365_672836120563678516_n', 'w_800,h_600,c_fill,q_auto'),
   },
@@ -151,58 +311,16 @@ Capable of sprinting at speeds exceeding 70 km/h, these giant flightless birds t
     category: 'Mammals',
     conservationStatus: 'EN',
     statusLabel: 'Endangered',
-    excerpt: "Majestic desert antelope bearing spear-like parallel horns up to one meter long and bold monochrome facial markings.",
-    body: `The Beisa Oryx is the true emblem of arid East Africa's resilience. Possessing specialized physiological adaptations, the oryx can elevate its internal body temperature up to 45°C (113°F) to avoid sweating and conserve vital water.
+    excerpt: "Majestic desert antelope bearing straight, spear-like horns up to one meter long and bold monochrome facial masks.",
+    body: `The Beisa Oryx is an emblem of arid resilience. Its specialized physiology allows its internal body temperature to reach 45°C without sweating, conserving precious body fluids during severe droughts.
 
-Both males and females carry long, ringed, razor-straight horns that they use with lethal precision against predators such as lions and hyenas. Historical folklore attributes the myth of the unicorn to profile views of one-horned Beisa oryx.
-
-Intensified anti-poaching foot patrols by Borana rangers have allowed oryx herds to recover across the northern savannah sectors.`,
+Both males and females carry long, ringed, parallel horns used effectively against lions and hyenas. Active ranger anti-poaching patrols have supported oryx herd recovery across Dida-Hara and Sarite.`,
     habitat: 'Semi-desert grasslands, dry acacia woodland, and sandy bush savanna.',
     diet: 'Coarse desert grasses, tubers, wild melons, and moisture-rich roots.',
-    behavior: 'Cohesive herds of 10 to 40 individuals. Highly nomadic in response to local rainfall patterns.',
+    behavior: 'Cohesive herds of 10 to 40 individuals; nomadic according to rainfall.',
     viewingTip: 'Early morning near seasonal pans and open salt licks.',
     populationEstimate: '~650 resident animals',
     imageUrl: cldImage('783592801_122141256603053365_1923857396616899501_n', 'w_800,h_600,c_fill,q_auto'),
-  },
-  {
-    id: 'w-ethiopian-wolf',
-    title: 'Ethiopian Wolf',
-    slug: 'ethiopian-wolf',
-    scientificName: 'Canis simensis',
-    category: 'Endemics',
-    conservationStatus: 'CR',
-    statusLabel: 'Critically Endangered',
-    excerpt: "The rarest canid on Earth and Africa's most endangered carnivore, patrolling the high-altitude afro-alpine ridges.",
-    body: `With fewer than 500 individuals remaining on the planet, the Ethiopian Wolf is a creature of mythical rarity and ecological significance. With an exquisite tawny red coat, white markings, and a slender fox-like muzzle, it is a specialized predator of subterranean giant mole-rats and highland grass mice.
-
-In the upper montane pockets and high-altitude plateaus adjoining the Borana highland border, EWCA teams and conservation biologists maintain non-invasive camera trap arrays and community vaccination rings to protect wolf packs from domestic dog-borne rabies.`,
-    habitat: 'Afro-alpine moorlands, montane tussock grasslands above 3,000 meters.',
-    diet: 'Specialist rodent hunter; preys almost exclusively on diurnal rodents and grass rats.',
-    behavior: 'Pack-living territorial canid. Packs hunt solitarily during daytime and reunite at dusk.',
-    viewingTip: 'Highland ridges during misty dawn hours accompanied by an authorized EWCA wildlife guide.',
-    populationEstimate: 'Critically endangered endemic predator',
-    imageUrl: cldImage('707328149_122258731478333664_5656229408438147613_n', 'w_800,h_600,c_fill,q_auto'),
-  },
-  {
-    id: 'w-african-elephant',
-    title: 'African Bush Elephant',
-    slug: 'african-elephant',
-    scientificName: 'Loxodonta africana',
-    category: 'Mammals',
-    conservationStatus: 'EN',
-    statusLabel: 'Endangered',
-    excerpt: "Keystone ecosystem architects whose ancient migration paths traverse the southern cross-border corridors.",
-    body: `The African Bush Elephant represents the ultimate ecosystem engineer of the Borana landscape. As breeding herds move through the woodland, they create forest pathways, dig dry riverbeds to access subterranean water for hundreds of other species, and disperse essential acacia and baobab seeds.
-
-Cross-border telemetry tracking operated in partnership with wildlife services indicates seasonal movement along ancient ecological corridors connecting Borana, Chelbi, and the northern Kenyan frontier.
-
-EWCA ranger outposts operate 24/7 solar-powered satellite base stations to prevent human-wildlife conflict along agricultural buffer zones.`,
-    habitat: 'Acacia woodlands, riparian gallery forests, and foothill grasslands.',
-    diet: 'Vast variety of grasses, tree bark, roots, foliage, and wild fruits (up to 150 kg daily).',
-    behavior: 'Matriarchal family units led by the oldest cow. Highly complex vocal and infrasonic communication.',
-    viewingTip: 'Late afternoon near riverbed water points and dense commiphora woodlands.',
-    populationEstimate: 'Seasonal herds numbering 120-200 animals',
-    imageUrl: cldImage('667404940_1374606078046903_3918001419654482747_n', 'w_800,h_600,c_fill,q_auto'),
   },
   {
     id: 'w-african-lion',
@@ -212,35 +330,35 @@ EWCA ranger outposts operate 24/7 solar-powered satellite base stations to preve
     category: 'Mammals',
     conservationStatus: 'VU',
     statusLabel: 'Vulnerable',
-    excerpt: "Apex predator of the savanna, hunting zebras, kudu, and oryx across the vast volcanic plains.",
-    body: `The lions of southern Ethiopia are recognized for their robust stature, muscular build, and dark-maned dominant males. As the apex predator of Borana National Park, prides regulate herbivore populations and maintain the ecological balance of the savanna.
+    excerpt: "Apex predator of the southern savanna, hunting zebras, kudu, and oryx across the volcanic inselbergs.",
+    body: `Southern Ethiopian lions are recognized for their robust build and dark-maned dominant males. As the apex predator of Borana National Park, prides regulate herbivore populations across the savanna.
 
-Borana National Park's conservation strategy combines GPS telemetry tracking with community 'Lion Guardians'—trained Borena pastoralist youth who monitor pride movements and notify herdsmen in advance, eliminating retaliatory livestock conflict.`,
+The park pairs GPS collar monitoring with community pastoralist liaisons, enabling early warning notifications that prevent retaliatory livestock conflict.`,
     habitat: 'Open savanna grasslands, rocky kopjes, and dry woodland thickets.',
-    diet: 'Large ungulates including zebras, oryx, kudu, warthogs, and wildebeest.',
-    behavior: 'Highly social carnivore living in territorial prides of 3 to 12 adults and cubs.',
-    viewingTip: 'Early morning game drives around the granite inselbergs and volcanic kopjes.',
+    diet: 'Large ungulates including zebras, oryx, kudu, warthogs, and gazelles.',
+    behavior: 'Territorial prides of 3 to 12 individuals.',
+    viewingTip: 'Early morning game drives around granite inselbergs and volcanic kopjes.',
     populationEstimate: '~45 resident individuals',
     imageUrl: cldImage('668120447_1374606164713561_8675150383045939896_n', 'w_800,h_600,c_fill,q_auto'),
   },
   {
-    id: 'w-vulturine-guineafowl',
-    title: 'Vulturine Guineafowl',
-    slug: 'vulturine-guineafowl',
-    scientificName: 'Acryllium vulturinum',
+    id: 'w-kori-bustard',
+    title: 'Kori Bustard',
+    slug: 'kori-bustard',
+    scientificName: 'Ardeotis kori',
     category: 'Birds',
-    conservationStatus: 'LC',
-    statusLabel: 'Least Concern',
-    excerpt: "The most dazzling of all guineafowl species, adorned in electric cobalt blue plumage with white pinstripes.",
-    body: `With its startling bare head, bright crimson eyes, and a cape of iridescent cobalt-blue hackles, the Vulturine Guineafowl is widely regarded as one of Africa's most breathtaking dryland birds.
+    conservationStatus: 'NT',
+    statusLabel: 'Near Threatened',
+    excerpt: "The world's heaviest flying bird, striding deliberately across the open short-grass plains hunting insects and reptiles.",
+    body: `Weighing up to 18 kilograms, the Kori Bustard is the heaviest bird capable of flight on Earth. With majestic, measured strides, it patrols open grasslands, flushing grasshoppers, beetles, and small reptiles.
 
-Flocks numbering up to 50 individuals trot together through the thorny scrub, maintaining constant contact with musical piping whistles. In flight, their vibrant blue underwings flash brilliantly against the golden savanna.`,
-    habitat: 'Dry brush country, acacia woodlands, and rocky foothill thickets.',
-    diet: 'Seeds, bulbs, termites, small invertebrates, and moisture-rich succulent shoots.',
-    behavior: 'Gregarious terrestrial flocks. Roosts high in acacia canopy branches at nightfall.',
-    viewingTip: 'Ubiquitous along dusty park tracks in the early morning and late afternoon.',
-    populationEstimate: 'Abundant throughout the park',
-    imageUrl: cldImage('667812556_1374606328046878_2299729915640711788_n', 'w_800,h_600,c_fill,q_auto'),
+During the breeding season, males perform an extraordinary courtship display, inflating their throat pouch to the size of a balloon and fanning their tail over their back.`,
+    habitat: 'Open short-grass savanna, semi-arid plains, and light acacia scrub.',
+    diet: 'Insects, grasshoppers, lizards, seeds, and acacia gum.',
+    behavior: 'Terrestrial, solitary or paired; takes to wing only when strongly pressed.',
+    viewingTip: 'Sarite open grassland plains during mid-day.',
+    populationEstimate: 'Healthy presence in open grassland blocks',
+    imageUrl: cldImage('782170688_122141256729053365_672836120563678516_n', 'w_800,h_600,c_fill,q_auto'),
   },
   {
     id: 'w-greater-kudu',
@@ -251,187 +369,118 @@ Flocks numbering up to 50 individuals trot together through the thorny scrub, ma
     conservationStatus: 'LC',
     statusLabel: 'Least Concern',
     excerpt: "Spectacular spiral-horned antelope possessing incredible jumping ability and large radar-dish ears.",
-    body: `The Greater Kudu is renowned for the magnificent corkscrew horns carried by adult bulls, reaching up to 1.8 meters in length with 2.5 full twists. Their thin white body stripes break up their silhouette in the dappled shadows of acacia and commiphora thickets.
+    body: `The Greater Kudu is renowned for the magnificent corkscrew horns carried by adult bulls, reaching up to 1.8 meters with 2.5 full twists. Their thin white vertical stripes provide camouflage in the dappled shadows of rocky volcanic slopes.
 
-Equipped with enormous ears that rotate independently, kudu can detect approaching footsteps from hundreds of meters away. When startled, they can leap over 2.5-meter fences and boulders with effortless grace.`,
-    habitat: 'Hilly terrain, rocky slopes, dense bushland, and riverine woodlands.',
-    diet: 'Foliage browser eating leaves, shoots, seed pods, and wild succulents.',
-    behavior: 'Bulls form bachelor groups; cows and calves form loose maternal bands.',
-    viewingTip: 'Rocky ridges of the volcanic crater slopes during early morning hours.',
-    populationEstimate: 'Common in rocky hills and crater rims',
+Equipped with large, independently rotating ears, kudu detect footsteps from hundreds of meters away and can easily leap over 2.5-meter obstacles.`,
+    habitat: 'Hilly volcanic terrain, rocky slopes, and dense Commiphora bushland.',
+    diet: 'Leaves, shoots, seed pods, wild succulents, and fallen fruits.',
+    behavior: 'Bachelor herds for bulls; maternal groups for cows and calves.',
+    viewingTip: 'Slopes around El Sod and Danbala-Dhibayu crater rims.',
+    populationEstimate: 'Common in rocky hills and crater slopes',
     imageUrl: cldImage('714881540_1425095369664640_1560666463367040759_n', 'w_800,h_600,c_fill,q_auto'),
   },
   {
-    id: 'w-caracal',
-    title: 'Caracal',
-    slug: 'caracal',
-    scientificName: 'Caracal caracal',
-    category: 'Mammals',
+    id: 'w-vulturine-guineafowl',
+    title: 'Vulturine Guineafowl',
+    slug: 'vulturine-guineafowl',
+    scientificName: 'Acryllium vulturinum',
+    category: 'Birds',
     conservationStatus: 'LC',
     statusLabel: 'Least Concern',
-    excerpt: "Athletic nocturnal feline with iconic tufted black ears, capable of leaping 3 meters into the air to catch birds.",
-    body: `The caracal is the most formidable medium-sized cat of the African arid biome. Its long, tasseled black ears act as acoustic funnels and visual signaling devices, while powerful hindquarters enable extraordinary vertical leaps to snatch low-flying birds right out of the sky.
-
-Masterfully secretive and predominantly nocturnal, the caracal roams solitary territories spanning over 30 sq km of Borana's scrubland.`,
-    habitat: 'Dry scrub savanna, rocky hillsides, and arid thornveld.',
-    diet: 'Game birds, francolins, hyraxes, hares, and young gazelles.',
-    behavior: 'Strictly solitary, agile nocturnal predator with supreme climbing skill.',
-    viewingTip: 'Dusk spotlighting drives along rocky escarpments.',
-    populationEstimate: 'Healthy wild population across rocky terrain',
-    imageUrl: cldImage('666963146_1374606204713557_5148189493277579201_n', 'w_800,h_600,c_fill,q_auto'),
-  },
-  {
-    id: 'w-ethiopian-bushcrow',
-    title: 'Ethiopian Bushcrow (Stresemann\'s Bushcrow)',
-    slug: 'ethiopian-bushcrow',
-    scientificName: 'Zavattariornis stresemanni',
-    category: 'Endemics',
-    conservationStatus: 'EN',
-    statusLabel: 'Endangered',
-    excerpt: "Borana's most famous avian enigma, globally restricted to a narrow 6,000 km² acacia savanna pocket around Yabelo and Mega.",
-    body: `The Ethiopian Bushcrow (*Zavattariornis stresemanni*), or *Qorii* in Afaan Oromo, is one of the world's most enigmatic and geographically restricted bird species. Found nowhere else on Earth outside the Borana acacia woodlands of southern Ethiopia, its global distribution is strictly bounded by a mysterious micro-climatic thermal envelope with an average annual temperature of 18.7°C to 20.6°C.
-
-Distinguished by its pearl-grey plumage, black wings, and startling bare cobalt-blue facial skin around the eye, the Bushcrow exhibits extraordinary cooperative social behavior. Family clans construct huge, communal globe nests of thorny acacia twigs up to 60 cm in diameter, insulated with cow dung and grass.
-
-Multiple adult helpers assist the breeding pair in incubating eggs and provisioning chicks. International ornithologists travel thousands of miles to Borana National Park to observe this legendary flagship species in its native rangeland.`,
-    habitat: 'Open Acacia-Commiphora savanna, thorny bush rangelands, and pastoral grassland glades between 1,300m and 1,800m.',
-    diet: 'Invertebrates, beetles, caterpillars, grasshoppers, and seasonal acacia seed pods.',
-    behavior: 'Highly gregarious clans of 4 to 12 birds foraging on the ground; communal nesting in giant thorny twig domes.',
-    viewingTip: 'Yabelo Wildlife Sanctuary sector, central acacia loop, and the open savanna between Yabelo and Dubuluk.',
-    populationEstimate: '~9,000–16,000 individuals globally (restricted to Borana)',
-    imageUrl: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_800,h_600,c_fill,q_auto'),
-    gallery: [
-      cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_1200,h_800,c_fill,q_auto'),
-      cldImage('715234713_1425095352997975_7244808407264930827_n', 'w_1200,h_800,c_fill,q_auto'),
-    ],
-  },
-  {
-    id: 'w-white-tailed-swallow',
-    title: 'White-tailed Swallow',
-    slug: 'white-tailed-swallow',
-    scientificName: 'Hirundo megaensis',
-    category: 'Endemics',
-    conservationStatus: 'VU',
-    statusLabel: 'Vulnerable',
-    excerpt: "Dazzling endemic aerial acrobat with gleaming white outer tail feathers, skimming the Borana plateau savannas.",
-    body: `The White-tailed Swallow is a rare Ethiopian endemic restricted to the high-plateau savannas around Mega and Yabelo in southern Ethiopia. Named after the town of Mega (*megaensis*), this delicate swallow glides over open grasslands hawking winged insects.
-
-Its deep metallic steel-blue upperparts and snowy white throat and outer tail streamers create an unmistakable silhouette as it twists and dives across the open rangeland. It builds mud-pellet cup nests beneath the eaves of traditional Borana dwellings and culverts.
-
-Preservation of open grassland habitat and traditional pastoral grazing mosaics is critical to maintaining insect biodiversity for this range-restricted bird.`,
-    habitat: 'Highland thorn savanna, montane grassland glades, and pastoral grazing plains between 1,400m and 2,200m.',
-    diet: 'Aerial insects, flying termites, small beetles, and midges captured in flight.',
-    behavior: 'Pairs or loose flocks hunting low over grasses; graceful, rapid acrobatic flight with flashing white tail feathers.',
-    viewingTip: 'Plateau ridges between Yabelo and Mega, particularly around traditional Borana homesteads.',
-    populationEstimate: '~2,500–10,000 mature individuals',
-    imageUrl: cldImage('715234713_1425095352997975_7244808407264930827_n', 'w_800,h_600,c_fill,q_auto'),
-  },
-  {
-    id: 'w-prince-ruspolis-turaco',
-    title: 'Prince Ruspoli\'s Turaco',
-    slug: 'prince-ruspolis-turaco',
-    scientificName: 'Tauraco ruspolii',
-    category: 'Endemics',
-    conservationStatus: 'VU',
-    statusLabel: 'Vulnerable',
-    excerpt: "One of Africa's most breathtaking canopy birds, flashing brilliant ruby-red flight feathers through the highland juniper forests.",
-    body: `Prince Ruspoli's Turaco is an astonishing avian gem of southern Ethiopia's afro-montane cloud forests. First collected in 1892 by the Italian explorer Prince Eugenio Ruspoli, who was tragically killed by an elephant before recording the exact location, this bird remained an enigma to science for decades until rediscovery in the juniper forests adjoining the Borana highlands.
-
-With an iridescent bottle-green chest, a tall white crest, bright crimson eye-rings, and magnificent scarlet-crimson primary flight feathers, seeing a flock of Ruspoli's Turacos bounding through the canopy of *Juniperus procera* and *Podocarpus* trees is an unforgettable safari highlight.`,
-    habitat: 'Afro-montane juniper forest remnants, riverine fig galleries, and mixed podocarpus-acacia forest belts.',
-    diet: 'Wild figs (*Ficus*), juniper berries, mistletoe fruits, buds, and flowering blossoms.',
-    behavior: 'Arboreal fruit-eater living in bonded pairs or small noisy family groups; agile canopy runner.',
-    viewingTip: 'Arero forest canopy trails, Magado crater forest rim, and the highland juniper ravines.',
-    populationEstimate: '~3,000–6,000 mature individuals',
-    imageUrl: cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_800,h_600,c_fill,q_auto'),
+    excerpt: "Dazzling cobalt-blue and pinstriped game bird trotting in large social flocks across the dry thorn savanna.",
+    body: `Adorned in brilliant cobalt-blue hackles, crimson eyes, and white pinstripes, the Vulturine Guineafowl is one of the most striking arid-zone birds in Africa. Flocks of up to 50 individuals forage along dusty park tracks, emitting musical whistles.`,
+    habitat: 'Dry brush country, acacia woodlands, and rocky foothill thickets.',
+    diet: 'Seeds, bulbs, termites, small invertebrates, and moisture-rich shoots.',
+    behavior: 'Gregarious terrestrial flocks; roosts high in acacia canopies at night.',
+    viewingTip: 'Ubiquitous along park tracks at dawn and late afternoon.',
+    populationEstimate: 'Abundant throughout the park',
+    imageUrl: cldImage('667812556_1374606328046878_2299729915640711788_n', 'w_800,h_600,c_fill,q_auto'),
   },
 ]
 
 /* =========================================================================
-   OFFICIAL FIELD STORIES & CONSERVATION DISPATCHES
+   OFFICIAL FIELD STORIES & CONSERVATION DISPATCHES (Sourced Research)
    ========================================================================= */
 export const OFFICIAL_STORIES: ParkStory[] = [
   {
-    id: 's-grevy-census-2025',
-    title: 'Biannual Grevy’s Zebra Ground Census: Population Shows Encouraging Growth in Sarite',
-    slug: 'grevys-zebra-census-sarite',
-    excerpt: "The latest collaborative wildlife count conducted by EWCA rangers and community scout networks reveals positive recruitment rates across protected breeding corridors.",
-    body: `Over five consecutive days, joint teams of EWCA wildlife biologists, community scout monitors, and regional conservation partners completed the comprehensive southern Ethiopia dry-season wildlife census across Borana National Park and the Sarite Sanctuary.
+    id: 's-tula-singing-wells',
+    title: 'The Living Legacy of the Tula Wells: Ancient Hydrological Engineering of the Borana',
+    slug: 'tula-singing-wells-gadaa-heritage',
+    excerpt: "Hand-dug 12 to 30 meters into solid rock, the 'Singing Wells' (*Tula Sallan*) sustain pastoral herds and wildlife through human bucket chains and the customary law of grass and water.",
+    body: `Deep within the limestone strata of southern Ethiopia lie the legendary Tula Wells (*Tula Sallan*)—ancient vertical shafts excavated by hand 12 to 30 meters down to subterranean aquifers without modern machinery.
 
-Using synchronized GPS-enabled mobile survey units and standardized strip-transect methodology, teams recorded 418 individual Grevy’s zebras, including 54 healthy young foals born within the last six months.
+To draw water during the dry season, a human chain of 4 to 8 young Borana men balances on timber footholds down the vertical shaft, passing leather buckets (*Okole*, traditionally fashioned from giraffe hide) hand-to-hand in unbroken rhythm. As they haul, they chant polyphonic work songs (*Weellu*) whose tempo paces their labor and calms thousands of waiting cattle.
 
-"The expansion of community-managed water corridors and strict pasture resting agreements under traditional Gadaa guidance has dramatically reduced calf mortality," stated Dr. Alula Haile, Senior Wildlife Ecologist.
+Under customary law (*Seera Marraa fi Bisaanii*—the law of grass and water) administered by the Gadaa system, water is a sacred communal trust. No person or animal may be denied water. After domestic herds drink, water troughs are left filled overnight, providing essential hydration for nocturnal wild zebras, oryx, and gazelles.`,
+    category: 'Community',
+    author: {
+      name: 'Guyo Boru',
+      role: 'Cultural Heritage & Gadaa Liaison',
+    },
+    publishedAt: '2025-11-20',
+    readTime: '6 min read',
+    imageUrl: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_800,h_600,c_fill,q_auto'),
+    tags: ['Tula Wells', 'Singing Wells', 'Gadaa System', 'Customary Law', 'UNESCO'],
+  },
+  {
+    id: 's-bushcrow-thermal-envelope',
+    title: 'The Thermal Envelope of the Ethiopian Bushcrow: Climate Boundaries of an Avian Enigma',
+    slug: 'ethiopian-bushcrow-thermal-envelope',
+    excerpt: "Why is Stresemann's Bushcrow confined to a narrow 17.5–20°C temperature island in southern Ethiopia? Research reveals a fragile symbiosis between climate and pastoral grazing.",
+    body: `For decades, ornithologists wondered why the Ethiopian Bushcrow (*Zavattariornis stresemanni*) never expanded beyond its 6,000 km² range around Yabelo, Mega, and Arero, despite seemingly identical acacia savanna extending across East Africa.
 
-The census also recorded substantial numbers of Beisa oryx, Somali ostrich flocks, and gerenuk populations, verifying the resilience of the southern ecological sanctuary.`,
+Groundbreaking research (Donald et al. 2012) proved that the Bushcrow's distribution is almost uniquely temperature-determined: it is biologically restricted to a cool micro-climatic thermal pocket where mean annual temperatures remain between 17.5°C and 20.6°C.
+
+Furthermore, the species depends on heavy livestock grazing by Borana cattle to keep grass short, enabling ground foraging for beetles and larvae. However, climate change models project up to a 90% contraction of this thermal bubble by 2070, making Borana National Park's conservation blocks the ultimate refuge for this endangered flagship.`,
     category: 'Research',
     author: {
       name: 'Dr. Alula Haile',
       role: 'Chief Wildlife Ecologist, EWCA',
     },
-    publishedAt: '2025-11-14',
-    readTime: '5 min read',
-    imageUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_600,c_fill,q_auto'),
-    tags: ['Wildlife Census', 'Grevy\'s Zebra', 'EWCA Research', 'Endangered Species'],
+    publishedAt: '2025-10-15',
+    readTime: '7 min read',
+    imageUrl: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_800,h_600,c_fill,q_auto'),
+    tags: ['Stresemann\'s Bushcrow', 'Endemic Species', 'Climate Science', 'Ornithology'],
   },
   {
-    id: 's-gadaa-water-wells',
-    title: 'The Living Legacy of the Tula Wells: Ancient Hydrological Engineering of the Borana',
-    slug: 'tula-singing-wells-gadaa-heritage',
-    excerpt: "For centuries, the subterranean 'Singing Wells' have supplied life to wildlife and pastoralist herds while sustaining a timeless democratic water management covenant.",
-    body: `Deep within the limestone strata of southern Ethiopia lie the legendary Tula Wells—deep subterranean shafts descending up to thirty meters into the groundwater table. Known worldwide as the 'Singing Wells', these engineering wonders represent one of humankind’s greatest traditional water conservation systems.
+    id: 's-booqee-sadeen-defense',
+    title: 'Defending Booqee Sadeen: How Borana Communities Protected the Salt Calderas',
+    slug: 'defending-booqee-sadeen-salt-craters',
+    excerpt: "When industrial concessions threatened El Sod crater lake, Borana pastoralists mobilized customary councils to safeguard centuries of sustainable community salt mining.",
+    body: `Booqee Sadeen ('The Three Maar Craters'), anchored by the dramatic El Sod volcanic caldera (*Booqee Sooddaa* or 'House of Salt'), represents one of Ethiopia's most striking geological landscapes. For over 600 years, local divers have descended the 600-meter caldera to harvest black mineral salt (*Sooqda*) from the subterranean brine lake.
 
-Every morning, human chains of young men stand balanced on narrow wooden scaffolding down the dark vertical shaft, rhythmically passing heavy leather buckets from hand to hand. As they work, they sing synchronized, harmonic chants that soothe their cattle waiting patiently above and keep the bucket rhythm constant.
+When industrial mining concessions were proposed for the lake bed, the Borana community mobilized through their customary elders (*Jaarsa*) and Gadaa leadership, successfully demonstrating that centuries of customary extraction sustained thousands of rural livelihoods without ecological destruction.
 
-Under the traditional *Gadaa* governance structure—inscribed by UNESCO as Intangible Cultural Heritage—water is designated as a sacred communal trust. Strict customary laws ensure that wild animals (including zebras, antelopes, and birds) have guaranteed nocturnal access to the water troughs once domestic herds have cleared.`,
-    category: 'Community',
-    author: {
-      name: 'Guyo Boru',
-      role: 'Cultural Heritage Coordinator',
-    },
-    publishedAt: '2025-09-28',
-    readTime: '6 min read',
-    imageUrl: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_800,h_600,c_fill,q_auto'),
-    tags: ['Culture', 'Gadaa System', 'UNESCO Heritage', 'Singing Wells'],
-  },
-  {
-    id: 's-anti-poaching-tech',
-    title: 'Solar-Powered Smart Outposts and Community Ranger Patrols Transform Park Security',
-    slug: 'smart-outposts-community-rangers',
-    excerpt: "How remote satellite mesh networks, thermal sensor arrays, and trained local scout units have virtually eliminated illegal poaching across key habitats.",
-    body: `Borana National Park has unveiled its modernized park protection infrastructure with the commissioning of four solar-powered ranger monitoring stations along the southern perimeter.
-
-Equipped with long-range radio repeaters, real-time spatial monitoring and reporting software (SMART), and thermal night-vision gear, ranger detachments now maintain 24/7 surveillance across critical wildlife corridors.
-
-Crucially, over 65% of active field scouts are recruited directly from neighboring pastoralist villages. "When local communities are the primary beneficiaries of park tourism revenue and employment, wildlife protection becomes a shared source of civic pride," remarked Park Warden Tsegaye Lemma.`,
+Today, El Sod stands as a shining model of community-conserved geological heritage, combining sustainable artisanal salt harvesting with low-impact geotourism.`,
     category: 'Conservation',
-    author: {
-      name: 'Tsegaye Lemma',
-      role: 'Park Warden, Borana NP',
-    },
-    publishedAt: '2025-08-05',
-    readTime: '4 min read',
-    imageUrl: cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_800,h_600,c_fill,q_auto'),
-    tags: ['Conservation', 'Anti-Poaching', 'Rangers', 'SMART Technology'],
-  },
-  {
-    id: 's-el-sod-crater-expedition',
-    title: 'Descending into El Sod: Geological Secrets of the Volcanic "House of Salt"',
-    slug: 'el-sod-house-of-salt-geology',
-    excerpt: "A deep dive into the 1.8-kilometer volcanic caldera where miners harvest black mineral salt from a jet-black subterranean brine lake.",
-    body: `Rising steeply from the surrounding acacia savanna 90 kilometers south of Yabelo, the rim of El Sod crater suddenly reveals a dramatic 600-meter drop into an extinct volcanic caldera. At the very bottom rests an ink-black lake saturated with rich mineral salts.
-
-Known in the Oromo language as *Olla Sodda* or the 'House of Salt', local divers have extracted curative mineral salt here for over six centuries without the use of machinery.
-
-Beyond its cultural and geological significance, the protected crater slopes provide a microclimate for unique succulent flora, rare raptors including the Verreaux's eagle, and elusive leopard populations that den within the basalt rock crevices.`,
-    category: 'Field Report',
     author: {
       name: 'Elena Vance',
       role: 'Geotourism Specialist',
     },
-    publishedAt: '2025-06-19',
+    publishedAt: '2025-08-30',
     readTime: '5 min read',
     imageUrl: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_800,h_600,c_fill,q_auto'),
-    tags: ['Geology', 'El Sod Crater', 'Volcanoes', 'Cultural Tourism'],
+    tags: ['El Sod Crater', 'Booqee Sadeen', 'Community Conservation', 'Geology'],
+  },
+  {
+    id: 's-sympatric-zebras-coexistence',
+    title: 'Sympatric Equids: The Rare Coexistence of Grevy’s and Plains Zebras in Dida-Hara',
+    slug: 'sympatric-zebras-dida-hara-sarite',
+    excerpt: "Borana National Park is one of the only places on Earth where endangered Grevy's zebras and common plains zebras coexist in the same savanna habitat.",
+    body: `Across most of Africa, plains zebras and Grevy's zebras occupy separate geographic ranges. In Borana National Park's Dida-Hara and Sarite conservation blocks, however, both species share the same grassland ecosystem in an extraordinary display of sympatric coexistence.
+
+Biannual ground censuses conducted by EWCA rangers and community scouts track how the two species partition savanna resources. Plains zebras graze in cohesive family harems, while Grevy's stallions defend expansive territorial domains up to 10 km² near water.
+
+This dual-species grazing dynamic prevents single-species rangeland overutilization and provides a living laboratory for evolutionary biologists studying equid ecology.`,
+    category: 'Field Report',
+    author: {
+      name: 'Tsegaye Lemma',
+      role: 'Park Warden, Borana NP',
+    },
+    publishedAt: '2025-07-12',
+    readTime: '5 min read',
+    imageUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_600,c_fill,q_auto'),
+    tags: ['Grevy\'s Zebra', 'Plains Zebra', 'Sympatry', 'Dida-Hara', 'Sarite'],
   },
 ]
 
@@ -441,70 +490,70 @@ Beyond its cultural and geological significance, the protected crater slopes pro
 export const OFFICIAL_GALLERY: GalleryMedia[] = [
   {
     id: 'g-1',
-    title: "Grevy's Zebra Stallion on the Dida Hara Plains",
-    caption: 'An adult territorial stallion standing vigilant across the golden acacia savanna at dawn.',
+    title: "Grevy's Zebra Stallion on the Dida-Hara Plains",
+    caption: 'An adult territorial stallion standing vigilant across the drought-resistant acacia savanna at dawn.',
     category: 'Wildlife',
     cldId: '783592782_122141256459053365_1584076652469108423_n',
     imageUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_1600,h_1067,c_fill,q_auto'),
     thumbnailUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_600,h_400,c_fill,q_auto'),
     photographer: 'EWCA Conservation Media Unit',
-    location: 'Dida Hara Savanna Plains, Sector 3',
-    date: '2025-10-12',
+    location: 'Dida-Hara Conservation Block',
+    date: '2025-10-18',
     aspect: 'wide',
-    cameraSpecs: 'Sony A1 · 400mm f/2.8 GM · 1/2500s · ISO 200',
+    cameraSpecs: 'Sony A1 · 400mm f/2.8 GM · 1/2000s · ISO 200',
   },
   {
     id: 'g-2',
-    title: 'El Sod "House of Salt" Volcanic Caldera',
-    caption: 'Panoramic view looking down 600 vertical meters into the deep basalt volcanic caldera and subterranean brine lake.',
+    title: 'El Sod "House of Salt" Volcanic Explosion Caldera',
+    caption: 'A 600-meter vertical descent to the ink-black subterranean saline crater lake of Booqee Sooddaa.',
     category: 'Landscapes',
     cldId: '667811241_1374606294713548_4463427384711284519_n',
     imageUrl: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_1600,h_1067,c_fill,q_auto'),
     thumbnailUrl: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_600,h_400,c_fill,q_auto'),
-    photographer: 'Ethiopian Tourism Organization',
-    location: 'El Sod Caldera Rim, 1,880m',
-    date: '2025-09-18',
+    photographer: 'Earth Science Documentary Project',
+    location: 'El Sod Crater, 1,520m',
+    date: '2025-08-22',
     aspect: 'wide',
-    cameraSpecs: 'Canon EOS R5 · 24-70mm f/2.8L · 1/500s · ISO 100',
+    cameraSpecs: 'Fujifilm GFX 100S · 23mm f/4 · 1/160s · ISO 100',
   },
   {
     id: 'g-3',
-    title: 'Dubuluk Tula Singing Wells Cattle Watering',
-    caption: 'Borana pastoralists forming human chains inside deep limestone shafts while chanting customary water rhythms.',
+    title: 'Tula Singing Wells (*Tula Sallan*) Water Conveyance',
+    caption: 'Borana pastoralists forming a human bucket chain down a 20-meter vertical limestone shaft while singing in rhythm.',
     category: 'Culture',
     cldId: '782451195_122141256279053365_7936837558989253988_n',
     imageUrl: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_1600,h_1067,c_fill,q_auto'),
     thumbnailUrl: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_600,h_400,c_fill,q_auto'),
-    photographer: 'Guyo Boru & Oromia Cultural Trust',
-    location: 'Dubuluk Ancient Well Complex',
-    date: '2025-08-30',
-    aspect: 'portrait',
-    cameraSpecs: 'Nikon Z9 · 35mm f/1.4 · 1/800s · ISO 400',
+    photographer: 'UNESCO Intangible Heritage Archive',
+    location: 'Dubuluk Tula Well Complex',
+    date: '2025-09-05',
+    aspect: 'wide',
+    cameraSpecs: 'Canon EOS R5 · 24-70mm f/2.8L · 1/500s · ISO 320',
   },
   {
     id: 'g-4',
-    title: 'African Elephant Breeding Herd Crossing',
-    caption: 'Matriarch herd traversing the dry sandy riverbed in the southern riverine forest gallery corridor.',
+    title: "Ethiopian Bushcrow (*Zavattariornis stresemanni*) on Acacia",
+    caption: "The endemic Bushcrow exhibiting its bare cobalt-blue orbital patch in its restricted thermal habitat.",
     category: 'Wildlife',
-    cldId: '667404940_1374606078046903_3918001419654482747_n',
-    imageUrl: cldImage('667404940_1374606078046903_3918001419654482747_n', 'w_1600,h_1067,c_fill,q_auto'),
-    thumbnailUrl: cldImage('667404940_1374606078046903_3918001419654482747_n', 'w_600,h_400,c_fill,q_auto'),
-    photographer: 'EWCA Field Rangers & Spatial Unit',
-    location: 'Southern Forest Gallery Sector',
+    cldId: '707826833_122258731340333664_6654029734201501351_n',
+    imageUrl: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_1600,h_1067,c_fill,q_auto'),
+    thumbnailUrl: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_600,h_400,c_fill,q_auto'),
+    photographer: 'East African Ornithological Society',
+    location: 'Yabello Conservation Block',
     date: '2025-11-02',
-    aspect: 'wide',
-    cameraSpecs: 'Sony A7R V · 200-600mm G · 1/1600s · ISO 320',
+    aspect: 'portrait',
+    cameraSpecs: 'Nikon Z9 · 800mm f/6.3 VR S · 1/2500s · ISO 640',
   },
   {
     id: 'g-5',
     title: 'Community Ranger Scout on SMART Telemetry Patrol',
-    caption: 'Equipped local ranger monitoring wildlife GPS collars and checking perimeter solar sensors.',
+    caption: 'Equipped local ranger monitoring wildlife GPS collars and checking perimeter solar sensors in Sarite.',
     category: 'Conservation',
     cldId: '780553747_122141256591053365_2969268618095047054_n',
     imageUrl: cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_1600,h_1067,c_fill,q_auto'),
     thumbnailUrl: cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_600,h_400,c_fill,q_auto'),
     photographer: 'Tsegaye Lemma & Wildlife Direct',
-    location: 'Sarite Conservancies Buffer Outpost',
+    location: 'Sarite Block Outpost',
     date: '2025-07-14',
     aspect: 'square',
     cameraSpecs: 'Fujifilm GFX 100 II · 80mm f/1.7 · 1/1000s · ISO 160',
@@ -579,34 +628,6 @@ export const OFFICIAL_GALLERY: GalleryMedia[] = [
     aspect: 'wide',
     cameraSpecs: 'Canon EOS R5 · 100-500mm f/4.5-7.1L · 1/1250s · ISO 500',
   },
-  {
-    id: 'g-11',
-    title: 'Ranger Dawn Anti-Poaching Briefing',
-    caption: 'EWCA uniformed ranger squad receiving spatial patrol coordinates at the Yabelo headquarters compound.',
-    category: 'Conservation',
-    cldId: '707739665_1417594383748072_8777943947648670810_n',
-    imageUrl: cldImage('707739665_1417594383748072_8777943947648670810_n', 'w_1600,h_1067,c_fill,q_auto'),
-    thumbnailUrl: cldImage('707739665_1417594383748072_8777943947648670810_n', 'w_600,h_400,c_fill,q_auto'),
-    photographer: 'EWCA Official Press Bureau',
-    location: 'Yabelo Park Headquarters',
-    date: '2025-12-04',
-    aspect: 'wide',
-    cameraSpecs: 'Nikon Z8 · 24-120mm f/4 S · 1/640s · ISO 400',
-  },
-  {
-    id: 'g-12',
-    title: 'Sunset over Southern Rift Savanna Horizon',
-    caption: 'Golden rays illuminating flat-topped umbrella acacia trees across the southern Ethiopian wilderness.',
-    category: 'Landscapes',
-    cldId: '668110576_1374606031380241_6681634558621259739_n',
-    imageUrl: cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_1600,h_1067,c_fill,q_auto'),
-    thumbnailUrl: cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_600,h_400,c_fill,q_auto'),
-    photographer: 'Landscape Photographers Guild',
-    location: 'Sarite Sunset Plateau',
-    date: '2025-09-02',
-    aspect: 'wide',
-    cameraSpecs: 'Sony A7R V · 16-35mm f/2.8 GM II · 1/320s · ISO 100',
-  },
 ]
 
 /* =========================================================================
@@ -616,96 +637,96 @@ export const OFFICIAL_MAP_POIS: MapPOI[] = [
   {
     id: 'poi-hq',
     name: 'Park Headquarters & Visitor Center (Yabelo)',
-    description: 'Official park headquarters, permit issuance desk, briefing theater, ranger dispatch, and museum exhibits.',
+    description: 'Official administrative center, permit desk, briefing theater, ranger dispatch, and natural history museum.',
     category: 'visitor-center',
     latitude: 4.8872,
     longitude: 38.0833,
     elevation: '1,850 m',
-    accessTip: 'Located directly off the asphalt highway 5 km north of Yabelo town center.',
+    accessTip: 'Located directly off the Trans-African Highway, 5 km north of Yabelo town center.',
     imageUrl: cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-main-gate',
     name: 'Main Northern Entrance Gate',
-    description: 'Official entry checkpoint, vehicle registration, tariff validation, and certified scout assignment.',
+    description: 'Official entrance checkpoint, vehicle registration, tariff validation, and certified scout assignment.',
     category: 'entrance',
     latitude: 4.9125,
     longitude: 38.1154,
     elevation: '1,790 m',
-    accessTip: 'Open daily from 06:00 to 18:00. 4WD vehicles recommended for inner tracks.',
+    accessTip: 'Open daily from 06:00 to 18:00. 4WD vehicles recommended for inner conservation blocks.',
     imageUrl: cldImage('707739665_1417594383748072_8777943947648670810_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-el-sod',
-    name: 'El Sod "House of Salt" Volcanic Crater',
-    description: 'Breathtaking 1.8-km caldera containing a deep black brine lake with traditional salt-harvesting operations.',
+    name: 'El Sod "House of Salt" (Booqee Sooddaa)',
+    description: 'Ancient volcanic caldera with a black subterranean saline crater lake and centuries-old artisanal salt mining.',
     category: 'cultural-site',
-    latitude: 4.2189,
-    longitude: 38.3842,
+    latitude: 4.1170,
+    longitude: 38.5670,
     elevation: '1,520 m (Rim)',
-    accessTip: '90 km south of Yabelo. Guided 2.5-hour roundtrip hike down the crater switchback path.',
+    accessTip: '90 km south of Yabelo. Guided 2.5-hour roundtrip hike down donkey paths; best visited in morning.',
     imageUrl: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-dida-hara',
-    name: 'Dida Hara Wildlife Savanna',
-    description: 'Expansive open grassland plains offering premier viewing of Grevy’s zebras, Beisa oryx, and Somali ostriches.',
+    name: 'Dida-Hara Wildlife Conservation Block',
+    description: "Expansive drought-resistant woodland savanna; premier viewing of coexisting Grevy's and plains zebras and endemic birds.",
     category: 'wildlife-viewing',
     latitude: 4.9650,
     longitude: 38.1720,
     elevation: '1,640 m',
-    accessTip: 'Best visited at dawn (06:30 - 09:00) and dusk (16:30 - 18:00).',
+    accessTip: 'Optimal game drives at dawn (06:30 - 09:30) and dusk (16:30 - 18:30).',
     imageUrl: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-singing-wells',
-    name: 'Dubuluk "Singing Wells" (Tula Heritage Site)',
-    description: 'Ancient hand-excavated vertical water wells operated by rhythmic chanting Borana pastoralist teams.',
+    name: 'Dubuluk Singing Wells (Tula Sallan)',
+    description: 'Centuries-old hand-dug vertical well complex (12–30m deep) operated with human bucket chains and polyphonic chants.',
     category: 'cultural-site',
     latitude: 4.6521,
     longitude: 38.2415,
     elevation: '1,580 m',
-    accessTip: 'Peak activity occurs between 08:00 and 12:00 when cattle herds arrive to drink.',
+    accessTip: 'Peak activity occurs between 08:00 and 12:00 when cattle herds arrive to drink under customary law.',
     imageUrl: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-magado',
-    name: 'Magado Crater Lake & Forest Viewpoint',
-    description: 'Emerald green crater lake surrounded by dense afro-montane forest and home to colobus monkeys and rare raptors.',
+    name: 'Magado Crater Lake & Montane Ridge',
+    description: 'Emerald maar crater lake surrounded by dry evergreen Afromontane juniper and podocarpus forest.',
     category: 'viewpoint',
     latitude: 4.4110,
     longitude: 38.3050,
     elevation: '1,920 m',
-    accessTip: 'Accessible via 4WD track from Mega; spectacular picnic site on north ridge.',
+    accessTip: 'Accessible via 4WD track from Mega; spectacular panoramic picnic site on north ridge.',
     imageUrl: cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-sarite-campsite',
-    name: 'Sarite Eco-Campsite & Ranger Outpost',
-    description: 'Designated wilderness campsite equipped with water cisterns, shaded cooking shelters, and 24/7 ranger security.',
+    name: 'Sarite Grassland Eco-Campsite & Outpost',
+    description: 'Wilderness campsite in the Sarite grassland block with water cisterns, shaded cooking shelters, and 24/7 ranger presence.',
     category: 'campsite',
     latitude: 4.7890,
     longitude: 38.3450,
     elevation: '1,610 m',
-    accessTip: 'Campers must register at HQ prior to arrival. Firewood permitted only in designated fire pits.',
+    accessTip: 'Registration required at Yabelo HQ. Firewood permitted only in designated fire pits.',
     imageUrl: cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
   {
     id: 'poi-emergency-station',
-    name: 'EWCA Emergency Medical & Search & Rescue Base',
-    description: 'Primary medical triage, satellite telecommunications dispatch, and 4WD search-and-rescue ambulance.',
+    name: 'EWCA Emergency Medical & Ranger SAR Station',
+    description: 'Medical triage base, satellite telecommunications dispatch, and 4WD search-and-rescue response unit.',
     category: 'emergency',
     latitude: 4.8910,
     longitude: 38.0860,
     elevation: '1,850 m',
-    accessTip: 'Ranger emergency radio channel 16 / Phone: +251 46 444 0210.',
+    accessTip: 'Emergency radio VHF Channel 16 / HQ Hotline: +251 46 444 0210.',
     imageUrl: cldImage('780553747_122141256591053365_2969268618095047054_n', 'w_800,h_600,c_fill,q_auto'),
     essential_offline: true,
   },
@@ -757,7 +778,7 @@ export const OFFICIAL_TARIFFS: TariffRate[] = [
   },
   {
     category: 'Commercial Filming & Documentary Permit',
-    description: 'Professional cinema cameras, broadcast crews, and drone permit.',
+    description: 'Professional cinema cameras, broadcast crews, and drone permits.',
     foreignNonResidentUSD: 250,
     foreignResidentUSD: 150,
     ethiopianCitizenETB: 8000,
@@ -766,29 +787,55 @@ export const OFFICIAL_TARIFFS: TariffRate[] = [
 ]
 
 /* =========================================================================
-   PARK QUICK STATS & CONTACTS
+   PARK INSTITUTIONAL DATA (Sourced Master Profile)
    ========================================================================= */
 export const PARK_INSTITUTIONAL_DATA = {
-  name: 'Borena National Park',
-  authority: 'Ethiopian Wildlife Conservation Authority (EWCA)',
-  regionalState: 'Oromia Regional State',
-  establishedYear: '2016 (Upgraded Sanctuary to National Park Status)',
-  totalAreaHectares: '1,200,000+ ha (Combined core & buffer ecosystems)',
+  name: 'Borana National Park',
+  oromoName: 'Booranaa Biyya Baha National Park',
+  authority: 'Oromia Forest & Wildlife Enterprise (OFWE) & Ethiopian Wildlife Conservation Authority (EWCA)',
+  regionalState: 'Oromia Regional State (Borena Zone & Liben border)',
+  history: 'Originally designated as a Controlled Hunting Zone in 1986; upgraded and formally gazetted as a National Park in 2017.',
+  establishedYear: '1986 (Controlled Hunting) / 2017 (National Park Gazettement)',
+  totalAreaKm2: '45,366 km²',
+  totalAreaHectares: '4,536,600 ha (Ethiopia’s Largest Protected Area Complex)',
   elevationRange: '1,000 m to 2,050 m above sea level',
-  headquarters: 'Yabelo, Borena Zone, Oromia, Ethiopia',
+  headquarters: 'Yabelo, Borena Zone, Oromia, Ethiopia (approx. 570 km south of Addis Ababa)',
+  coordinates: {
+    latitude: 4.117,
+    longitude: 38.567,
+    formatted: '4.117°N, 38.567°E',
+  },
+  borders: {
+    south: 'Kenya–Ethiopia international border',
+    west: 'Chelbi Wildlife Reserve',
+    east: 'Geraille National Park',
+    north: 'Yabelo Wildlife Sanctuary and Arero National Forest Priority Area',
+  },
+  biodiversity: {
+    plants: '327 documented species across 197 genera and 69 families (Dalle et al. 2005)',
+    mammals: '40+ recorded species including sympatric Grevy\'s and Plains zebras',
+    birds: '280+ recorded species with 4 range-restricted endemics',
+    endemicBirds: [
+      "Stresemann's Bushcrow (Zavattariornis stresemanni)",
+      "White-tailed Swallow (Hirundo megaensis)",
+      "Prince Ruspoli's Turaco (Tauraco ruspolii)",
+      "Black-fronted Spurfowl (Pternistis atrifrons)",
+    ],
+  },
+  geology: {
+    basement: 'Precambrian crystalline basement rock overlain by Tertiary volcanic flood basalts',
+    features: 'Undulating plains, volcanic inselbergs, rocky kopjes, karst sinkholes and caves',
+    craters: 'Booqee Sadeen (The Three Maar Crater Lakes), notably El Sod (Booqee Sooddaa) black-water caldera',
+  },
+  climate: {
+    type: 'Semi-arid, near-equatorial (minimal seasonal temp swing: 25°C–33°C daytime)',
+    annualRainfall: '400–700 mm (Bimodal)',
+    wetSeasons: 'Main rains March–May (Ganna), Short rains September–November (Hagayya)',
+    drySeasons: 'December–February (Bona) and June–August (Adoolessa)',
+  },
   emergencyPhone: '+251 (0) 46 444 0210',
   hotline24: '+251 (0) 91 100 2345',
   officialEmail: 'info@borenapark.gov.et',
   permitsEmail: 'permits@borenapark.gov.et',
   researchEmail: 'research@borenapark.gov.et',
-  coordinates: {
-    latitude: 4.8872,
-    longitude: 38.0833,
-  },
-  seasons: {
-    drySeason: 'October to March & June to August (Optimal game drives, dry roads)',
-    rainySeason: 'April to May (Main rains) & September to October (Short rains)',
-    averageTempDay: '26°C - 31°C (79°F - 88°F)',
-    averageTempNight: '14°C - 18°C (57°F - 64°F)',
-  },
 }

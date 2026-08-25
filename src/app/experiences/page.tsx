@@ -11,64 +11,70 @@ import {
   Clock,
   ArrowRight,
   Calculator,
+  MapPin,
+  Calendar,
+  Car,
+  Shield,
+  Binoculars,
+  Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { cldImage } from '@/lib/cloudinary'
 
 const EXPERIENCES = [
   {
-    title: 'Savanna Game Drives & Grevy’s Zebra Safari',
+    title: 'Savanna Game Drives & Sympatric Zebra Tracking',
     category: 'Wildlife Safari',
     duration: 'Half-Day or Full-Day',
     difficulty: 'Easy',
-    desc: 'Expert-led 4WD tracking across the Dida Hara plains to observe Grevy’s zebras, Beisa oryx, lions, cheetahs, and Somali ostriches with a certified EWCA ranger.',
+    desc: 'Expert-led 4WD tracking across the Dida-Hara and Sarite conservation blocks to observe coexisting Grevy’s zebras and common plains zebras, Beisa oryx, lions, cheetahs, and Somali ostriches with a certified EWCA ranger.',
     image: cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: 'Highest density of Grevy’s zebras in southern Ethiopia',
+    highlight: 'Rare dual-species zebra coexistence & big game tracking',
   },
   {
-    title: 'El Sod "House of Salt" Crater Caldera Trek',
+    title: 'El Sod "House of Salt" (Booqee Sooddaa) Caldera Descent',
     category: 'Geotourism & Trekking',
-    duration: '3–4 Hours',
+    duration: '3–4 Hours (Morning Recommended)',
     difficulty: 'Moderate',
-    desc: 'Descend 600 vertical meters into the ancient volcanic caldera of El Sod to witness traditional mineral salt harvesting from the subterranean black brine lake.',
+    desc: 'Descend 600 vertical meters into the ancient volcanic explosion caldera of El Sod. Follow donkey trails to witness centuries-old artisanal black mineral salt harvesting from the subterranean brine lake.',
     image: cldImage('667811241_1374606294713548_4463427384711284519_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: '600m volcanic descent to black brine lake',
+    highlight: '600m volcanic descent to black brine lake & 600-year mining culture',
   },
   {
-    title: 'Tula "Singing Wells" Cultural Immersion',
-    category: 'Heritage Tour',
-    duration: '2–3 Hours (Morning)',
+    title: 'Dubuluk Tula "Singing Wells" Heritage Immersion',
+    category: 'Cultural Heritage',
+    duration: '2–3 Hours (08:00–12:00)',
     difficulty: 'Easy',
-    desc: 'Witness the morning watering ritual at Dubuluk, where pastoralist teams chant in ancient rhythmic harmony as they draw water from 30-meter deep stone wells.',
+    desc: 'Witness the morning watering ritual at Dubuluk, where Borana pastoralist teams chant polyphonic work songs down 12–30m vertical hand-dug limestone shafts while passing leather buckets in rhythm.',
     image: cldImage('782451195_122141256279053365_7936837558989253988_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: 'UNESCO-inscribed living polyphonic chants',
+    highlight: 'UNESCO-inscribed living polyphonic chants & customary water law',
   },
   {
-    title: 'Sarite Wilderness Eco-Camping & Stargazing',
-    category: 'Overnight Expedition',
+    title: 'Sarite Grassland Wilderness Camping & Dark Skies',
+    category: 'Overnight Safari',
     duration: '1–3 Nights',
     difficulty: 'Moderate',
-    desc: 'Camp beneath some of East Africa’s darkest night skies in designated eco-campsites accompanied by an armed ranger, with nocturnal wildlife listening walks.',
+    desc: 'Camp beneath pristine Class-1 Bortle dark skies in designated eco-campsites across the Sarite block, accompanied by an armed ranger scout, with nocturnal wildlife listening walks.',
     image: cldImage('668110576_1374606031380241_6681634558621259739_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: 'Pristine Class-1 Bortle dark sky stargazing',
+    highlight: 'Pristine dark sky stargazing & open grassland silence',
   },
   {
-    title: 'Highland Endemic Birding & Raptor Expedition',
+    title: 'Endemic Birding & Micro-Climate Avian Expedition',
     category: 'Specialist Birding',
-    duration: 'Full-Day',
+    duration: 'Full-Day or Multi-Day',
     difficulty: 'Easy–Moderate',
-    desc: 'Targeting over 320 recorded avian species including Vulturine Guineafowl, Somali Ostrich, Ruspoli’s Turaco, and cliff-dwelling Verreaux’s eagles.',
-    image: cldImage('667812556_1374606328046878_2299729915640711788_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: '320+ species including Ethiopian endemics',
+    desc: 'Targeting 280+ recorded avian species including the 4 globally endangered range endemics: Stresemann’s Bushcrow (Zavattariornis stresemanni), White-tailed Swallow, Prince Ruspoli’s Turaco, and Black-fronted Spurfowl.',
+    image: cldImage('707826833_122258731340333664_6654029734201501351_n', 'w_800,h_500,c_fill,q_auto'),
+    highlight: '4 range-restricted endemics in unique thermal envelope',
   },
   {
-    title: 'Magado Crater Lake & Forest Ascent',
+    title: 'Magado Crater Lake & Highland Forest Ascent',
     category: 'Mountain Hiking',
     duration: '4–5 Hours',
     difficulty: 'Challenging',
-    desc: 'Trek through lush afro-montane forest slopes surrounding the emerald crater lake of Magado, home to colobus monkeys, bushbucks, and panoramic southern vistas.',
+    desc: 'Trek through dry evergreen Afromontane juniper and podocarpus forests surrounding the emerald crater lake of Magado, home to colobus monkeys, raptors, and panoramic southern rift vistas.',
     image: cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_800,h_500,c_fill,q_auto'),
-    highlight: 'Pristine cloud forest & crater lake panorama',
+    highlight: 'Pristine Afromontane forest & emerald crater lake panorama',
   },
 ]
 
@@ -77,19 +83,42 @@ const ITINERARIES = [
     title: '1-Day Savanna & Caldera Express',
     tag: 'Highlights Tour',
     days: '1 Day',
-    desc: 'Dawn game drive across Dida Hara Savanna followed by an afternoon hike along the dramatic crater rim of El Sod.',
+    desc: 'Dawn game drive across Dida-Hara Savanna for zebras and oryx, followed by an early afternoon hike down the dramatic crater rim of El Sod.',
   },
   {
     title: '3-Day Wildlife, Salt & Singing Wells Classic',
     tag: 'Recommended Safari',
     days: '3 Days / 2 Nights',
-    desc: 'Comprehensive expedition covering Dida Hara plains, morning Tula Singing Wells chants, deep caldera descent, and a night of eco-camping.',
+    desc: 'Comprehensive expedition covering Dida-Hara plains, morning Dubuluk Tula Singing Wells chants, deep El Sod caldera descent, and a night of eco-camping at Sarite.',
   },
   {
     title: '5-Day Transboundary Wilderness Odyssey',
     tag: 'Full Backcountry Trek',
     days: '5 Days / 4 Nights',
-    desc: 'Deep multi-day wilderness traverse of Sarite rangelands, Magado cloud forest summit, wildlife corridor telemetry scouting, and Gadaa elder council meetings.',
+    desc: 'Deep multi-day wilderness traverse of Sarite rangelands, Magado cloud forest summit, endemic Bushcrow thermal pocket tracking, and Gadaa elder biocultural council meetings.',
+  },
+]
+
+const VISITING_LOGISTICS = [
+  {
+    icon: Car,
+    title: 'Overland & Air Access',
+    desc: 'Located approx. 570 km (7–8 hours) south of Addis Ababa via Hawassa and Yabelo along the paved Trans-African Highway. Domestic flights to Hawassa or Arba Minch shorten the driving route.',
+  },
+  {
+    icon: Compass,
+    title: '4WD Vehicle & Local Guide',
+    desc: 'A high-clearance 4WD vehicle is essential for navigating backcountry tracks in Dida-Hara, Sarite, and Magado. Hiring a certified local EWCA guide is mandatory and essential for locating endemic birds.',
+  },
+  {
+    icon: MapPin,
+    title: 'Base Town & Accommodations',
+    desc: 'Yabelo serves as the primary gateway town, offering mid-range tourist lodges, guesthouses, and restaurants. The colorful Saturday regional market in Yabelo is a cultural highlight.',
+  },
+  {
+    icon: Calendar,
+    title: 'Optimal Travel Seasons',
+    desc: 'Best for birdwatching: Wet seasons (March–May & Sept–Nov) when resident endemics and migrants are most active. Best for general game viewing: Dry seasons (Dec–Feb & June–Aug) when wildlife gathers at watercourses.',
   },
 ]
 
@@ -100,27 +129,28 @@ export default function ExperiencesPage() {
   const [includeCamping, setIncludeCamping] = useState(true)
   const [includeVehicle, setIncludeVehicle] = useState(true)
 
+  // Tariff calculation constants
   const dailyFeePerGuest = visitorType === 'international' ? 20 : visitorType === 'resident' ? 10 : 2
   const rangerFeePerDay = 15
-  const vehicleFeePerDay = includeVehicle ? 10 : 0
-  const campingFeePerNight = includeCamping ? 10 * numGuests : 0
+  const campingFeePerNight = visitorType === 'international' ? 10 : 5
+  const vehicleFeePerDay = 10
 
   const totalEstimate =
     dailyFeePerGuest * numGuests * numDays +
     rangerFeePerDay * numDays +
-    vehicleFeePerDay * numDays +
-    campingFeePerNight * Math.max(0, numDays - 1)
+    (includeCamping && numDays > 1 ? campingFeePerNight * (numDays - 1) : 0) +
+    (includeVehicle ? vehicleFeePerDay * numDays : 0)
 
   return (
     <div className="min-h-screen bg-ivory-50 flex flex-col font-sans">
       <SiteHeader />
 
-      {/* Hero Section */}
+      {/* Hero Banner */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
         <div className="absolute inset-0 opacity-40">
           <OptimizedImage
-            src={cldImage('667817973_1374606124713565_3197675928973472449_n', 'w_1600,h_900,c_fill,q_auto')}
-            alt="Experiences Hero"
+            src={cldImage('783592782_122141256459053365_1584076652469108423_n', 'w_1600,h_900,c_fill,q_auto')}
+            alt="Experiences in Borana"
             fill
             priority
             sizes="100vw"
@@ -128,88 +158,81 @@ export default function ExperiencesPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
-        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
+        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-4xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Compass className="w-3.5 h-3.5" />
-            Curated Safari Circuits & Treks
+            Field Expeditions &amp; Geotourism
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
-            Safari Expeditions
+            Curated Park Experiences
           </h1>
           <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
-            From 4WD wildlife tracking across golden plains to descending 600m volcanic calderas and camping beneath pristine night skies.
+            From sunrise zebra safaris across Dida-Hara to the black-water volcanic caldera of El Sod and the polyphonic Singing Wells of Dubuluk.
           </p>
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Main Content Area */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 w-full space-y-16">
-        {/* Core Experiences Grid */}
+        {/* Signature Experiences Grid */}
         <section className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
+          <div className="max-w-2xl space-y-2">
             <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
               <span className="inline-block h-px w-4 bg-gold-600" />
               <span>Signature Adventures</span>
             </p>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-charcoal-950">
-              Core Safari Activities
+            <h2 className="text-3xl font-display font-bold text-charcoal-950">
+              Six Guided Field Expeditions
             </h2>
-            <p className="text-xs sm:text-sm text-charcoal-700 font-light">
-              All expeditions are conducted under the accompaniment of certified EWCA armed scouts.
+            <p className="text-sm text-charcoal-700 font-light leading-relaxed">
+              Every expedition is accompanied by an authorized EWCA wildlife ranger or certified community guide, ensuring safety and authentic biocultural interpretation.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {EXPERIENCES.map((exp, idx) => (
+            {EXPERIENCES.map((exp) => (
               <div
                 key={exp.title}
-                className="group bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle hover:shadow-card hover:border-gold-500/50 transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle hover:shadow-card transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="relative aspect-[16/10] overflow-hidden bg-forest-950">
+                  <div className="relative aspect-[16/10] bg-forest-950 overflow-hidden">
                     <OptimizedImage
                       src={exp.image}
                       alt={exp.title}
                       fill
-                      priority={idx < 3}
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <span className="absolute top-3 left-3 bg-forest-950/80 backdrop-blur-sm text-gold-300 text-[10px] font-bold uppercase px-2.5 py-0.5 rounded-full border border-gold-500/30">
+                    <div className="absolute top-3 left-3 bg-forest-950/80 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-semibold text-gold-300 border border-forest-800">
                       {exp.category}
-                    </span>
+                    </div>
                   </div>
 
                   <div className="p-6 space-y-3">
-                    <div className="flex items-center gap-3 text-xs text-charcoal-600">
+                    <div className="flex items-center gap-4 text-xs text-charcoal-600 font-medium">
                       <span className="flex items-center gap-1">
                         <Clock className="w-3.5 h-3.5 text-forest-700" />
                         {exp.duration}
                       </span>
                       <span>•</span>
-                      <span className="font-medium text-forest-900">{exp.difficulty}</span>
+                      <span className="px-2 py-0.5 rounded bg-sand-100 text-charcoal-700 text-[11px]">
+                        {exp.difficulty}
+                      </span>
                     </div>
 
-                    <h3 className="font-display font-bold text-lg text-charcoal-950 leading-snug">
+                    <h3 className="font-display font-bold text-lg text-charcoal-950 group-hover:text-forest-900 transition-colors">
                       {exp.title}
                     </h3>
-                    <p className="text-xs text-charcoal-700 leading-relaxed font-light">
-                      {exp.desc}
-                    </p>
+                    <p className="text-xs text-charcoal-700 leading-relaxed font-light">{exp.desc}</p>
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-sand-100 mt-4 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-gold-800 italic">
-                    {exp.highlight}
-                  </span>
-                  <Link
-                    href={`/contact?safariExp=${encodeURIComponent(exp.title)}`}
-                    className="p-2 rounded-lg bg-sand-50 hover:bg-forest-900 hover:text-white text-forest-800 transition-colors"
-                    title="Book this experience"
-                  >
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
+                <div className="p-6 pt-0 border-t border-sand-100 mt-4">
+                  <p className="text-[11px] font-semibold text-earth-800 flex items-center gap-1.5">
+                    <Sparkles className="w-3.5 h-3.5 text-gold-600 shrink-0" />
+                    <span>{exp.highlight}</span>
+                  </p>
                 </div>
               </div>
             ))}
@@ -217,20 +240,22 @@ export default function ExperiencesPage() {
         </section>
 
         {/* Trail Circuit Explorer Component */}
-        <TrailCircuitExplorer />
+        <section>
+          <TrailCircuitExplorer />
+        </section>
 
-        {/* Multi-Day Sample Itineraries */}
-        <section className="bg-white rounded-2xl border border-sand-200/80 p-8 sm:p-12 shadow-subtle space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
+        {/* Suggested Itineraries */}
+        <section className="space-y-8">
+          <div className="max-w-2xl space-y-2">
             <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
               <span className="inline-block h-px w-4 bg-gold-600" />
-              <span>Recommended Itineraries</span>
+              <span>Recommended Circuits</span>
             </p>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-charcoal-950">
-              Multi-Day Safari Routes
-            </h3>
-            <p className="text-xs sm:text-sm text-charcoal-700 font-light">
-              Tailored itineraries combining wildlife game drives, volcanic crater descents, and cultural encounters.
+            <h2 className="text-3xl font-display font-bold text-charcoal-950">
+              Curated Safari Itineraries
+            </h2>
+            <p className="text-sm text-charcoal-700 font-light leading-relaxed">
+              Designed for wildlife photographers, birding specialists, and geotourists seeking immersive multi-day expeditions.
             </p>
           </div>
 
@@ -238,14 +263,14 @@ export default function ExperiencesPage() {
             {ITINERARIES.map((itin) => (
               <div
                 key={itin.title}
-                className="p-6 rounded-xl bg-ivory-50/70 border border-sand-200 hover:border-forest-750 transition-all flex flex-col justify-between space-y-4"
+                className="bg-white p-7 rounded-2xl border border-sand-200/80 shadow-subtle space-y-4 hover:border-gold-500/50 transition-all flex flex-col justify-between"
               >
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-gold-100/80 text-gold-900">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-gold-50 text-gold-900 border border-gold-200">
                       {itin.tag}
                     </span>
-                    <span className="text-xs font-mono font-bold text-forest-900">{itin.days}</span>
+                    <span className="text-xs font-bold font-mono text-forest-900">{itin.days}</span>
                   </div>
                   <h4 className="font-display font-bold text-base text-charcoal-950">{itin.title}</h4>
                   <p className="text-xs text-charcoal-700 leading-relaxed font-light">{itin.desc}</p>
@@ -258,6 +283,35 @@ export default function ExperiencesPage() {
                   <span>Request Custom Itinerary</span>
                   <ArrowRight className="w-3.5 h-3.5 text-gold-400" />
                 </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Travel Logistics & Practical Visiting Information (Sourced from Dossier §10) */}
+        <section className="bg-white rounded-2xl border border-sand-200/80 p-8 sm:p-10 shadow-subtle space-y-6">
+          <div className="max-w-2xl space-y-2">
+            <span className="text-xs font-bold uppercase tracking-widest text-earth-700 flex items-center gap-2">
+              <Compass className="w-4 h-4 text-forest-800" /> Plan Your Trip
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-950">
+              Essential Visitor Logistics &amp; Travel Planning
+            </h3>
+            <p className="text-xs sm:text-sm text-charcoal-700 font-light leading-relaxed">
+              Planning advice compiled from official EWCA field guidelines and regional destination reports:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+            {VISITING_LOGISTICS.map((item) => (
+              <div key={item.title} className="p-5 rounded-xl bg-ivory-50 border border-sand-200 space-y-2">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-forest-50 text-forest-800 flex items-center justify-center border border-forest-100 shrink-0">
+                    <item.icon className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-display font-bold text-base text-charcoal-950">{item.title}</h4>
+                </div>
+                <p className="text-xs text-charcoal-700 leading-relaxed font-light">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -291,7 +345,7 @@ export default function ExperiencesPage() {
                     {[
                       { key: 'international', label: 'International ($20/day)' },
                       { key: 'resident', label: 'Resident Exp. ($10/day)' },
-                      { key: 'national', label: 'Ethiopian Citizen (50 ETB)' },
+                      { key: 'national', label: 'Ethiopian Citizen (100 ETB)' },
                     ].map((opt) => (
                       <button
                         key={opt.key}
@@ -400,7 +454,7 @@ export default function ExperiencesPage() {
                   </span>
                 </div>
                 <p className="text-[10px] text-ivory-300/80 leading-relaxed font-light">
-                  *Official fees payable in USD or equivalent ETB at park headquarters. Includes VAT and ranger escort.
+                  *Official statutory fees payable in USD or equivalent ETB at Yabelo park headquarters.
                 </p>
               </div>
 

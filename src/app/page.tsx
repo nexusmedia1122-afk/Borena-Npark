@@ -4,6 +4,7 @@ import HeroVideoSection from '@/components/HeroVideoSection'
 import NewsletterForm from '@/components/NewsletterForm'
 import SeasonalWildlifeMatrix from '@/components/SeasonalWildlifeMatrix'
 import TrailCircuitExplorer from '@/components/TrailCircuitExplorer'
+import HomeMapSection from '@/components/HomeMapSection'
 import { Button, OptimizedImage, SectionHeading } from '@/components/ui/components'
 import { CountUp } from '@/components/ui/CountUp'
 import { cldImage, cldVideo } from '@/lib/cloudinary'
@@ -489,6 +490,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ===== Interactive Topographic GIS & Landmark Map Explorer ===== */}
+      <HomeMapSection />
 
       {/* ===== 8. Living Cultural Heritage & Indigenous Astronomy ===== */}
       <section className="py-24 bg-sand-100/60 border-b border-sand-200">

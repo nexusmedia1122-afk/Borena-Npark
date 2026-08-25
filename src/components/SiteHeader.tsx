@@ -2,24 +2,21 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Search, ChevronRight, MapPin, Compass, ArrowRight } from 'lucide-react'
+import { Menu, X, Search, ChevronRight, ArrowRight } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import QuickSearchModal from '@/components/QuickSearchModal'
 import { cn } from '@/lib/utils'
 
 const PRIMARY_NAV = [
   { href: '/wildlife', label: 'Wildlife' },
+  { href: '/culture', label: 'Culture' },
+  { href: '/astronomy', label: 'Astronomy' },
   { href: '/conservation', label: 'Conservation' },
-  { href: '/culture', label: 'Culture & Heritage' },
-  { href: '/experiences', label: 'Safaris & Visit' },
-  { href: '/stories', label: 'Field Stories' },
+  { href: '/experiences', label: 'Safaris' },
+  { href: '/map', label: 'Map' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/stories', label: 'Stories' },
   { href: '/about', label: 'About' },
-]
-
-const SECONDARY_NAV = [
-  { href: '/astronomy', label: 'Indigenous Astronomy' },
-  { href: '/gallery', label: 'Photo Archive' },
-  { href: '/map', label: 'Park GIS Map' },
 ]
 
 export default function SiteHeader() {
@@ -58,34 +55,38 @@ export default function SiteHeader() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Official Brand Identity */}
-            <Link href="/" className="flex items-center gap-3.5 group shrink-0">
-              <div className="w-11 h-11 rounded-full bg-white p-0.5 flex items-center justify-center shadow-subtle group-hover:scale-105 transition-transform overflow-hidden border border-gold-400/60 shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-3 group shrink-0"
+              title="Borena National Park Official Site"
+            >
+              <div className="w-11 h-11 rounded-full bg-white/95 p-1 border-2 border-gold-400/80 shadow-md group-hover:scale-105 transition-transform flex items-center justify-center overflow-hidden">
                 <img
                   src="/logo.png"
-                  alt="Official Insignia of Borana National Park"
-                  className="w-full h-full object-contain transform scale-110"
+                  alt="Borana National Park Official Seal"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight leading-none">
-                  Borena
+                <span className="font-display font-bold text-base sm:text-lg text-white leading-tight tracking-tight group-hover:text-gold-300 transition-colors">
+                  BORENA
                 </span>
-                <span className="text-[9px] sm:text-[10px] tracking-[0.22em] uppercase font-semibold text-gold-400 mt-1">
-                  National Park · Ethiopia
+                <span className="text-[10px] uppercase font-bold tracking-widest-luxury text-gold-400/90 leading-none">
+                  National Park
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {PRIMARY_NAV.map((item) => {
-                const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                const isActive = pathname === item.href
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      'px-3.5 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-200 rounded-lg relative',
+                      'px-2.5 py-1.5 xl:px-3 text-xs font-semibold uppercase tracking-wider transition-all duration-200 rounded-lg relative',
                       isActive
                         ? 'text-gold-300 font-bold bg-white/5'
                         : 'text-ivory-100 hover:text-gold-300 hover:bg-white/5'
@@ -93,7 +94,7 @@ export default function SiteHeader() {
                   >
                     {item.label}
                     {isActive && (
-                      <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-gold-400 rounded-full" />
+                      <span className="absolute bottom-0 left-2.5 right-2.5 h-0.5 bg-gold-400 rounded-full" />
                     )}
                   </Link>
                 )
@@ -101,11 +102,11 @@ export default function SiteHeader() {
             </nav>
 
             {/* Header Right Actions */}
-            <div className="hidden sm:flex items-center gap-3 shrink-0">
+            <div className="hidden sm:flex items-center gap-2.5 shrink-0">
               {/* Search Modal Trigger */}
               <button
                 onClick={() => setSearchOpen(true)}
-                className="p-2.5 rounded-lg text-ivory-200 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-2 rounded-lg text-ivory-200 hover:text-white hover:bg-white/10 transition-colors"
                 title="Search wildlife, stories, and visitor guides (Ctrl+K)"
                 aria-label="Search site content"
               >
@@ -115,9 +116,9 @@ export default function SiteHeader() {
               {/* Primary Plan Your Visit CTA */}
               <Link
                 href="/contact"
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-xs font-bold uppercase tracking-wider shadow-subtle hover:shadow transition-all duration-200"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-xs font-bold uppercase tracking-wider shadow-subtle hover:shadow transition-all duration-200"
               >
-                <span>Plan Your Visit</span>
+                <span>Plan Visit</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -165,23 +166,6 @@ export default function SiteHeader() {
                   </Link>
                 )
               })}
-            </div>
-
-            {/* Secondary Explorer Links */}
-            <div className="space-y-1 pt-2">
-              <p className="text-[10px] uppercase font-bold tracking-widest text-gold-400/80 mb-2">
-                Specialized Explorers
-              </p>
-              {SECONDARY_NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="flex items-center justify-between py-2 text-xs text-ivory-200/80 hover:text-gold-300"
-                >
-                  <span>{item.label}</span>
-                  <ChevronRight className="w-3.5 h-3.5 text-forest-700" />
-                </Link>
-              ))}
             </div>
 
             {/* Mobile Emergency & Headquarters Info */}

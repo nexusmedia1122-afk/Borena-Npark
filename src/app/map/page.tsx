@@ -5,7 +5,6 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import { Button } from '@/components/ui/components'
 import OptimizedImage from '@/components/OptimizedImage'
 import {
   Search,
@@ -14,14 +13,12 @@ import {
   Compass,
   Printer,
   Info,
-  CheckCircle2,
   Copy,
   Check,
   ArrowRight,
   Route,
   Mountain,
   Loader2,
-  X,
 } from 'lucide-react'
 import { fetchAllMapPOIs } from '@/lib/data-service'
 import { MapPOI } from '@/data/park-data'
@@ -32,7 +29,7 @@ const MapView = dynamic(() => import('@/components/MapView'), {
   ssr: false,
   loading: () => (
     <div className="h-[620px] w-full bg-sand-100/80 rounded-2xl flex flex-col items-center justify-center gap-3 border border-sand-200">
-      <Loader2 className="w-8 h-8 animate-spin text-forest-700" />
+      <Loader2 className="w-8 h-8 animate-spin text-forest-800" />
       <p className="text-xs font-semibold text-charcoal-700 uppercase tracking-wider">
         Loading Topographic GIS Explorer...
       </p>
@@ -122,7 +119,7 @@ export default function MapPage() {
 
       {/* Map Hero Header */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 opacity-35">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=75"
             alt="Topographic landscape of Borana"
@@ -133,15 +130,15 @@ export default function MapPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
-        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Compass className="w-3.5 h-3.5" />
             Official Topographic & Landmark GIS
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
             Interactive Park Map
           </h1>
-          <p className="mt-4 text-base md:text-lg text-ivory-200 leading-relaxed">
+          <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
             Explore verified GPS coordinates, volcanic crater rims, wildlife corridors, and designated ranger eco-campsites across Borana.
           </p>
         </div>
@@ -150,22 +147,22 @@ export default function MapPage() {
       {/* Main Map Content */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         {/* Filter & Search Bar */}
-        <div className="bg-white rounded-2xl border border-sand-200 p-5 shadow-card mb-8 space-y-4">
+        <div className="bg-white rounded-2xl border border-sand-200/80 p-5 shadow-subtle mb-8 space-y-4">
           <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
             {/* Search Input */}
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-700" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-charcoal-500" />
               <input
                 type="text"
                 placeholder="Search landmarks (e.g. Yabelo HQ, El Sod Crater, Dida Hara, Singing Wells)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-16 py-2.5 rounded-xl border border-sand-200 bg-ivory-50/50 text-sm focus:outline-none focus:ring-2 focus:ring-forest-700 focus:bg-white text-charcoal-900 placeholder:text-charcoal-700 transition-all"
+                className="w-full pl-10 pr-16 py-2.5 rounded-xl border border-sand-200 bg-ivory-50/50 text-sm focus:outline-none focus:ring-2 focus:ring-forest-800 focus:bg-white text-charcoal-950 placeholder:text-charcoal-500 transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-charcoal-600 hover:text-charcoal-900 text-xs font-semibold"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-charcoal-600 hover:text-charcoal-950 text-xs font-semibold"
                 >
                   Clear
                 </button>
@@ -176,18 +173,18 @@ export default function MapPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleLocate}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-charcoal-900 text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-sand-50 hover:bg-sand-100 border border-sand-200 text-charcoal-900 text-xs font-semibold transition-colors"
                 title="Detect your current GPS location"
               >
-                <Navigation className="w-3.5 h-3.5 text-forest-700" />
+                <Navigation className="w-3.5 h-3.5 text-forest-750" />
                 <span>My Location</span>
               </button>
               <button
                 onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-charcoal-900 text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-sand-50 hover:bg-sand-100 border border-sand-200 text-charcoal-900 text-xs font-semibold transition-colors"
                 title="Print official map field sheet"
               >
-                <Printer className="w-3.5 h-3.5 text-forest-700" />
+                <Printer className="w-3.5 h-3.5 text-forest-750" />
                 <span>Print Map</span>
               </button>
             </div>
@@ -200,10 +197,10 @@ export default function MapPage() {
                 key={cat.key}
                 onClick={() => setActiveCategory(cat.key)}
                 className={cn(
-                  'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all',
+                  'inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all',
                   activeCategory === cat.key
-                    ? 'bg-forest-900 text-white shadow-sm ring-1 ring-gold-500/50'
-                    : 'bg-sand-50 border border-sand-200 text-charcoal-700 hover:border-forest-700 hover:text-forest-900'
+                    ? 'bg-forest-950 text-white shadow-subtle ring-1 ring-gold-400/50'
+                    : 'bg-sand-50/80 border border-sand-200 text-charcoal-700 hover:border-forest-700 hover:text-forest-900'
                 )}
               >
                 <span>{cat.icon}</span>
@@ -217,18 +214,20 @@ export default function MapPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Map Column (7 cols) */}
           <div className="lg:col-span-7 space-y-4">
-            <MapView
-              pois={filtered}
-              activeCategory={activeCategory}
-              onMarkerClick={(loc) => setSelectedLocation(loc)}
-              selectedLocation={selectedLocation}
-              searchQuery={searchQuery}
-            />
+            <div className="bg-white rounded-2xl border border-sand-200/80 p-2 shadow-subtle overflow-hidden">
+              <MapView
+                pois={filtered}
+                activeCategory={activeCategory}
+                onMarkerClick={(loc) => setSelectedLocation(loc)}
+                selectedLocation={selectedLocation}
+                searchQuery={searchQuery}
+              />
+            </div>
 
             {/* Map Usage Hint */}
             <div className="flex items-center justify-between text-xs text-charcoal-600 px-2">
               <span className="flex items-center gap-1.5">
-                <Info className="w-3.5 h-3.5 text-forest-700" /> Click any marker or landmark card to view terrain specs.
+                <Info className="w-3.5 h-3.5 text-forest-750" /> Click any marker or landmark card to view terrain specs.
               </span>
               <span>Showing {filtered.length} of {locations.length} landmarks</span>
             </div>
@@ -237,7 +236,7 @@ export default function MapPage() {
           {/* Landmark Dossier Sidebar (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
             {selectedLocation ? (
-              <div className="bg-white rounded-2xl border border-sand-200 overflow-hidden shadow-card animate-in">
+              <div className="bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle animate-in">
                 {/* Landmark Photo Frame */}
                 <div className="relative aspect-[16/10] bg-forest-950">
                   {selectedLocation.imageUrl ? (
@@ -264,10 +263,10 @@ export default function MapPage() {
                 {/* Landmark Detail Body */}
                 <div className="p-6 space-y-4">
                   <div>
-                    <h3 className="font-display font-bold text-2xl text-charcoal-900 leading-tight">
+                    <h3 className="font-display font-bold text-2xl text-charcoal-950 leading-tight">
                       {selectedLocation.name}
                     </h3>
-                    <p className="text-sm text-charcoal-700 mt-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-charcoal-700 mt-2 leading-relaxed font-light">
                       {selectedLocation.description}
                     </p>
                   </div>
@@ -275,18 +274,18 @@ export default function MapPage() {
                   {/* Elevation & Terrain Specs */}
                   <div className="grid grid-cols-2 gap-3 pt-2">
                     {selectedLocation.elevation && (
-                      <div className="bg-sand-50 rounded-xl p-3 border border-sand-200">
+                      <div className="bg-sand-50/80 rounded-xl p-3 border border-sand-200">
                         <span className="text-[11px] font-semibold text-charcoal-600 flex items-center gap-1 mb-0.5">
                           <Mountain className="w-3.5 h-3.5 text-earth-700" /> Elevation
                         </span>
-                        <p className="font-mono text-sm font-bold text-charcoal-900">
+                        <p className="font-mono text-sm font-bold text-charcoal-950">
                           {selectedLocation.elevation}
                         </p>
                       </div>
                     )}
-                    <div className="bg-sand-50 rounded-xl p-3 border border-sand-200">
+                    <div className="bg-sand-50/80 rounded-xl p-3 border border-sand-200">
                       <span className="text-[11px] font-semibold text-charcoal-600 flex items-center gap-1 mb-0.5">
-                        <Route className="w-3.5 h-3.5 text-forest-700" /> Access Requirement
+                        <Route className="w-3.5 h-3.5 text-forest-750" /> Access Requirement
                       </span>
                       <p className="text-xs font-bold text-forest-900">
                         Ranger Scout Accompaniment
@@ -296,8 +295,8 @@ export default function MapPage() {
 
                   {/* Access & Logistics Tip */}
                   {selectedLocation.accessTip && (
-                    <div className="bg-forest-50 border border-forest-100 rounded-xl p-3.5 text-xs text-forest-900 leading-relaxed">
-                      <strong>Field Access Note:</strong> {selectedLocation.accessTip}
+                    <div className="bg-sand-50 border border-sand-200 rounded-xl p-3.5 text-xs text-forest-950 leading-relaxed font-light">
+                      <strong className="font-bold text-forest-900">Field Access Note:</strong> {selectedLocation.accessTip}
                     </div>
                   )}
 
@@ -305,13 +304,13 @@ export default function MapPage() {
                   <div className="flex items-center justify-between p-3.5 rounded-xl bg-ivory-50 border border-sand-200 text-xs">
                     <div>
                       <span className="text-[10px] text-charcoal-600 uppercase font-bold block">Verified Coordinates</span>
-                      <span className="font-mono font-bold text-charcoal-900">
+                      <span className="font-mono font-bold text-charcoal-950">
                         {selectedLocation.latitude.toFixed(4)}° N, {selectedLocation.longitude.toFixed(4)}° E
                       </span>
                     </div>
                     <button
                       onClick={() => handleCopyGps(selectedLocation.latitude, selectedLocation.longitude)}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-sand-200 hover:border-forest-700 text-xs font-semibold text-charcoal-800 transition-colors shadow-sm"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-sand-200 hover:border-forest-700 text-xs font-semibold text-charcoal-800 transition-colors shadow-subtle"
                       title="Copy GPS coordinates to clipboard"
                     >
                       {copiedGps ? (
@@ -321,7 +320,7 @@ export default function MapPage() {
                         </>
                       ) : (
                         <>
-                          <Copy className="w-3.5 h-3.5 text-forest-700" />
+                          <Copy className="w-3.5 h-3.5 text-forest-750" />
                           <span>Copy GPS</span>
                         </>
                       )}
@@ -332,7 +331,7 @@ export default function MapPage() {
                   <div className="pt-2">
                     <Link
                       href={`/contact?visitType=${encodeURIComponent(selectedLocation.name)}`}
-                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-forest-900 hover:bg-forest-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-all text-center"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 bg-forest-900 hover:bg-forest-850 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-subtle transition-all text-center"
                     >
                       <span>Plan Expedition to {selectedLocation.name}</span>
                       <ArrowRight className="w-4 h-4 text-gold-400" />
@@ -343,12 +342,12 @@ export default function MapPage() {
             ) : null}
 
             {/* Landmark Directory List */}
-            <div className="bg-white rounded-2xl border border-sand-200 p-6 shadow-sm">
+            <div className="bg-white rounded-2xl border border-sand-200/80 p-6 shadow-subtle">
               <div className="flex items-center justify-between border-b border-sand-200 pb-3 mb-4">
-                <h3 className="font-display font-semibold text-charcoal-900 text-base">
+                <h3 className="font-display font-semibold text-charcoal-950 text-base">
                   Park Landmark Directory
                 </h3>
-                <span className="text-xs font-semibold text-forest-800 bg-forest-100 px-2.5 py-0.5 rounded-full">
+                <span className="text-xs font-semibold text-forest-900 bg-sand-100 px-2.5 py-0.5 rounded-full">
                   {filtered.length} POIs
                 </span>
               </div>
@@ -363,19 +362,19 @@ export default function MapPage() {
                       className={cn(
                         'w-full text-left p-3.5 rounded-xl border transition-all',
                         isSelected
-                          ? 'border-forest-700 bg-forest-50/70 shadow-sm ring-1 ring-forest-700'
-                          : 'border-sand-200 hover:border-sand-300 hover:bg-sand-50'
+                          ? 'border-forest-750 bg-sand-50/90 shadow-subtle ring-1 ring-forest-750'
+                          : 'border-sand-200 hover:border-sand-300 hover:bg-sand-50/50'
                       )}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <p className={cn('font-semibold text-sm', isSelected ? 'text-forest-900' : 'text-charcoal-900')}>
+                        <p className={cn('font-semibold text-sm', isSelected ? 'text-forest-900' : 'text-charcoal-950')}>
                           {loc.name}
                         </p>
                         <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-sand-100 text-charcoal-700 shrink-0">
                           {loc.category.replace(/-/g, ' ')}
                         </span>
                       </div>
-                      <p className="text-xs text-charcoal-600 mt-1 line-clamp-1">
+                      <p className="text-xs text-charcoal-600 mt-1 line-clamp-1 font-light">
                         {loc.description}
                       </p>
                     </button>

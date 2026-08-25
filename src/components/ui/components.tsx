@@ -13,15 +13,19 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', size = 'md', href, children, className, ...props }: ButtonProps) {
-  const base = 'inline-flex items-center justify-center font-medium rounded-md transition-colors duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-gold-500 focus:ring-offset-2 disabled:opacity-60 disabled:pointer-events-none'
+  const base = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-out focus:outline-none focus:ring-2 focus:ring-gold-500/50 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none'
   const variants = {
-    primary: 'bg-gold-600 text-charcoal-900 hover:bg-gold-500 hover:shadow-lg hover:shadow-gold-600/20',
-    secondary: 'bg-forest-700 text-ivory-50 hover:bg-forest-900 hover:shadow-lg hover:shadow-forest-900/20',
-    outline: 'border-2 border-forest-700 text-forest-700 hover:bg-forest-700 hover:text-ivory-50 hover:shadow-md',
-    ghost: 'text-forest-700 hover:bg-forest-100',
-    'hero-outline': 'border-2 border-ivory-50/80 text-ivory-50 hover:bg-ivory-50/10 hover:shadow-lg hover:shadow-charcoal-900/20',
+    primary: 'bg-gold-500 text-charcoal-950 hover:bg-gold-400 font-semibold shadow-subtle hover:shadow hover:-translate-y-0.5 active:translate-y-0 active:bg-gold-600',
+    secondary: 'bg-forest-900 text-white hover:bg-forest-850 font-semibold shadow-subtle hover:shadow hover:-translate-y-0.5 active:translate-y-0',
+    outline: 'border border-forest-800 text-forest-900 hover:bg-forest-900 hover:text-white active:bg-forest-950 font-semibold',
+    ghost: 'text-forest-900 hover:bg-forest-100/60 font-medium',
+    'hero-outline': 'border border-ivory-100/40 text-ivory-50 hover:bg-white/10 hover:border-ivory-50 backdrop-blur-xs font-semibold',
   }
-  const sizes = { sm: 'px-3 py-1.5 text-sm', md: 'px-5 py-2.5 text-sm', lg: 'px-6 py-3 text-base' }
+  const sizes = {
+    sm: 'px-3.5 py-1.5 text-xs',
+    md: 'px-5 py-2.5 text-sm',
+    lg: 'px-6 py-3.5 text-sm sm:text-base',
+  }
 
   const classNameString = cn(base, variants[variant], sizes[size], className)
 
@@ -44,28 +48,56 @@ interface CardProps {
 
 export function Card({ children, className, hover = false }: CardProps) {
   return (
-    <div className={cn('bg-white rounded-xl border border-sand-200 shadow-sm overflow-hidden', hover && 'hover:shadow-xl hover:shadow-charcoal-900/10 hover:-translate-y-1 hover:border-forest-700/30 transition-all duration-300 ease-out', className)}>
+    <div className={cn('bg-white rounded-2xl border border-sand-200/80 shadow-subtle overflow-hidden', hover && 'hover:shadow-card hover:-translate-y-1 hover:border-forest-800/30 transition-all duration-300 ease-out', className)}>
       {children}
     </div>
   )
 }
 
-export function Badge({ children, variant = 'default' }: { children: React.ReactNode; variant?: 'default' | 'success' | 'warning' | 'earth' }) {
+export function Badge({ children, variant = 'default' }: { children: React.ReactNode; variant?: 'default' | 'success' | 'warning' | 'earth' | 'gold' }) {
   const colors = {
-    default: 'bg-forest-100 text-forest-700',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-amber-100 text-amber-800',
-    earth: 'bg-earth-100 text-earth-700',
+    default: 'bg-forest-50 text-forest-800 border-forest-200/60',
+    success: 'bg-emerald-50 text-emerald-800 border-emerald-200/60',
+    warning: 'bg-amber-50 text-amber-900 border-amber-200/60',
+    earth: 'bg-earth-50 text-earth-800 border-earth-200/60',
+    gold: 'bg-gold-50 text-gold-800 border-gold-200/60',
   }
-  return <span className={cn('inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium', colors[variant])}>{children}</span>
+  return (
+    <span className={cn('inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold border', colors[variant])}>
+      {children}
+    </span>
+  )
 }
 
-export function SectionHeading({ eyebrow, title, subtitle }: { eyebrow?: string; title: string; subtitle?: string }) {
+export function SectionHeading({
+  eyebrow,
+  title,
+  subtitle,
+  centered = false,
+  light = false,
+}: {
+  eyebrow?: string
+  title: string
+  subtitle?: string
+  centered?: boolean
+  light?: boolean
+}) {
   return (
-    <div className="max-w-3xl">
-      {eyebrow && <p className="text-sm font-semibold text-gold-600 uppercase tracking-wider mb-2">{eyebrow}</p>}
-      <h2 className="text-3xl md:text-4xl font-display font-semibold text-charcoal-900 text-balance">{title}</h2>
-      {subtitle && <p className="mt-3 text-lg text-charcoal-700 leading-relaxed">{subtitle}</p>}
+    <div className={cn('max-w-3xl space-y-3', centered && 'mx-auto text-center')}>
+      {eyebrow && (
+        <p className={cn('inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-wider-editorial', light ? 'text-gold-400' : 'text-earth-700')}>
+          <span aria-hidden="true" className={cn('inline-block h-px w-5', light ? 'bg-gold-400/80' : 'bg-gold-600')} />
+          <span>{eyebrow}</span>
+        </p>
+      )}
+      <h2 className={cn('text-3xl sm:text-4xl lg:text-[2.65rem] font-display font-bold leading-[1.12] tracking-tight text-balance', light ? 'text-white' : 'text-charcoal-950')}>
+        {title}
+      </h2>
+      {subtitle && (
+        <p className={cn('text-sm sm:text-base leading-relaxed', light ? 'text-ivory-200/85 font-light' : 'text-charcoal-700')}>
+          {subtitle}
+        </p>
+      )}
     </div>
   )
 }
@@ -108,7 +140,7 @@ export function OptimizedImage({
         fill
         priority={priority}
         sizes={sizes}
-        className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-90')}
+        className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-85')}
         loading={priority ? 'eager' : loading || 'lazy'}
         unoptimized={shouldBypass}
         decoding={priority ? 'sync' : 'async'}
@@ -125,7 +157,7 @@ export function OptimizedImage({
       height={height}
       priority={priority}
       sizes={sizesProp}
-      className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-90')}
+      className={cn(className, 'transition-opacity duration-500 ease-out', loaded ? 'opacity-100' : 'opacity-85')}
       loading={priority ? 'eager' : loading || 'lazy'}
       unoptimized={shouldBypass}
       decoding={priority ? 'sync' : 'async'}

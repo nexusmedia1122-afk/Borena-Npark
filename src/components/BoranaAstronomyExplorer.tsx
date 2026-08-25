@@ -197,20 +197,20 @@ export default function BoranaAstronomyExplorer() {
       : AYYAANA_DAYS.filter((a) => a.category === filterCategory)
 
   return (
-    <div className="bg-forest-950 text-white rounded-3xl border border-forest-800/80 p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+    <div className="bg-forest-950 text-white rounded-2xl border border-forest-800/80 p-6 sm:p-10 shadow-card relative overflow-hidden">
       {/* Background Starry Dust Overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gold-500/10 via-transparent to-transparent pointer-events-none" />
 
       {/* Section Header */}
-      <div className="relative z-10 max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest-luxury text-gold-400 bg-gold-950/60 px-3.5 py-1.5 rounded-full border border-gold-500/30 mb-3">
-          <Moon className="w-3.5 h-3.5 text-gold-400" />
+      <div className="relative z-10 max-w-3xl mb-8 space-y-2">
+        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-gold-400">
+          <span className="inline-block h-px w-4 bg-gold-400" />
           <span>Indigenous Lunar-Stellar Science · Dhaha Boranaa</span>
-        </div>
+        </p>
         <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
           The Celestial Calendar of the Borana
         </h2>
-        <p className="text-sm sm:text-base text-ivory-200/80 mt-2 leading-relaxed font-light">
+        <p className="text-sm sm:text-base text-ivory-200/85 mt-2 leading-relaxed font-light">
           Originating over 2,300 years ago, the Borana lunar-stellar calendar (*Dhaha Boranaa*) is one of Africa’s oldest astronomical systems. It aligns 12 lunar cycles with 7 anchor constellations to guide pasture management, wildlife protection, and the Gadaa democracy.
         </p>
       </div>
@@ -220,10 +220,10 @@ export default function BoranaAstronomyExplorer() {
         <button
           onClick={() => setActiveTab('stars')}
           className={cn(
-            'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all',
+            'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all',
             activeTab === 'stars'
-              ? 'bg-gold-500 text-charcoal-950 shadow-md'
-              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-800 border border-forest-700/60'
+              ? 'bg-gold-500 text-charcoal-950 shadow-subtle'
+              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-850 border border-forest-700/60'
           )}
         >
           <Star className="w-3.5 h-3.5" />
@@ -233,10 +233,10 @@ export default function BoranaAstronomyExplorer() {
         <button
           onClick={() => setActiveTab('ayyaana')}
           className={cn(
-            'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all',
+            'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all',
             activeTab === 'ayyaana'
-              ? 'bg-gold-500 text-charcoal-950 shadow-md'
-              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-800 border border-forest-700/60'
+              ? 'bg-gold-500 text-charcoal-950 shadow-subtle'
+              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-850 border border-forest-700/60'
           )}
         >
           <Calendar className="w-3.5 h-3.5" />
@@ -246,10 +246,10 @@ export default function BoranaAstronomyExplorer() {
         <button
           onClick={() => setActiveTab('philosophy')}
           className={cn(
-            'inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all',
+            'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all',
             activeTab === 'philosophy'
-              ? 'bg-gold-500 text-charcoal-950 shadow-md'
-              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-800 border border-forest-700/60'
+              ? 'bg-gold-500 text-charcoal-950 shadow-subtle'
+              : 'bg-forest-900/60 text-ivory-200 hover:bg-forest-850 border border-forest-700/60'
           )}
         >
           <BookOpen className="w-3.5 h-3.5" />

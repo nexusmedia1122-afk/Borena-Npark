@@ -3,18 +3,9 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import BoranaAstronomyExplorer from '@/components/BoranaAstronomyExplorer'
 import { Button, OptimizedImage } from '@/components/ui/components'
-import Link from 'next/link'
 import {
-  Moon,
   Sparkles,
-  Compass,
-  Star,
-  Shield,
-  Layers,
-  MapPin,
-  Clock,
   Camera,
-  ArrowRight,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -92,7 +83,7 @@ export default function AstronomyPage() {
       {/* Dark Sky Safari & Astrophotography Guide */}
       <section className="py-24 bg-forest-900/60 border-y border-forest-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          <div className="max-w-2xl space-y-3">
+          <div className="max-w-2xl space-y-2">
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-400">
               <Camera className="w-4 h-4 text-gold-400" />
               <span>Astrotourism & Night Sky Safaris</span>
@@ -109,7 +100,7 @@ export default function AstronomyPage() {
             {ASTRO_HOTSPOTS.map((spot) => (
               <div
                 key={spot.name}
-                className="p-6 rounded-3xl bg-forest-950 border border-forest-800 space-y-4 hover:border-gold-500/40 transition-all shadow-lg"
+                className="p-6 rounded-2xl bg-forest-950 border border-forest-800 space-y-3.5 hover:border-gold-500/40 transition-all shadow-subtle"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-mono font-bold text-gold-400">{spot.elevation}</span>
@@ -123,7 +114,7 @@ export default function AstronomyPage() {
             ))}
           </div>
 
-          <div className="p-8 rounded-3xl bg-gradient-to-r from-forest-950 via-forest-900 to-forest-950 border border-gold-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="p-8 rounded-2xl bg-forest-950 border border-gold-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-luxury">
             <div className="space-y-1 max-w-xl">
               <h4 className="font-display font-bold text-lg text-white">
                 Experience a Guided Night Sky & Safari Expedition

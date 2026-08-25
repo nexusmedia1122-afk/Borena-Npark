@@ -8,20 +8,9 @@ import OptimizedImage from '@/components/OptimizedImage'
 import TrailCircuitExplorer from '@/components/TrailCircuitExplorer'
 import {
   Compass,
-  Tent,
-  Bird,
-  Camera,
-  MapPin,
   Clock,
   ArrowRight,
-  ShieldCheck,
   Calculator,
-  Users,
-  Car,
-  CheckCircle2,
-  Calendar,
-  Layers,
-  Sparkles,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -104,14 +93,12 @@ const ITINERARIES = [
 ]
 
 export default function ExperiencesPage() {
-  // Calculator state
   const [visitorType, setVisitorType] = useState<'international' | 'resident' | 'national'>('international')
   const [numGuests, setNumGuests] = useState(2)
   const [numDays, setNumDays] = useState(3)
   const [includeCamping, setIncludeCamping] = useState(true)
   const [includeVehicle, setIncludeVehicle] = useState(true)
 
-  // Tariff calculation (USD approx)
   const dailyFeePerGuest = visitorType === 'international' ? 20 : visitorType === 'resident' ? 10 : 2
   const rangerFeePerDay = 15
   const vehicleFeePerDay = includeVehicle ? 10 : 0
@@ -129,7 +116,7 @@ export default function ExperiencesPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 opacity-35">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=75"
             alt="Experiences Hero"
@@ -139,16 +126,16 @@ export default function ExperiencesPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
-        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Compass className="w-3.5 h-3.5" />
             Curated Safari Circuits & Treks
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
             Safari Expeditions
           </h1>
-          <p className="mt-4 text-base md:text-lg text-ivory-200 leading-relaxed">
+          <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
             From 4WD wildlife tracking across golden plains to descending 600m volcanic calderas and camping beneath pristine night skies.
           </p>
         </div>
@@ -159,13 +146,14 @@ export default function ExperiencesPage() {
         {/* Core Experiences Grid */}
         <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs uppercase font-bold tracking-widest-luxury text-gold-600">
-              Signature Adventures
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-charcoal-900">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+              <span className="inline-block h-px w-4 bg-gold-600" />
+              <span>Signature Adventures</span>
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl font-bold text-charcoal-950">
               Core Safari Activities
             </h2>
-            <p className="text-xs sm:text-sm text-charcoal-600">
+            <p className="text-xs sm:text-sm text-charcoal-700 font-light">
               All expeditions are conducted under the accompaniment of certified EWCA armed scouts.
             </p>
           </div>
@@ -174,7 +162,7 @@ export default function ExperiencesPage() {
             {EXPERIENCES.map((exp) => (
               <div
                 key={exp.title}
-                className="group bg-white rounded-3xl border border-sand-200 overflow-hidden shadow-sm hover:shadow-card hover:border-gold-500/50 transition-all flex flex-col justify-between"
+                className="group bg-white rounded-2xl border border-sand-200/80 overflow-hidden shadow-subtle hover:shadow-card hover:border-gold-500/50 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="relative aspect-[16/10] overflow-hidden bg-forest-950">
@@ -200,22 +188,22 @@ export default function ExperiencesPage() {
                       <span className="font-medium text-forest-900">{exp.difficulty}</span>
                     </div>
 
-                    <h3 className="font-display font-bold text-lg text-charcoal-900 leading-snug">
+                    <h3 className="font-display font-bold text-lg text-charcoal-950 leading-snug">
                       {exp.title}
                     </h3>
-                    <p className="text-xs text-charcoal-600 leading-relaxed">
+                    <p className="text-xs text-charcoal-700 leading-relaxed font-light">
                       {exp.desc}
                     </p>
                   </div>
                 </div>
 
                 <div className="p-6 pt-0 border-t border-sand-100 mt-4 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-gold-700 italic">
+                  <span className="text-[11px] font-semibold text-gold-800 italic">
                     {exp.highlight}
                   </span>
                   <Link
                     href={`/contact?safariExp=${encodeURIComponent(exp.title)}`}
-                    className="p-2 rounded-full bg-forest-50 hover:bg-forest-900 hover:text-white text-forest-800 transition-colors"
+                    className="p-2 rounded-lg bg-sand-50 hover:bg-forest-900 hover:text-white text-forest-800 transition-colors"
                     title="Book this experience"
                   >
                     <ArrowRight className="w-4 h-4" />
@@ -230,15 +218,16 @@ export default function ExperiencesPage() {
         <TrailCircuitExplorer />
 
         {/* Multi-Day Sample Itineraries */}
-        <section className="bg-white rounded-3xl border border-sand-200 p-8 sm:p-12 shadow-card space-y-8">
+        <section className="bg-white rounded-2xl border border-sand-200/80 p-8 sm:p-12 shadow-subtle space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs uppercase font-bold tracking-widest-luxury text-gold-600">
-              Recommended Itineraries
-            </span>
-            <h3 className="font-display text-2xl sm:text-3xl font-bold text-charcoal-900">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+              <span className="inline-block h-px w-4 bg-gold-600" />
+              <span>Recommended Itineraries</span>
+            </p>
+            <h3 className="font-display text-2xl sm:text-3xl font-bold text-charcoal-950">
               Multi-Day Safari Routes
             </h3>
-            <p className="text-xs sm:text-sm text-charcoal-600">
+            <p className="text-xs sm:text-sm text-charcoal-700 font-light">
               Tailored itineraries combining wildlife game drives, volcanic crater descents, and cultural encounters.
             </p>
           </div>
@@ -247,22 +236,22 @@ export default function ExperiencesPage() {
             {ITINERARIES.map((itin) => (
               <div
                 key={itin.title}
-                className="p-6 rounded-2xl bg-ivory-50/70 border border-sand-200 hover:border-forest-700 transition-all flex flex-col justify-between space-y-4"
+                className="p-6 rounded-xl bg-ivory-50/70 border border-sand-200 hover:border-forest-750 transition-all flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-gold-100 text-gold-800">
+                    <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-gold-100/80 text-gold-900">
                       {itin.tag}
                     </span>
                     <span className="text-xs font-mono font-bold text-forest-900">{itin.days}</span>
                   </div>
-                  <h4 className="font-display font-bold text-base text-charcoal-900">{itin.title}</h4>
-                  <p className="text-xs text-charcoal-600 leading-relaxed">{itin.desc}</p>
+                  <h4 className="font-display font-bold text-base text-charcoal-950">{itin.title}</h4>
+                  <p className="text-xs text-charcoal-700 leading-relaxed font-light">{itin.desc}</p>
                 </div>
 
                 <Link
                   href={`/contact?itinerary=${encodeURIComponent(itin.title)}`}
-                  className="w-full py-2.5 px-4 bg-forest-900 hover:bg-forest-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-colors text-center inline-flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 px-4 bg-forest-900 hover:bg-forest-850 text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors text-center inline-flex items-center justify-center gap-1.5 shadow-subtle"
                 >
                   <span>Request Custom Itinerary</span>
                   <ArrowRight className="w-3.5 h-3.5 text-gold-400" />
@@ -273,7 +262,7 @@ export default function ExperiencesPage() {
         </section>
 
         {/* Interactive Park Fee & Tariff Calculator */}
-        <section className="bg-forest-950 text-white rounded-3xl border border-forest-800 p-8 sm:p-12 shadow-card">
+        <section className="bg-forest-950 text-white rounded-2xl border border-forest-800 p-8 sm:p-12 shadow-card">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left: Input Controls */}
             <div className="lg:col-span-7 space-y-6">
@@ -285,7 +274,7 @@ export default function ExperiencesPage() {
                 <h3 className="font-display text-2xl sm:text-3xl font-bold">
                   Interactive Park Fee Calculator
                 </h3>
-                <p className="text-xs text-ivory-200/80">
+                <p className="text-xs text-ivory-200/80 font-light">
                   Calculate estimated statutory entry permits, ranger guide services, and camping fees under EWCA regulations.
                 </p>
               </div>
@@ -306,9 +295,9 @@ export default function ExperiencesPage() {
                         key={opt.key}
                         onClick={() => setVisitorType(opt.key as any)}
                         className={cn(
-                          'p-2.5 rounded-xl border text-center font-semibold transition-all',
+                          'p-2.5 rounded-lg border text-center font-semibold transition-all',
                           visitorType === opt.key
-                            ? 'bg-gold-600 text-charcoal-950 border-gold-400 shadow-sm'
+                            ? 'bg-gold-500 text-charcoal-950 border-gold-400 shadow-sm'
                             : 'bg-forest-900/60 border-forest-800 text-ivory-200 hover:border-forest-700'
                         )}
                       >
@@ -330,7 +319,7 @@ export default function ExperiencesPage() {
                       max={20}
                       value={numGuests}
                       onChange={(e) => setNumGuests(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="w-full bg-forest-900 border border-forest-800 rounded-xl px-4 py-2.5 text-white font-mono text-sm outline-none focus:border-gold-500"
+                      className="w-full bg-forest-900 border border-forest-800 rounded-lg px-4 py-2.5 text-white font-mono text-sm outline-none focus:border-gold-500"
                     />
                   </div>
                   <div>
@@ -343,7 +332,7 @@ export default function ExperiencesPage() {
                       max={14}
                       value={numDays}
                       onChange={(e) => setNumDays(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="w-full bg-forest-900 border border-forest-800 rounded-xl px-4 py-2.5 text-white font-mono text-sm outline-none focus:border-gold-500"
+                      className="w-full bg-forest-900 border border-forest-800 rounded-lg px-4 py-2.5 text-white font-mono text-sm outline-none focus:border-gold-500"
                     />
                   </div>
                 </div>
@@ -355,7 +344,7 @@ export default function ExperiencesPage() {
                       type="checkbox"
                       checked={includeCamping}
                       onChange={(e) => setIncludeCamping(e.target.checked)}
-                      className="rounded border-forest-800 bg-forest-900 text-gold-600 focus:ring-gold-500 w-4 h-4"
+                      className="rounded border-forest-800 bg-forest-900 text-gold-500 focus:ring-gold-500 w-4 h-4"
                     />
                     <span className="text-ivory-200">Include Eco-Camping Permits</span>
                   </label>
@@ -364,7 +353,7 @@ export default function ExperiencesPage() {
                       type="checkbox"
                       checked={includeVehicle}
                       onChange={(e) => setIncludeVehicle(e.target.checked)}
-                      className="rounded border-forest-800 bg-forest-900 text-gold-600 focus:ring-gold-500 w-4 h-4"
+                      className="rounded border-forest-800 bg-forest-900 text-gold-500 focus:ring-gold-500 w-4 h-4"
                     />
                     <span className="text-ivory-200">Include 4WD Vehicle Permit</span>
                   </label>
@@ -373,7 +362,7 @@ export default function ExperiencesPage() {
             </div>
 
             {/* Right: Calculated Summary Card */}
-            <div className="lg:col-span-5 bg-forest-900/90 border border-forest-800 rounded-3xl p-8 space-y-6 flex flex-col justify-between">
+            <div className="lg:col-span-5 bg-forest-900/90 border border-forest-800 rounded-2xl p-8 space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400">
                   Estimated Official Tariff
@@ -408,14 +397,14 @@ export default function ExperiencesPage() {
                     <span className="text-xs text-ivory-300 font-sans font-normal ml-1">USD</span>
                   </span>
                 </div>
-                <p className="text-[10px] text-ivory-300/80 leading-relaxed">
+                <p className="text-[10px] text-ivory-300/80 leading-relaxed font-light">
                   *Official fees payable in USD or equivalent ETB at park headquarters. Includes VAT and ranger escort.
                 </p>
               </div>
 
               <Link
                 href={`/contact?estGuests=${numGuests}&estDays=${numDays}&estType=${visitorType}`}
-                className="w-full py-3 px-4 bg-gold-600 hover:bg-gold-500 text-charcoal-950 font-bold text-xs uppercase tracking-wider rounded-xl shadow-glow-gold transition-all text-center inline-flex items-center justify-center gap-2"
+                className="w-full py-3 px-4 bg-gold-500 hover:bg-gold-400 text-charcoal-950 font-bold text-xs uppercase tracking-wider rounded-lg shadow-subtle transition-all text-center inline-flex items-center justify-center gap-2"
               >
                 <span>Reserve Expedition Permits</span>
                 <ArrowRight className="w-4 h-4" />

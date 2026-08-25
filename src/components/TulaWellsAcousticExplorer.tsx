@@ -2,18 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import {
-  Waves,
   Music,
   Volume2,
   VolumeX,
-  Layers,
   MapPin,
-  ChevronRight,
-  Info,
   Shield,
-  Sparkles,
   Droplets,
-  Users,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -190,14 +184,14 @@ export default function TulaWellsAcousticExplorer() {
   }, [isPlayingAudio])
 
   return (
-    <div className="bg-white rounded-3xl border border-sand-200/90 p-6 sm:p-10 shadow-card space-y-10">
+    <div className="bg-white rounded-2xl border border-sand-200/80 p-6 sm:p-10 shadow-subtle space-y-8">
       {/* Header */}
-      <div className="max-w-3xl space-y-3">
-        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest-luxury text-earth-800 bg-earth-100/70 px-3.5 py-1 rounded-full border border-earth-300">
-          <Droplets className="w-3.5 h-3.5 text-earth-700" />
-          <span>Hydrological Engineering & UNESCO Cultural Heritage</span>
-        </div>
-        <h2 className="text-2xl sm:text-4xl font-display font-bold text-charcoal-900 tracking-tight">
+      <div className="max-w-3xl space-y-2">
+        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+          <span className="inline-block h-px w-4 bg-gold-600" />
+          <span>Hydrological Engineering & UNESCO Heritage</span>
+        </p>
+        <h2 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-950 tracking-tight">
           The 9 Sacred Tula Singing Wells (*Eela Tula Saglan*)
         </h2>
         <p className="text-sm sm:text-base text-charcoal-700 leading-relaxed font-light">
@@ -207,7 +201,7 @@ export default function TulaWellsAcousticExplorer() {
 
       {/* Well Selector Carousel / Grid */}
       <div className="space-y-2">
-        <p className="text-xs font-bold uppercase tracking-wider text-charcoal-700">
+        <p className="text-xs font-bold uppercase tracking-wider text-charcoal-600">
           Select One of the 9 Historic Tula Well Networks:
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2">
@@ -218,10 +212,10 @@ export default function TulaWellsAcousticExplorer() {
                 key={well.id}
                 onClick={() => setSelectedWell(well)}
                 className={cn(
-                  'p-3 rounded-2xl text-left transition-all border text-xs flex flex-col justify-between h-24',
+                  'p-3 rounded-xl text-left transition-all border text-xs flex flex-col justify-between h-24',
                   isSelected
-                    ? 'bg-forest-950 text-white border-forest-950 shadow-md ring-2 ring-gold-500/50'
-                    : 'bg-ivory-50 text-charcoal-800 border-sand-200 hover:border-sand-300 hover:bg-sand-100/60'
+                    ? 'bg-forest-950 text-white border-forest-950 shadow-subtle ring-1 ring-gold-400/50'
+                    : 'bg-ivory-50 text-charcoal-800 border-sand-200 hover:border-sand-300 hover:bg-sand-50'
                 )}
               >
                 <span className={cn('text-[10px] font-bold uppercase truncate', isSelected ? 'text-gold-400' : 'text-earth-700')}>
@@ -230,7 +224,7 @@ export default function TulaWellsAcousticExplorer() {
                 <p className="font-display font-bold text-xs leading-snug line-clamp-2">
                   {well.name.replace(' Tula Well Complex', '').replace(' Subterranean Well', '').replace(' Ancient Stone Wells', '').replace(' Constitutional Well Cluster', '').replace(' Mineral Spring Well', '').replace(' Volcanic Rift Shaft', '').replace(' Highland Reservoir Shaft', '').replace(' Red-Earth Well', '').replace(' Deep Desert Outpost Well', '')}
                 </p>
-                <span className="text-[9px] text-charcoal-600 truncate">{well.chainSize} Scouts</span>
+                <span className="text-[9px] text-charcoal-500 truncate">{well.chainSize} Scouts</span>
               </button>
             )
           })}
@@ -240,40 +234,40 @@ export default function TulaWellsAcousticExplorer() {
       {/* Active Well Deep Dossier & Acoustic Simulator */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Column: Well Architecture & Specs (5 cols) */}
-        <div className="lg:col-span-5 bg-sand-50/80 rounded-3xl border border-sand-200 p-6 space-y-6">
+        <div className="lg:col-span-5 bg-sand-50/70 rounded-xl border border-sand-200/80 p-6 space-y-6">
           <div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-forest-800 mb-1">
               <MapPin className="w-3.5 h-3.5 text-gold-600" />
               <span>{selectedWell.location}</span>
             </div>
-            <h3 className="text-xl font-display font-bold text-charcoal-900">
+            <h3 className="text-xl font-display font-bold text-charcoal-950">
               {selectedWell.name}
             </h3>
             <p className="text-xs font-mono text-charcoal-600 mt-0.5">{selectedWell.gps}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="p-3.5 rounded-2xl bg-white border border-sand-200">
+            <div className="p-3.5 rounded-xl bg-white border border-sand-200">
               <span className="text-charcoal-600 block text-[11px]">Shaft Depth</span>
-              <span className="font-display font-bold text-lg text-charcoal-900">{selectedWell.depthMeters} Meters</span>
+              <span className="font-display font-bold text-lg text-charcoal-950">{selectedWell.depthMeters} Meters</span>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white border border-sand-200">
+            <div className="p-3.5 rounded-xl bg-white border border-sand-200">
               <span className="text-charcoal-600 block text-[11px]">Bucket Relay Chain</span>
               <span className="font-display font-bold text-lg text-forest-800">{selectedWell.chainSize} Scouts</span>
             </div>
-            <div className="p-3.5 rounded-2xl bg-white border border-sand-200 col-span-2">
+            <div className="p-3.5 rounded-xl bg-white border border-sand-200 col-span-2">
               <span className="text-charcoal-600 block text-[11px]">Watering Throughput</span>
               <span className="font-display font-bold text-base text-gold-700">~{selectedWell.capacityCattlePerHour} Cattle / Hour</span>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white border border-sand-200 text-xs text-charcoal-700 leading-relaxed space-y-1.5">
-            <p className="font-bold text-charcoal-900">Geological & Historical Profile:</p>
+          <div className="p-4 rounded-xl bg-white border border-sand-200 text-xs text-charcoal-700 leading-relaxed space-y-1.5 font-light">
+            <p className="font-bold text-charcoal-950">Geological & Historical Profile:</p>
             <p>{selectedWell.historicalSignificance}</p>
           </div>
 
           {/* Polyphonic Song Acoustic Player Card */}
-          <div className="p-5 rounded-2xl bg-forest-950 text-white space-y-3.5 shadow-lg border border-forest-800">
+          <div className="p-5 rounded-xl bg-forest-950 text-white space-y-3.5 shadow-card border border-forest-800">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-300">
                 <Music className="w-4 h-4 text-gold-400" />
@@ -281,7 +275,7 @@ export default function TulaWellsAcousticExplorer() {
               </div>
               <button
                 onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gold-500 text-charcoal-950 text-xs font-bold uppercase tracking-wider hover:bg-gold-400 transition-all shadow-sm"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gold-500 text-charcoal-950 text-xs font-bold uppercase tracking-wider hover:bg-gold-400 transition-all shadow-subtle"
               >
                 {isPlayingAudio ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                 <span>{isPlayingAudio ? 'Mute Song' : 'Listen Cadence'}</span>
@@ -293,12 +287,12 @@ export default function TulaWellsAcousticExplorer() {
             </p>
 
             {/* Simulated Acoustic Wave Bars */}
-            <div className="h-10 rounded-xl bg-forest-900/90 border border-forest-800 flex items-center justify-center gap-1.5 px-4 overflow-hidden">
+            <div className="h-9 rounded-lg bg-forest-900/90 border border-forest-800 flex items-center justify-center gap-1.5 px-4 overflow-hidden">
               {[4, 8, 14, 22, 30, 24, 18, 28, 32, 26, 16, 20, 28, 12, 6, 18, 24, 10, 4].map((h, i) => (
                 <div
                   key={i}
                   style={{
-                    height: isPlayingAudio ? `${Math.min(32, h * (0.8 + (waveCadence % 3) * 0.3))}px` : '6px',
+                    height: isPlayingAudio ? `${Math.min(28, h * (0.8 + (waveCadence % 3) * 0.3))}px` : '5px',
                   }}
                   className={cn(
                     'w-1.5 rounded-full transition-all duration-200',
@@ -311,18 +305,18 @@ export default function TulaWellsAcousticExplorer() {
         </div>
 
         {/* Right Column: 3D Cross-Section Shaft Tier Visualizer (7 cols) */}
-        <div className="lg:col-span-7 bg-white rounded-3xl border border-sand-200 p-6 sm:p-8 space-y-6 shadow-sm">
-          <div className="border-b border-sand-200 pb-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-earth-800">
+        <div className="lg:col-span-7 bg-white rounded-xl border border-sand-200/80 p-6 sm:p-8 space-y-6 shadow-subtle">
+          <div className="border-b border-sand-200/80 pb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-earth-700">
               Cross-Sectional Shaft Architecture
             </span>
-            <h3 className="text-xl font-display font-bold text-charcoal-900 mt-0.5">
+            <h3 className="text-xl font-display font-bold text-charcoal-950 mt-0.5">
               30-Meter Subterranean Chain Mechanics
             </h3>
           </div>
 
           {/* Interactive Depth Tiers */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {DEPTH_TIERS.map((tier, idx) => {
               const isSelected = selectedTier.depth === tier.depth
               return (
@@ -330,26 +324,26 @@ export default function TulaWellsAcousticExplorer() {
                   key={tier.depth}
                   onClick={() => setSelectedTier(tier)}
                   className={cn(
-                    'w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4',
+                    'w-full text-left p-3.5 rounded-xl border transition-all flex items-start gap-3.5',
                     isSelected
-                      ? 'bg-ivory-50 border-gold-600 shadow-md ring-1 ring-gold-600/30'
+                      ? 'bg-ivory-50 border-gold-600 shadow-subtle ring-1 ring-gold-600/30'
                       : 'bg-white border-sand-200 hover:bg-sand-50/60'
                   )}
                 >
                   <div className={cn(
-                    'w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-mono shrink-0 text-center border',
-                    isSelected ? 'bg-forest-950 text-gold-300 border-gold-500/40' : 'bg-sand-100 text-charcoal-700 border-sand-200'
+                    'w-12 h-12 rounded-xl flex flex-col items-center justify-center font-mono shrink-0 text-center border',
+                    isSelected ? 'bg-forest-950 text-gold-300 border-gold-500/40' : 'bg-sand-50 text-charcoal-700 border-sand-200'
                   )}>
-                    <span className="text-[10px] uppercase font-bold leading-none">Tier {idx + 1}</span>
+                    <span className="text-[9px] uppercase font-bold leading-none">Tier {idx + 1}</span>
                     <span className="text-xs font-black mt-0.5 leading-none">{tier.depth.split(' ')[0]}</span>
                   </div>
 
-                  <div className="space-y-1 flex-1">
+                  <div className="space-y-0.5 flex-1">
                     <div className="flex items-center justify-between">
-                      <h4 className="font-display font-bold text-sm text-charcoal-900">{tier.role}</h4>
-                      <span className="text-[10px] text-charcoal-600 font-mono">{tier.elevation}</span>
+                      <h4 className="font-display font-bold text-sm text-charcoal-950">{tier.role}</h4>
+                      <span className="text-[10px] text-charcoal-500 font-mono">{tier.elevation}</span>
                     </div>
-                    <p className="text-xs text-charcoal-700 leading-relaxed">{tier.desc}</p>
+                    <p className="text-xs text-charcoal-700 leading-relaxed font-light">{tier.desc}</p>
                   </div>
                 </button>
               )
@@ -357,12 +351,12 @@ export default function TulaWellsAcousticExplorer() {
           </div>
 
           {/* Seera Marraa fi Bishaan Customary Law Box */}
-          <div className="p-4 rounded-2xl bg-earth-50 border border-earth-200 text-xs text-earth-900 space-y-1">
+          <div className="p-4 rounded-xl bg-earth-50 border border-earth-200/80 text-xs text-earth-900 space-y-1">
             <p className="font-bold flex items-center gap-1.5 text-earth-800">
               <Shield className="w-4 h-4 text-earth-700" />
               Customary Ecological Law (*Seera Marraa fi Bishaan*):
             </p>
-            <p className="leading-relaxed">
+            <p className="leading-relaxed font-light">
               Under Borana customary law, water drawn from the Tula Wells cannot be commercialized or sold. Any passerby, foreign traveler, or wild animal has an uninfringeable right to drink freely.
             </p>
           </div>

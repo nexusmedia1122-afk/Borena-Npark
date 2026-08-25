@@ -10,14 +10,8 @@ import {
   TreePine,
   Users,
   Search,
-  Activity,
-  Cpu,
   ArrowRight,
-  CheckCircle2,
-  Radio,
   Sparkles,
-  Globe2,
-  HeartHandshake,
   FileText,
 } from 'lucide-react'
 
@@ -62,7 +56,7 @@ export default function ConservationPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 opacity-35">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1507034589631-9433cc6bc453?auto=format&fit=crop&w=1200&q=75"
             alt="Conservation in Borana"
@@ -72,16 +66,16 @@ export default function ConservationPage() {
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/60 to-transparent" />
-        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+        <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
+        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Shield className="w-3.5 h-3.5" />
             Biodiversity Stewardship & Science
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
             Conservation & Research
           </h1>
-          <p className="mt-4 text-base md:text-lg text-ivory-200 leading-relaxed">
+          <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
             Integrating cutting-edge spatial ranger telemetry with ancient community covenants to secure southern Ethiopia&apos;s wildest ecosystems.
           </p>
         </div>
@@ -94,7 +88,7 @@ export default function ConservationPage() {
           {CONSERVATION_METRICS.map((m) => (
             <div
               key={m.label}
-              className="bg-white rounded-2xl border border-sand-200 p-6 shadow-sm text-center space-y-1 hover:border-gold-500/50 transition-colors"
+              className="bg-white rounded-2xl border border-sand-200/80 p-6 shadow-subtle text-center space-y-1 hover:border-gold-500/50 transition-colors"
             >
               <p className="font-display font-bold text-3xl sm:text-4xl text-forest-900">{m.value}</p>
               <p className="text-xs font-semibold text-charcoal-600 uppercase tracking-wider">{m.label}</p>
@@ -102,79 +96,68 @@ export default function ConservationPage() {
           ))}
         </div>
 
-        {/* Strategic Pillars */}
-        <section className="space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs uppercase font-bold tracking-widest-luxury text-gold-600">
-              Operational Matrix
-            </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-charcoal-900">
-              Core Conservation Programs
+        {/* Core Pillars Narrative */}
+        <div className="space-y-8">
+          <div className="max-w-2xl space-y-2">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+              <span className="inline-block h-px w-4 bg-gold-600" />
+              <span>Institutional Strategy</span>
+            </p>
+            <h2 className="text-3xl font-display font-bold text-charcoal-950">
+              Integrated Landscape Conservation Framework
             </h2>
-            <p className="text-xs sm:text-sm text-charcoal-600">
-              Co-managed by the Ethiopian Wildlife Conservation Authority (EWCA) and traditional Gadaa community elders.
+            <p className="text-sm text-charcoal-700 font-light leading-relaxed">
+              Borana National Park employs a hybrid protection model that unifies government law enforcement (EWCA) with customary pastoral governance under the Gadaa system.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {CONSERVATION_INITIATIVES.map((init, idx) => {
-              const Icon = init.icon
-              return (
-                <div
-                  key={idx}
-                  className="bg-white rounded-3xl border border-sand-200 p-8 shadow-sm hover:shadow-card hover:border-forest-700/40 transition-all flex flex-col justify-between space-y-4"
-                >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-forest-100 text-forest-800 flex items-center justify-center">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-xs font-mono font-bold text-gold-700 bg-gold-100/70 px-2.5 py-1 rounded-lg">
-                        {init.metric}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display font-bold text-xl text-charcoal-900 leading-snug">
-                      {init.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-charcoal-600 leading-relaxed">
-                      {init.desc}
-                    </p>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </section>
-
-        {/* Academic & Scientific Research Permits Callout */}
-        <section className="bg-forest-950 text-white rounded-3xl border border-forest-800 p-8 sm:p-12 shadow-card">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-3">
-              <span className="text-xs uppercase font-bold tracking-widest-luxury text-gold-400 flex items-center gap-2">
-                <Globe2 className="w-4 h-4 text-gold-400" />
-                Scientific Research Accreditations
-              </span>
-              <h3 className="font-display text-2xl sm:text-3xl font-bold leading-tight">
-                Field Research Stations & University Partnerships
-              </h3>
-              <p className="text-sm text-ivory-200/80 leading-relaxed max-w-2xl">
-                Borena National Park welcomes academic researchers, zoologists, and botanical institutes. EWCA provides field base station logistics, telemetry access, and certified armed scout escorts for registered studies.
-              </p>
-            </div>
-            <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
-              <Link
-                href="/contact?inquiryType=Scientific%20Research%20Accreditation"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gold-600 hover:bg-gold-500 text-charcoal-950 text-xs font-bold uppercase tracking-wider rounded-xl shadow-glow-gold transition-all text-center"
+            {CONSERVATION_INITIATIVES.map((init) => (
+              <div
+                key={init.title}
+                className="bg-white rounded-2xl border border-sand-200/80 p-7 shadow-subtle space-y-4 hover:border-gold-500/40 transition-all flex flex-col justify-between"
               >
-                <span>Apply for Research Permit</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="w-10 h-10 rounded-xl bg-forest-50 text-forest-800 flex items-center justify-center border border-forest-100">
+                      <init.icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-sand-50 text-forest-900 border border-sand-200">
+                      {init.metric}
+                    </span>
+                  </div>
+                  <h3 className="font-display font-bold text-xl text-charcoal-950">{init.title}</h3>
+                  <p className="text-xs sm:text-sm text-charcoal-700 leading-relaxed font-light">{init.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
 
-        {/* Official Downloads & Conservation Directives */}
+        {/* Academic & Research Accreditation Portal */}
+        <div className="p-8 sm:p-12 rounded-2xl bg-forest-950 text-white border border-forest-800 shadow-luxury flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+          <div className="space-y-3 max-w-2xl">
+            <span className="text-xs font-bold uppercase tracking-widest text-gold-400 flex items-center gap-2">
+              <FileText className="w-4 h-4" /> Academic Affiliation
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-display font-bold">
+              Conduct Field Research in Borana National Park
+            </h3>
+            <p className="text-xs sm:text-sm text-ivory-200/80 leading-relaxed font-light">
+              We welcome domestic and international university scholars, ornithologists, and conservation biologists. Registered researchers gain access to long-term monitoring plots, ranger support, and GIS spatial data.
+            </p>
+          </div>
+
+          <Link
+            href="/contact?type=research"
+            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-charcoal-950 text-xs font-bold uppercase tracking-wider transition-all shadow-subtle shrink-0"
+          >
+            <span>Apply for Research Permit</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Official Downloads Section */}
         <OfficialDownloads />
       </main>
 

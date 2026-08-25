@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Sun, CloudRain, Sprout, Compass, Eye, Bird, Footprints, Shield, ArrowRight } from 'lucide-react'
+import { Sun, CloudRain, Sprout, Compass, Bird, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
@@ -111,17 +111,17 @@ export default function SeasonalWildlifeMatrix() {
   const [activeSeason, setActiveSeason] = useState(SEASONS[0])
 
   return (
-    <div className="bg-white rounded-3xl border border-sand-200/80 p-6 sm:p-10 shadow-card">
+    <div className="bg-white rounded-2xl border border-sand-200/80 p-6 sm:p-10 shadow-subtle">
       {/* Header */}
-      <div className="max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gold-600 bg-gold-50 px-3 py-1 rounded-full border border-gold-200/60 mb-3">
-          <Compass className="w-3.5 h-3.5" />
+      <div className="max-w-3xl mb-8 space-y-2">
+        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+          <span className="inline-block h-px w-4 bg-gold-600" />
           <span>Wildlife Calendar & Climate Index</span>
-        </div>
-        <h3 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-900 tracking-tight">
+        </p>
+        <h3 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-950 tracking-tight">
           When to Visit: Seasons of the Borana Savanna
         </h3>
-        <p className="text-sm sm:text-base text-charcoal-700 mt-2 leading-relaxed">
+        <p className="text-sm sm:text-base text-charcoal-700 leading-relaxed font-light">
           Wildlife movement in Borana is shaped by seasonal rains and customary pastoral water cycles. Explore our month-by-month wildlife dynamics to plan your ideal safari.
         </p>
       </div>
@@ -135,10 +135,10 @@ export default function SeasonalWildlifeMatrix() {
               key={season.id}
               onClick={() => setActiveSeason(season)}
               className={cn(
-                'p-4 rounded-2xl text-left transition-all border text-sm',
+                'p-4 rounded-xl text-left transition-all border text-sm',
                 isSelected
-                  ? 'bg-forest-950 text-white border-forest-950 shadow-md ring-2 ring-gold-500/40'
-                  : 'bg-ivory-50 text-charcoal-800 border-sand-200 hover:bg-sand-100 hover:border-sand-300'
+                  ? 'bg-forest-950 text-white border-forest-950 shadow-subtle ring-1 ring-gold-400/50'
+                  : 'bg-ivory-50 text-charcoal-800 border-sand-200 hover:bg-sand-50 hover:border-sand-300'
               )}
             >
               <div className="flex items-center justify-between gap-2 mb-1">
@@ -149,7 +149,7 @@ export default function SeasonalWildlifeMatrix() {
                 {season.id === 'green-spring' && <Sprout className={cn('w-4 h-4', isSelected ? 'text-emerald-400' : 'text-emerald-600')} />}
                 {season.id === 'short-rains' && <CloudRain className={cn('w-4 h-4', isSelected ? 'text-sky-400' : 'text-sky-600')} />}
               </div>
-              <p className="font-display font-semibold text-base leading-snug">{season.name}</p>
+              <p className="font-display font-bold text-base leading-snug">{season.name}</p>
             </button>
           )
         })}
@@ -158,44 +158,44 @@ export default function SeasonalWildlifeMatrix() {
       {/* Active Season Detail Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left: Climate & Conditions Card (4 cols) */}
-        <div className="lg:col-span-4 bg-sand-50/80 rounded-2xl border border-sand-200 p-6 space-y-5">
-          <h4 className="font-display font-bold text-charcoal-900 text-lg border-b border-sand-200 pb-3">
+        <div className="lg:col-span-4 bg-sand-50/70 rounded-xl border border-sand-200/80 p-6 space-y-5">
+          <h4 className="font-display font-bold text-charcoal-950 text-lg border-b border-sand-200/80 pb-3">
             Field Conditions
           </h4>
 
           <div className="space-y-3.5 text-xs sm:text-sm">
             <div>
-              <span className="text-charcoal-600 block font-medium">Day Temperature:</span>
+              <span className="text-charcoal-600 block text-xs">Day Temperature:</span>
               <span className="font-semibold text-charcoal-900">{activeSeason.climate.tempDay}</span>
             </div>
             <div>
-              <span className="text-charcoal-600 block font-medium">Night Temperature:</span>
+              <span className="text-charcoal-600 block text-xs">Night Temperature:</span>
               <span className="font-semibold text-charcoal-900">{activeSeason.climate.tempNight}</span>
             </div>
             <div>
-              <span className="text-charcoal-600 block font-medium">Precipitation:</span>
+              <span className="text-charcoal-600 block text-xs">Precipitation:</span>
               <span className="font-semibold text-charcoal-900">{activeSeason.climate.rainfall}</span>
             </div>
             <div>
-              <span className="text-charcoal-600 block font-medium">Track Passability:</span>
-              <span className="font-semibold text-forest-700">{activeSeason.climate.tracks}</span>
+              <span className="text-charcoal-600 block text-xs">Track Passability:</span>
+              <span className="font-semibold text-forest-800">{activeSeason.climate.tracks}</span>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-sand-200 text-xs">
-            <span className="text-charcoal-600 block font-medium mb-1">Recommended Safari Activity:</span>
-            <p className="text-charcoal-800 leading-relaxed font-medium">{activeSeason.recommendedExperience}</p>
+          <div className="pt-3 border-t border-sand-200/80 text-xs">
+            <span className="text-charcoal-600 block mb-1">Recommended Safari Activity:</span>
+            <p className="text-charcoal-900 leading-relaxed font-medium">{activeSeason.recommendedExperience}</p>
           </div>
         </div>
 
         {/* Right: Wildlife Dynamics & Key Sighting Hotspots (8 cols) */}
         <div className="lg:col-span-8 space-y-6">
           <div>
-            <span className="text-xs uppercase font-bold tracking-wider text-forest-700">{activeSeason.tagline}</span>
-            <h4 className="text-xl sm:text-2xl font-display font-bold text-charcoal-900 mt-1">
+            <span className="text-xs uppercase font-bold tracking-wider text-earth-700">{activeSeason.tagline}</span>
+            <h4 className="text-xl sm:text-2xl font-display font-bold text-charcoal-950 mt-1">
               {activeSeason.wildlifeDynamics.title}
             </h4>
-            <p className="text-sm text-charcoal-700 mt-2 leading-relaxed">
+            <p className="text-sm text-charcoal-700 mt-2 leading-relaxed font-light">
               {activeSeason.wildlifeDynamics.description}
             </p>
           </div>
@@ -210,15 +210,15 @@ export default function SeasonalWildlifeMatrix() {
                 <Link
                   key={species.slug}
                   href={`/wildlife/${species.slug}`}
-                  className="group flex flex-col p-4 rounded-xl border border-sand-200 bg-white hover:border-gold-500/60 hover:shadow-sm transition-all"
+                  className="group flex flex-col p-4 rounded-xl border border-sand-200 bg-white hover:border-gold-500/60 hover:shadow-subtle transition-all"
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-display font-bold text-charcoal-900 text-sm group-hover:text-forest-700 transition-colors">
+                    <span className="font-display font-bold text-charcoal-950 text-sm group-hover:text-forest-800 transition-colors">
                       {species.name}
                     </span>
                     <ArrowRight className="w-3.5 h-3.5 text-gold-600 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                   </div>
-                  <p className="text-xs text-charcoal-600 mt-1 leading-relaxed">
+                  <p className="text-xs text-charcoal-600 mt-1 leading-relaxed font-light">
                     {species.behavior}
                   </p>
                 </Link>
@@ -227,7 +227,7 @@ export default function SeasonalWildlifeMatrix() {
           </div>
 
           {/* Birding & Sighting Locations Bar */}
-          <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-2xl bg-forest-950 text-white text-xs">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl bg-forest-950 text-white text-xs">
             <div className="flex items-center gap-2.5">
               <Bird className="w-4 h-4 text-gold-400 shrink-0" />
               <span><strong>Birding Note:</strong> {activeSeason.birdingNotes}</span>
@@ -236,7 +236,7 @@ export default function SeasonalWildlifeMatrix() {
               href="/wildlife"
               className="font-bold text-gold-400 hover:text-gold-300 hover:underline shrink-0"
             >
-              All 10+ Species Dossiers →
+              All Species Dossiers →
             </Link>
           </div>
         </div>

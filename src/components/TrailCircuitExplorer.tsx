@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Route, Mountain, Clock, ShieldCheck, Droplets, Footprints, ArrowRight, Compass } from 'lucide-react'
+import { Route, Mountain, Clock, ShieldCheck, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
@@ -101,25 +101,25 @@ const TRAILS: TrailCircuit[] = [
 ]
 
 const DIFFICULTY_STYLES = {
-  Easy: 'bg-emerald-100 text-emerald-800 border-emerald-200',
-  Moderate: 'bg-gold-100 text-gold-800 border-gold-300',
-  Challenging: 'bg-earth-100 text-earth-800 border-earth-300',
+  Easy: 'bg-emerald-50 text-emerald-800 border-emerald-200/60',
+  Moderate: 'bg-gold-50 text-gold-850 border-gold-300/60',
+  Challenging: 'bg-earth-50 text-earth-850 border-earth-300/60',
 }
 
 export default function TrailCircuitExplorer() {
   const [selectedTrail, setSelectedTrail] = useState(TRAILS[0])
 
   return (
-    <div className="bg-white rounded-3xl border border-sand-200/80 p-6 sm:p-10 shadow-card">
-      <div className="max-w-3xl mb-8">
-        <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-earth-700 bg-earth-50 px-3 py-1 rounded-full border border-earth-200/60 mb-3">
-          <Route className="w-3.5 h-3.5" />
+    <div className="bg-white rounded-2xl border border-sand-200/80 p-6 sm:p-10 shadow-subtle">
+      <div className="max-w-3xl mb-8 space-y-2">
+        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+          <span className="inline-block h-px w-4 bg-gold-600" />
           <span>Signature Safari & Trekking Circuits</span>
-        </div>
-        <h3 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-900 tracking-tight">
+        </p>
+        <h3 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-950 tracking-tight">
           Explore Borana On Foot & 4WD
         </h3>
-        <p className="text-sm sm:text-base text-charcoal-700 mt-2 leading-relaxed">
+        <p className="text-sm sm:text-base text-charcoal-700 leading-relaxed font-light">
           From descending 600 vertical meters into ancient volcanic salt calderas to trailing endangered Grevy’s zebras across wide plains — every route is accompanied by a certified ranger scout.
         </p>
       </div>
@@ -133,17 +133,17 @@ export default function TrailCircuitExplorer() {
               key={trail.id}
               onClick={() => setSelectedTrail(trail)}
               className={cn(
-                'p-4 rounded-2xl text-left transition-all border',
+                'p-4 rounded-xl text-left transition-all border',
                 isSelected
-                  ? 'bg-forest-950 text-white border-forest-950 shadow-md ring-2 ring-gold-500/40'
-                  : 'bg-ivory-50 text-charcoal-900 border-sand-200 hover:bg-sand-100 hover:border-sand-300'
+                  ? 'bg-forest-950 text-white border-forest-950 shadow-subtle ring-1 ring-gold-400/50'
+                  : 'bg-ivory-50 text-charcoal-900 border-sand-200 hover:bg-sand-50 hover:border-sand-300'
               )}
             >
               <div className="flex items-center justify-between gap-2 mb-2">
-                <span className={cn('text-[11px] font-bold px-2 py-0.5 rounded-full border', DIFFICULTY_STYLES[trail.difficulty])}>
+                <span className={cn('text-[10px] font-bold px-2 py-0.5 rounded-full border', DIFFICULTY_STYLES[trail.difficulty])}>
                   {trail.difficulty}
                 </span>
-                <span className={cn('text-xs font-semibold', isSelected ? 'text-gold-300' : 'text-charcoal-600')}>
+                <span className={cn('text-xs font-medium', isSelected ? 'text-gold-300' : 'text-charcoal-600')}>
                   {trail.duration}
                 </span>
               </div>
@@ -156,23 +156,23 @@ export default function TrailCircuitExplorer() {
       </div>
 
       {/* Selected Trail Circuit Detail Card */}
-      <div className="bg-sand-50/70 rounded-2xl border border-sand-200 p-6 sm:p-8 space-y-6">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-sand-200 pb-6">
+      <div className="bg-sand-50/70 rounded-xl border border-sand-200/80 p-6 sm:p-8 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-sand-200/80 pb-6">
           <div>
-            <span className={cn('text-xs font-bold px-3 py-1 rounded-full border uppercase tracking-wider', DIFFICULTY_STYLES[selectedTrail.difficulty])}>
+            <span className={cn('text-[10px] font-bold px-2.5 py-0.5 rounded-full border uppercase tracking-wider', DIFFICULTY_STYLES[selectedTrail.difficulty])}>
               {selectedTrail.difficulty} Circuit
             </span>
-            <h4 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-900 mt-2">
+            <h4 className="text-2xl sm:text-3xl font-display font-bold text-charcoal-950 mt-2">
               {selectedTrail.name}
             </h4>
-            <p className="text-xs sm:text-sm text-charcoal-700 mt-1">
+            <p className="text-xs sm:text-sm text-charcoal-700 mt-1 font-light">
               {selectedTrail.subtitle}
             </p>
           </div>
 
           <Link
             href={`/contact?visitType=${encodeURIComponent(selectedTrail.name)}`}
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-forest-900 hover:bg-forest-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-sm transition-colors shrink-0"
+            className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-forest-900 hover:bg-forest-850 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-subtle hover:shadow transition-all shrink-0"
           >
             <span>Book This Trail</span>
             <ArrowRight className="w-4 h-4 text-gold-400" />
@@ -180,44 +180,44 @@ export default function TrailCircuitExplorer() {
         </div>
 
         {/* Trail Specs Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div className="bg-white rounded-xl p-4 border border-sand-200">
             <span className="text-xs text-charcoal-600 font-medium flex items-center gap-1.5 mb-1">
               <Route className="w-3.5 h-3.5 text-forest-700" /> Total Distance
             </span>
-            <p className="font-display font-bold text-base text-charcoal-900">{selectedTrail.distance}</p>
+            <p className="font-display font-bold text-base text-charcoal-950">{selectedTrail.distance}</p>
           </div>
 
           <div className="bg-white rounded-xl p-4 border border-sand-200">
             <span className="text-xs text-charcoal-600 font-medium flex items-center gap-1.5 mb-1">
               <Clock className="w-3.5 h-3.5 text-gold-600" /> Estimated Time
             </span>
-            <p className="font-display font-bold text-base text-charcoal-900">{selectedTrail.duration}</p>
+            <p className="font-display font-bold text-base text-charcoal-950">{selectedTrail.duration}</p>
           </div>
 
           <div className="bg-white rounded-xl p-4 border border-sand-200">
             <span className="text-xs text-charcoal-600 font-medium flex items-center gap-1.5 mb-1">
               <Mountain className="w-3.5 h-3.5 text-earth-700" /> Elevation Change
             </span>
-            <p className="font-display font-bold text-base text-charcoal-900">{selectedTrail.elevationGain}</p>
+            <p className="font-display font-bold text-base text-charcoal-950">{selectedTrail.elevationGain}</p>
           </div>
 
           <div className="bg-white rounded-xl p-4 border border-sand-200">
             <span className="text-xs text-charcoal-600 font-medium flex items-center gap-1.5 mb-1">
               <ShieldCheck className="w-3.5 h-3.5 text-forest-700" /> Ranger Scout
             </span>
-            <p className="font-display font-bold text-base text-emerald-700">Mandatory (Included)</p>
+            <p className="font-display font-bold text-base text-emerald-800">Mandatory (Included)</p>
           </div>
         </div>
 
         {/* Highlights List */}
         <div>
-          <h5 className="font-display font-bold text-charcoal-900 text-sm uppercase tracking-wider mb-3">
+          <h5 className="font-display font-bold text-charcoal-950 text-sm uppercase tracking-wider mb-3">
             Trail Highlights & Encounters
           </h5>
           <ul className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {selectedTrail.highlights.map((highlight, index) => (
-              <li key={index} className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white border border-sand-200 text-xs text-charcoal-800 leading-relaxed font-medium">
+              <li key={index} className="flex items-start gap-2.5 p-3.5 rounded-xl bg-white border border-sand-200 text-xs text-charcoal-800 leading-relaxed font-normal">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-600 mt-1.5 shrink-0" />
                 <span>{highlight}</span>
               </li>
@@ -226,14 +226,14 @@ export default function TrailCircuitExplorer() {
         </div>
 
         {/* Logistics & Gear Notes */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-sand-200 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-sand-200/80 text-xs">
           <div>
-            <strong className="text-charcoal-900 block font-semibold mb-1">Water & Hydration:</strong>
-            <p className="text-charcoal-700 leading-relaxed">{selectedTrail.waterPoints}</p>
+            <strong className="text-charcoal-950 block font-semibold mb-1">Water & Hydration:</strong>
+            <p className="text-charcoal-700 leading-relaxed font-light">{selectedTrail.waterPoints}</p>
           </div>
           <div>
-            <strong className="text-charcoal-900 block font-semibold mb-1">Recommended Gear:</strong>
-            <p className="text-charcoal-700 leading-relaxed">{selectedTrail.gearRecommendation}</p>
+            <strong className="text-charcoal-950 block font-semibold mb-1">Recommended Gear:</strong>
+            <p className="text-charcoal-700 leading-relaxed font-light">{selectedTrail.gearRecommendation}</p>
           </div>
         </div>
       </div>

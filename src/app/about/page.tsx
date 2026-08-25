@@ -16,7 +16,7 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section className="relative h-80 sm:h-96 flex items-center justify-center overflow-hidden bg-forest-950 pt-20">
-        <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 opacity-35">
           <OptimizedImage
             src="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?auto=format&fit=crop&w=1200&q=75"
             alt="About Borena National Park"
@@ -27,15 +27,15 @@ export default function AboutPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-forest-950 via-forest-950/50 to-transparent" />
-        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider mb-3">
+        <div className="relative z-10 text-center text-ivory-50 px-4 max-w-3xl mx-auto space-y-3">
+          <div className="inline-flex items-center gap-2 bg-gold-500/20 border border-gold-500/40 text-gold-300 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
             <Award className="w-3.5 h-3.5" />
             Institutional Overview & Mandate
           </div>
           <h1 className="text-4xl md:text-6xl font-display font-bold text-white tracking-tight">
             About the National Park
           </h1>
-          <p className="mt-4 text-base md:text-lg text-ivory-200 leading-relaxed">
+          <p className="text-sm md:text-base text-ivory-200/85 max-w-2xl mx-auto leading-relaxed font-light">
             The Ethiopian Wildlife Conservation Authority’s premier southern sanctuary—safeguarding endemic wildlife, volcanic wonders, and ancient pastoralist heritage.
           </p>
         </div>
@@ -46,31 +46,34 @@ export default function AboutPage() {
         {/* Mission & Statutory Framework */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-5">
-            <span className="text-xs uppercase font-bold tracking-wider text-gold-600">Statutory Purpose</span>
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-charcoal-900 leading-tight">
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider-editorial text-earth-700">
+              <span className="inline-block h-px w-4 bg-gold-600" />
+              <span>Statutory Purpose</span>
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-charcoal-950 leading-tight">
               Preserving Ethiopia&apos;s Southern Ecological Frontier
             </h2>
-            <p className="text-base text-charcoal-700 leading-relaxed">
+            <p className="text-base text-charcoal-800 leading-relaxed font-serif drop-cap">
               Borena National Park encompasses over 1.2 million hectares of protected ecosystems in the Borena Zone of the Oromia Region. Formally gazetted to protect critical migration corridors for endangered Grevy&apos;s zebras, Somali ostriches, and Beisa oryx, the park represents a flagship model of collaborative conservation.
             </p>
-            <p className="text-base text-charcoal-700 leading-relaxed">
+            <p className="text-sm sm:text-base text-charcoal-700 leading-relaxed font-light">
               Managed directly by the Ethiopian Wildlife Conservation Authority (EWCA) in co-management with traditional Gadaa community leaders, the park integrates modern telemetry wildlife science with centuries of customary pastoral natural resource covenants.
             </p>
 
-            <div className="grid grid-cols-2 gap-4 pt-2">
-              <div className="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+            <div className="grid grid-cols-2 gap-3 pt-2">
+              <div className="bg-white p-4 rounded-xl border border-sand-200 shadow-subtle">
                 <p className="text-2xl font-display font-bold text-forest-900">1,200,000+ ha</p>
-                <p className="text-xs text-charcoal-700 mt-1">Protected Ecosystem</p>
+                <p className="text-xs text-charcoal-600 mt-1">Protected Ecosystem</p>
               </div>
-              <div className="bg-white p-4 rounded-xl border border-sand-200 shadow-sm">
+              <div className="bg-white p-4 rounded-xl border border-sand-200 shadow-subtle">
                 <p className="text-2xl font-display font-bold text-forest-900">450+ Species</p>
-                <p className="text-xs text-charcoal-700 mt-1">Faunal Diversity</p>
+                <p className="text-xs text-charcoal-600 mt-1">Faunal Diversity</p>
               </div>
             </div>
           </div>
 
           <div className="lg:col-span-6">
-            <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-sand-200 bg-forest-950">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-card border border-sand-200 bg-forest-950">
               <OptimizedImage
                 src="https://images.unsplash.com/photo-1526095179574-86e545346ae6?auto=format&fit=crop&w=800&q=75"
                 alt="Protected Savanna Landscape"
@@ -83,9 +86,9 @@ export default function AboutPage() {
         </div>
 
         {/* Official Emblem & Identity */}
-        <div className="bg-white rounded-3xl border border-sand-200 p-8 sm:p-10 shadow-card grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <div className="bg-white rounded-2xl border border-sand-200/80 p-8 sm:p-10 shadow-subtle grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
           <div className="md:col-span-4 flex justify-center">
-            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-white p-2 border-2 border-gold-500/50 shadow-xl overflow-hidden flex items-center justify-center">
+            <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-white p-2 border-2 border-gold-500/50 shadow-luxury overflow-hidden flex items-center justify-center">
               <img
                 src="/logo.png"
                 alt="Official Seal of Borana National Park"
@@ -94,89 +97,46 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="md:col-span-8 space-y-3">
-            <span className="text-xs uppercase font-bold tracking-wider text-gold-600">Official Insignia</span>
-            <h3 className="font-display font-bold text-2xl text-charcoal-900">
+            <span className="text-xs uppercase font-bold tracking-wider text-earth-700">Official Insignia</span>
+            <h3 className="font-display font-bold text-2xl text-charcoal-950">
               The Official Seal of Borana National Park
             </h3>
-            <p className="text-sm font-serif italic text-forest-800">
-              Paarkii Biyyooleessa Booranaa
-            </p>
-            <p className="text-sm text-charcoal-700 leading-relaxed">
-              The official emblem embodies the park&apos;s natural and cultural identity: featuring the distinctive volcanic ridgelines of the southern rift, customary Oromo Gadaa heritage colors, the endangered Grevy&apos;s zebra, and native savanna biodiversity protected under collaborative community stewardship.
+            <p className="text-xs sm:text-sm text-charcoal-700 leading-relaxed font-light">
+              The circular emblem embodies the park&apos;s dual mission: institutional statutory conservation and ancestral Oromo pastoralist heritage. The typography honors Afaan Oromo (*Paarkii Biyyooleessa Booranaa*), framing the southern acacia rift silhouette and Oromo tricolor palette.
             </p>
           </div>
         </div>
 
-        {/* Institutional Pillars */}
-        <div>
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs uppercase font-bold tracking-wider text-gold-600">Core Objectives</span>
-            <h2 className="text-3xl font-display font-bold text-charcoal-900 mt-1">Three Pillars of Park Stewardship</h2>
+        {/* Institutional Governance Specs */}
+        <div className="space-y-6">
+          <div className="max-w-2xl space-y-1">
+            <span className="text-xs uppercase font-bold tracking-wider text-earth-700">Governance & Demographics</span>
+            <h3 className="font-display font-bold text-2xl text-charcoal-950">
+              Key Institutional Facts
+            </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl border border-sand-200 p-8 shadow-sm hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center mb-5">
-                <Shield className="w-6 h-6" />
-              </div>
-              <h3 className="font-display font-bold text-xl text-charcoal-900 mb-3">1. Biodiversity Protection</h3>
-              <p className="text-sm text-charcoal-700 leading-relaxed">
-                24/7 anti-poaching foot patrols, satellite smart-outposts, ecological censuses, and veterinary interventions preserving endangered Horn endemic species.
-              </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
+              <span className="text-xs text-charcoal-600 block">Managing Authority</span>
+              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.authority}</p>
             </div>
-
-            <div className="bg-white rounded-2xl border border-sand-200 p-8 shadow-sm hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center mb-5">
-                <Users className="w-6 h-6" />
-              </div>
-              <h3 className="font-display font-bold text-xl text-charcoal-900 mb-3">2. Community Gadaa Partnership</h3>
-              <p className="text-sm text-charcoal-700 leading-relaxed">
-                Direct revenue-sharing with pastoralist cooperatives, employing over 65% local rangers, and protecting sacred hydrological Tula well systems.
-              </p>
+            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
+              <span className="text-xs text-charcoal-600 block">Regional State</span>
+              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.regionalState}</p>
             </div>
-
-            <div className="bg-white rounded-2xl border border-sand-200 p-8 shadow-sm hover:shadow-lg transition-all">
-              <div className="w-12 h-12 rounded-xl bg-forest-100 text-forest-800 flex items-center justify-center mb-5">
-                <TreePine className="w-6 h-6" />
-              </div>
-              <h3 className="font-display font-bold text-xl text-charcoal-900 mb-3">3. Low-Impact Eco-Tourism</h3>
-              <p className="text-sm text-charcoal-700 leading-relaxed">
-                Regulated safari circuits, certified local scout escorts, wilderness trekking trails, and geological study tours generating sustainable green livelihoods.
-              </p>
+            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
+              <span className="text-xs text-charcoal-600 block">Park Headquarters</span>
+              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.headquarters}</p>
+            </div>
+            <div className="bg-white p-5 rounded-xl border border-sand-200/80 shadow-subtle space-y-1">
+              <span className="text-xs text-charcoal-600 block">Elevation Range</span>
+              <p className="font-display font-bold text-sm text-charcoal-950">{PARK_INSTITUTIONAL_DATA.elevationRange}</p>
             </div>
           </div>
         </div>
 
-        {/* Official Park Code & Regulations */}
-        <div className="bg-forest-950 text-ivory-50 rounded-3xl p-8 sm:p-12 border border-forest-800 shadow-xl">
-          <div className="max-w-3xl mb-8">
-            <span className="text-xs uppercase font-bold tracking-wider text-gold-400">Ministerial Directives</span>
-            <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mt-1">Official Park Code of Conduct</h2>
-            <p className="text-sm text-ivory-200 mt-2">
-              All visitors, tour operators, and researchers must abide by federal wildlife conservation statutes under Ethiopian law:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm text-ivory-100">
-            {[
-              'Always remain accompanied by a certified EWCA ranger scout on all backcountry trails.',
-              'Maintain a minimum observation distance of 30 meters from all wild mammals.',
-              'Maximum vehicle speed limit is 40 km/h on main roads and 25 km/h on wildlife tracks.',
-              'Strict zero-tolerance policy for littering: pack out all non-biodegradable waste.',
-              'Commercial drone flights require written prior permit from the Ministry of Tourism.',
-              'Open campfires are prohibited except in designated campsite fire enclosures.',
-              'Off-road driving is strictly forbidden to protect fragile savanna grasslands and root systems.',
-              'Observe cultural respect when visiting Gadaa council sites and traditional Tula wells.',
-            ].map((rule, idx) => (
-              <div key={idx} className="flex items-start gap-3 bg-forest-900/60 p-4 rounded-xl border border-forest-800/80">
-                <CheckCircle2 className="w-4 h-4 text-gold-400 flex-shrink-0 mt-0.5" />
-                <span>{rule}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Official Downloads */}
+        {/* Official Downloads Section */}
         <OfficialDownloads />
       </main>
 

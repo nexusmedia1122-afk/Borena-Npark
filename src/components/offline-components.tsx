@@ -90,8 +90,10 @@ export function InstallPrompt() {
 
 export function DataSaverToggle() {
   const [enabled, setEnabled] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     try {
       const stored = localStorage.getItem('borena-data-saver')
       if (stored) setEnabled(JSON.parse(stored))
@@ -101,15 +103,30 @@ export function DataSaverToggle() {
   const toggle = () => {
     const next = !enabled
     setEnabled(next)
-    try { localStorage.setItem('borena-data-saver', JSON.stringify(next)) } catch {}
+    try {
+      localStorage.setItem('borena-data-saver', JSON.stringify(next))
+    } catch {}
   }
+
+  if (!mounted) return null
 
   return (
     <button
       onClick={toggle}
-      className={`hidden md:inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${enabled ? 'bg-amber-100 text-amber-800' : 'bg-forest-700/50 text-ivory-100 hover:bg-forest-700'}`}
+      title={enabled ? 'Data Saver is Active (Optimizing media loading)' : 'Enable Data Saver mode'}
+      aria-label="Toggle data saver mode"
+      className={`fixed bottom-4 right-4 z-30 hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-wide shadow-md border backdrop-blur-md transition-all duration-200 ${
+        enabled
+          ? 'bg-gold-500/95 text-charcoal-950 border-gold-400 shadow-gold-500/20'
+          : 'bg-forest-950/85 text-ivory-200 border-forest-800 hover:bg-forest-900 hover:text-white'
+      }`}
     >
-      {enabled ? 'Data Saver: ON' : 'Data Saver: OFF'}
+      <span
+        className={`w-2 h-2 rounded-full ${
+          enabled ? 'bg-emerald-700 animate-pulse' : 'bg-forest-400'
+        }`}
+      />
+      <span>{enabled ? 'Data Saver: ON' : 'Data Saver: OFF'}</span>
     </button>
   )
 }

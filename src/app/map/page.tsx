@@ -83,19 +83,26 @@ export default function MapPage() {
     return result
   }, [locations, activeCategory, searchQuery])
 
+  const [locationStatus, setLocationStatus] = useState<string | null>(null)
+
   const handleLocate = useCallback(() => {
     if (!navigator.geolocation) {
-      alert('Geolocation is not supported by your browser.')
+      setLocationStatus('Geolocation is not supported by your browser.')
+      setTimeout(() => setLocationStatus(null), 4000)
       return
     }
+    setLocationStatus('Detecting device GPS coordinates...')
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        alert(
-          `Your Current GPS Coordinates:\nLatitude: ${pos.coords.latitude.toFixed(4)}° N\nLongitude: ${pos.coords.longitude.toFixed(4)}° E`
+        setLocationStatus(
+          `Your GPS Coordinates: ${pos.coords.latitude.toFixed(4)}° N, ${pos.coords.longitude.toFixed(4)}° E`
         )
+        setTimeout(() => setLocationStatus(null), 5000)
       },
-      () =>
-        alert('Unable to retrieve location. Please check browser GPS permissions.')
+      () => {
+        setLocationStatus('Unable to retrieve location. Please verify browser location permissions.')
+        setTimeout(() => setLocationStatus(null), 4000)
+      }
     )
   }, [])
 
@@ -206,6 +213,19 @@ export default function MapPage() {
               </button>
             ))}
           </div>
+
+          {/* Inline Location GPS Feedback */}
+          {locationStatus && (
+            <div className="p-3 rounded-xl bg-forest-900 text-ivory-100 text-xs flex items-center justify-between border border-gold-500/30 animate-in fade-in">
+              <span className="font-medium text-gold-300">{locationStatus}</span>
+              <button
+                onClick={() => setLocationStatus(null)}
+                className="text-ivory-300 hover:text-white p-0.5 text-xs ml-2"
+              >
+                Dismiss
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Map & Landmark Grid */}

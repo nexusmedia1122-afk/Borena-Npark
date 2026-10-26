@@ -63,10 +63,13 @@ export default function HeroVideoSection({
     const markReadyAndPlay = () => {
       setVideoReady(true)
       if (video.paused) {
-        video.play().catch(() => {
-          // Keep mounted even if autoplay is initially deferred by browser policy
-        })
+        video.play().catch(() => {})
       }
+    }
+
+    // Check if video is already cached and ready to play
+    if (video.readyState >= 1 || !video.paused) {
+      markReadyAndPlay()
     }
 
     const handleError = () => {
@@ -80,15 +83,12 @@ export default function HeroVideoSection({
     video.addEventListener('playing', () => setVideoReady(true))
     video.addEventListener('error', handleError)
 
-    // Trigger initial play attempt
+    // Trigger play attempt
     const playPromise = video.play()
     if (playPromise) {
       playPromise
         .then(() => setVideoReady(true))
-        .catch(() => {
-          // Autoplay was deferred by browser policy. Keep video mounted;
-          // it will start as soon as user interacts with the page.
-        })
+        .catch(() => {})
     }
 
     // User gesture fallback in case browser policy requires first interaction
@@ -112,7 +112,8 @@ export default function HeroVideoSection({
     }
   }, [videoSrc])
 
-  const showVideo = Boolean(videoSrc) && !videoFailed && !dataSaver && !reducedMotion
+  // Flagship hero video always displays unless OS reduced motion is requested or video explicitly failed
+  const showVideo = Boolean(videoSrc) && !videoFailed && !reducedMotion
 
   const toggleMute = () => {
     const video = videoRef.current
@@ -132,7 +133,7 @@ export default function HeroVideoSection({
           priority
           unoptimized
           sizes="100vw"
-          className={`object-cover transition-opacity duration-1000 ${showVideo && videoReady ? 'opacity-0' : 'opacity-100 animate-kenburns'}`}
+          className="object-cover animate-kenburns"
         />
         {showVideo && (
           <video
@@ -149,7 +150,7 @@ export default function HeroVideoSection({
             onLoadedData={() => setVideoReady(true)}
             onPlaying={() => setVideoReady(true)}
             onError={() => setVideoFailed(true)}
-            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
+            className="absolute inset-0 h-full w-full object-cover"
           >
             <source src={videoSrc} type="video/mp4" />
           </video>

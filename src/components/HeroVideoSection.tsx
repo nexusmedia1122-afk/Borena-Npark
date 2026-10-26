@@ -56,21 +56,59 @@ export default function HeroVideoSection({
     const video = videoRef.current
     if (!video) return
 
-    const handleCanPlay = () => setVideoReady(true)
-    const handleError = () => setVideoFailed(true)
+    // Ensure DOM properties are explicitly set for strict browser autoplay
+    video.muted = true
+    video.defaultMuted = true
 
-    video.addEventListener('loadeddata', handleCanPlay)
-    video.addEventListener('error', handleError)
-
-    // Some browsers reject autoplay silently — surface it as a fallback.
-    const playPromise = video.play()
-    if (playPromise) {
-      playPromise.catch(() => setVideoFailed(true))
+    const markReadyAndPlay = () => {
+      setVideoReady(true)
+      if (video.paused) {
+        video.play().catch(() => {
+          // Keep mounted even if autoplay is initially deferred by browser policy
+        })
+      }
     }
 
+    const handleError = () => {
+      if (video.error) {
+        setVideoFailed(true)
+      }
+    }
+
+    video.addEventListener('loadeddata', markReadyAndPlay)
+    video.addEventListener('canplay', markReadyAndPlay)
+    video.addEventListener('playing', () => setVideoReady(true))
+    video.addEventListener('error', handleError)
+
+    // Trigger initial play attempt
+    const playPromise = video.play()
+    if (playPromise) {
+      playPromise
+        .then(() => setVideoReady(true))
+        .catch(() => {
+          // Autoplay was deferred by browser policy. Keep video mounted;
+          // it will start as soon as user interacts with the page.
+        })
+    }
+
+    // User gesture fallback in case browser policy requires first interaction
+    const handleFirstGesture = () => {
+      if (videoRef.current && videoRef.current.paused) {
+        videoRef.current.play().then(() => setVideoReady(true)).catch(() => {})
+      }
+    }
+
+    window.addEventListener('click', handleFirstGesture, { once: true, passive: true })
+    window.addEventListener('touchstart', handleFirstGesture, { once: true, passive: true })
+    window.addEventListener('scroll', handleFirstGesture, { once: true, passive: true })
+
     return () => {
-      video.removeEventListener('loadeddata', handleCanPlay)
+      video.removeEventListener('loadeddata', markReadyAndPlay)
+      video.removeEventListener('canplay', markReadyAndPlay)
       video.removeEventListener('error', handleError)
+      window.removeEventListener('click', handleFirstGesture)
+      window.removeEventListener('touchstart', handleFirstGesture)
+      window.removeEventListener('scroll', handleFirstGesture)
     }
   }, [videoSrc])
 
@@ -102,10 +140,15 @@ export default function HeroVideoSection({
             autoPlay
             loop
             muted
+            // @ts-expect-error React standard for muted autoplay
+            defaultMuted={true}
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={posterSrc}
             aria-hidden="true"
+            onLoadedData={() => setVideoReady(true)}
+            onPlaying={() => setVideoReady(true)}
+            onError={() => setVideoFailed(true)}
             className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
           >
             <source src={videoSrc} type="video/mp4" />

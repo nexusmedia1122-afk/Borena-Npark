@@ -216,6 +216,33 @@ alter table public.contact_messages enable row level security;
 alter table public.newsletter_subscribers enable row level security;
 alter table public.activity_logs enable row level security;
 
+-- Security Definer functions to prevent RLS recursion on profiles
+create or replace function public.is_admin()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role = 'admin'
+  );
+$$;
+
+create or replace function public.is_staff()
+returns boolean
+language sql
+security definer
+set search_path = public
+stable
+as $$
+  select exists (
+    select 1 from public.profiles
+    where id = auth.uid() and role in ('admin', 'editor')
+  );
+$$;
+
 -- Public read policies
 create policy "Public read published content" on public.contents for select using (status = 'published');
 create policy "Public read published galleries" on public.galleries for select using (status = 'published');
@@ -224,80 +251,48 @@ create policy "Public read published accommodations" on public.accommodations fo
 create policy "Public read visitor info" on public.visitor_infos for select using (true);
 create policy "Public read navigation" on public.navigation_items for select using (visible = true);
 create policy "Public read site settings" on public.site_settings for select using (true);
+create policy "Public read media" on public.media for select using (true);
 
--- Admin policies
-create policy "Admins full access profiles" on public.profiles for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read profiles" on public.profiles for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access site_settings" on public.site_settings for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read site_settings" on public.site_settings for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access navigation" on public.navigation_items for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read navigation" on public.navigation_items for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access contents" on public.contents for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage contents" on public.contents for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access media" on public.media for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage media" on public.media for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access galleries" on public.galleries for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage galleries" on public.galleries for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access map_locations" on public.map_locations for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage map_locations" on public.map_locations for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access accommodations" on public.accommodations for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage accommodations" on public.accommodations for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access visitor_infos" on public.visitor_infos for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors manage visitor_infos" on public.visitor_infos for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access contact_messages" on public.contact_messages for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read contact_messages" on public.contact_messages for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access newsletter_subscribers" on public.newsletter_subscribers for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read newsletter_subscribers" on public.newsletter_subscribers for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
-create policy "Admins full access activity_logs" on public.activity_logs for all using (
-  exists (select 1 from public.profiles where id = auth.uid() and role = 'admin')
-);
-create policy "Editors read activity_logs" on public.activity_logs for select using (
-  exists (select 1 from public.profiles where id = auth.uid() and role in ('admin', 'editor'))
-);
+-- User self-access policies for profiles
+create policy "Users can view own profile" on public.profiles for select using (auth.uid() = id);
+create policy "Users can update own profile" on public.profiles for update using (auth.uid() = id);
+
+-- Admin & Staff policies (using security definer functions to prevent recursion)
+create policy "Admins full access profiles" on public.profiles for all using (public.is_admin());
+create policy "Editors read profiles" on public.profiles for select using (public.is_staff());
+
+create policy "Admins full access site_settings" on public.site_settings for all using (public.is_admin());
+create policy "Editors read site_settings" on public.site_settings for select using (public.is_staff());
+
+create policy "Admins full access navigation" on public.navigation_items for all using (public.is_admin());
+create policy "Editors read navigation" on public.navigation_items for select using (public.is_staff());
+
+create policy "Admins full access contents" on public.contents for all using (public.is_admin());
+create policy "Editors manage contents" on public.contents for all using (public.is_staff());
+
+create policy "Admins full access media" on public.media for all using (public.is_admin());
+create policy "Editors manage media" on public.media for all using (public.is_staff());
+
+create policy "Admins full access galleries" on public.galleries for all using (public.is_admin());
+create policy "Editors manage galleries" on public.galleries for all using (public.is_staff());
+
+create policy "Admins full access map_locations" on public.map_locations for all using (public.is_admin());
+create policy "Editors manage map_locations" on public.map_locations for all using (public.is_staff());
+
+create policy "Admins full access accommodations" on public.accommodations for all using (public.is_admin());
+create policy "Editors manage accommodations" on public.accommodations for all using (public.is_staff());
+
+create policy "Admins full access visitor_infos" on public.visitor_infos for all using (public.is_admin());
+create policy "Editors manage visitor_infos" on public.visitor_infos for all using (public.is_staff());
+
+create policy "Admins full access contact_messages" on public.contact_messages for all using (public.is_admin());
+create policy "Editors read contact_messages" on public.contact_messages for select using (public.is_staff());
+
+create policy "Admins full access newsletter_subscribers" on public.newsletter_subscribers for all using (public.is_admin());
+create policy "Editors read newsletter_subscribers" on public.newsletter_subscribers for select using (public.is_staff());
+
+create policy "Admins full access activity_logs" on public.activity_logs for all using (public.is_admin());
+create policy "Editors read activity_logs" on public.activity_logs for select using (public.is_staff());
 
 -- Auto-create profile on signup
 create or replace function public.handle_new_user()
